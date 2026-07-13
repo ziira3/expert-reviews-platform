@@ -398,6 +398,8 @@
         .wallet-input button:hover {
             background: #2a5f4a;
         }
+
+        /* PRODUCT CARD - Professional */
         .product-card {
             background: linear-gradient(145deg, #1a2337, #141b2b);
             border-radius: 16px;
@@ -430,6 +432,17 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0.6; }
         }
+
+        .product-card .product-image {
+            text-align: center;
+            font-size: 48px;
+            padding: 10px 0;
+            background: #0b0e1a;
+            border-radius: 12px;
+            margin-bottom: 14px;
+            border: 1px solid #1e2740;
+        }
+
         .product-card .product-name {
             font-size: 14px;
             font-weight: 600;
@@ -437,6 +450,7 @@
             margin-bottom: 16px;
             padding-right: 80px;
             line-height: 1.4;
+            text-align: center;
         }
         .product-card .product-name .highlight {
             color: #f0b34b;
@@ -452,6 +466,7 @@
             border-radius: 10px;
             padding: 10px 12px;
             border: 1px solid #1e2740;
+            text-align: center;
         }
         .product-card .product-details .detail-item .detail-label {
             font-size: 10px;
@@ -473,6 +488,9 @@
         }
         .product-card .product-details .detail-item .detail-value.red {
             color: #ff6b6b;
+        }
+        .product-card .product-details .detail-item .detail-value.blue {
+            color: #88b0ff;
         }
         .product-card .product-actions {
             display: grid;
@@ -522,6 +540,8 @@
             transition: width 0.5s;
             width: 0%;
         }
+
+        /* MODALS */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -559,6 +579,7 @@
         .modal-box .close-modal:hover {
             color: white;
         }
+
         .insufficient-modal .modal-icon {
             text-align: center;
             font-size: 48px;
@@ -645,6 +666,7 @@
         .insufficient-modal .modal-actions .btn-deposit-modal:hover {
             transform: scale(1.02);
         }
+
         .complete-modal .modal-icon {
             text-align: center;
             font-size: 48px;
@@ -702,6 +724,83 @@
             gap: 10px;
             margin-top: 16px;
         }
+
+        /* DEPOSIT MODAL - Contact CS */
+        .deposit-modal .modal-icon {
+            text-align: center;
+            font-size: 48px;
+            color: #f0b34b;
+            margin-bottom: 8px;
+        }
+        .deposit-modal .modal-title {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 700;
+            color: #f0b34b;
+            margin-bottom: 4px;
+        }
+        .deposit-modal .modal-sub {
+            text-align: center;
+            color: #8892b0;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .deposit-modal .wallet-box {
+            background: #0b0e1a;
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid #2a3450;
+            margin-bottom: 16px;
+        }
+        .deposit-modal .wallet-box .wallet-label {
+            font-size: 12px;
+            color: #8892b0;
+            margin-bottom: 4px;
+        }
+        .deposit-modal .wallet-box .wallet-address {
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: #88b0ff;
+            word-break: break-all;
+        }
+        .deposit-modal .wallet-box .copy-btn-sm {
+            background: #2a3a5c;
+            color: #88b0ff;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-top: 6px;
+        }
+        .deposit-modal .wallet-box .copy-btn-sm:hover {
+            background: #3e4b6b;
+        }
+        .deposit-modal .cs-contact {
+            background: #075e54;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+            width: 100%;
+            text-decoration: none;
+            text-align: center;
+            display: block;
+        }
+        .deposit-modal .cs-contact:hover {
+            background: #0a7a6e;
+            transform: scale(1.02);
+        }
+        .deposit-modal .deposit-note {
+            text-align: center;
+            color: #8892b0;
+            font-size: 12px;
+            margin-top: 12px;
+        }
     </style>
 </head>
 <body>
@@ -710,6 +809,46 @@
        class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
+
+    <!-- DEPOSIT MODAL - Contact Customer Service -->
+    <div class="modal-overlay" id="depositModal">
+        <div class="modal-box deposit-modal">
+            <button class="close-modal" onclick="closeDepositModal()">✕</button>
+            <div class="modal-icon">💰</div>
+            <div class="modal-title">Make a Deposit</div>
+            <div class="modal-sub">Contact our customer service to complete your deposit</div>
+
+            <div class="wallet-box">
+                <div class="wallet-label">📤 Send funds to this wallet address:</div>
+                <div class="wallet-address" id="modalWalletAddress">0x742d35Cc6634C0532925a3b844Bc454e4438f44e</div>
+                <button class="copy-btn-sm" onclick="copyModalWallet()"><i class="fas fa-copy"></i> Copy Address</button>
+            </div>
+
+            <div style="background:#1a2337;padding:12px;border-radius:10px;border:1px solid #2a3450;margin-bottom:16px;">
+                <div class="flex small-text">
+                    <span>💵 Minimum Deposit:</span>
+                    <span style="color:#64ff9e;">$50</span>
+                </div>
+                <div class="flex small-text mt-8">
+                    <span>⏱ Processing Time:</span>
+                    <span style="color:#88b0ff;">5-15 minutes</span>
+                </div>
+                <div class="flex small-text mt-8">
+                    <span>🏦 Network:</span>
+                    <span style="color:#f0b34b;">BEP20 / ERC20</span>
+                </div>
+            </div>
+
+            <a href="https://wa.me/1234567890?text=Hello%20Expert%20Reviews%2C%20I%20want%20to%20make%20a%20deposit.%20My%20username%20is%20[USERNAME].%20Please%20help%20me%20with%20the%20deposit%20process." 
+               class="cs-contact" target="_blank">
+                <i class="fab fa-whatsapp"></i> Contact Customer Service
+            </a>
+
+            <div class="deposit-note">
+                ⚡ Our team will assist you with the deposit within 5 minutes
+            </div>
+        </div>
+    </div>
 
     <!-- INSUFFICIENT BALANCE MODAL -->
     <div class="modal-overlay" id="insufficientModal">
@@ -735,15 +874,6 @@
                     <span class="bal-label">🏆 Potential 6x Commission</span>
                     <span class="bal-value green" id="insufficientCommission">$77.38</span>
                 </div>
-            </div>
-            <div style="background:#1a2337;padding:12px;border-radius:10px;border:1px solid #2a3450;margin-bottom:16px;">
-                <div style="font-size:12px;color:#8892b0;margin-bottom:4px;">📤 Send payment to:</div>
-                <div style="font-family:'Courier New',monospace;font-size:12px;color:#88b0ff;word-break:break-all;" id="insufficientWallet">
-                    0x742d35Cc6634C0532925a3b844Bc454e4438f44e
-                </div>
-                <button class="btn" style="background:#2a3a5c;color:#88b0ff;padding:8px;font-size:12px;width:auto;margin-top:6px;" onclick="copyInsufficientWallet()">
-                    <i class="fas fa-copy"></i> Copy Address
-                </button>
             </div>
             <div class="modal-actions">
                 <a href="https://wa.me/1234567890?text=Hello%20Expert%20Reviews%2C%20I%20have%20insufficient%20balance%20and%20need%20help%20with%20deposit" 
@@ -806,35 +936,6 @@
                     <i class="fab fa-whatsapp"></i> Request Withdrawal
                 </a>
             </div>
-        </div>
-    </div>
-
-    <!-- DEPOSIT MODAL -->
-    <div class="modal-overlay" id="depositModal">
-        <div class="modal-box">
-            <button class="close-modal" onclick="closeDepositModal()">✕</button>
-            <div class="modal-title" style="font-size:22px;font-weight:700;color:#f0b34b;text-align:center;margin-bottom:8px;">💰 Deposit Crypto</div>
-            <div class="modal-sub" style="text-align:center;color:#8892b0;font-size:14px;margin-bottom:20px;">Send funds to the wallet address below</div>
-            <div style="background:#0b0e1a;padding:14px;border-radius:12px;border:1px solid #2a3a5c;">
-                <div style="font-size:12px;color:#8892b0;margin-bottom:6px;">📤 Send to this address:</div>
-                <div style="font-family:'Courier New',monospace;font-size:12px;color:#88b0ff;word-break:break-all;" id="modalWalletAddress">
-                    0x742d35Cc6634C0532925a3b844Bc454e4438f44e
-                </div>
-                <button class="btn" style="background:#2a3a5c;color:#88b0ff;padding:8px;font-size:12px;width:auto;margin-top:8px;" onclick="copyModalWallet()">
-                    <i class="fas fa-copy"></i> Copy
-                </button>
-            </div>
-            <div style="margin-top:16px;padding:12px;background:#1a2337;border-radius:10px;border:1px solid #2a3a5c;">
-                <div class="flex small-text">
-                    <span>💵 Minimum Deposit:</span>
-                    <span style="color:#64ff9e;">$50</span>
-                </div>
-                <div class="flex small-text mt-8">
-                    <span>⏱ Processing Time:</span>
-                    <span style="color:#88b0ff;">5-15 minutes</span>
-                </div>
-            </div>
-            <button class="btn" style="background:#1a2337;color:#8892b0;margin-top:16px;" onclick="closeDepositModal()">Close</button>
         </div>
     </div>
 
@@ -991,8 +1092,9 @@
             <!-- PRODUCT CARD -->
             <div class="product-card" id="productCard">
                 <span class="product-badge normal" id="productBadge">Normal</span>
+                <div class="product-image" id="productImage">⌨️</div>
                 <div class="product-name" id="productName">
-                    <span class="highlight">AXIS Q6078-E</span> 50HZ EUR/UK TOP PERFORMANCE UHD 4K PTZ CAMERA 20X
+                    <span class="highlight">Mechanical Keyboard</span> RGB Gaming Keyboard with Blue Switches
                 </div>
                 <div class="product-details">
                     <div class="detail-item">
@@ -1001,7 +1103,7 @@
                     </div>
                     <div class="detail-item">
                         <div class="detail-label">Commission</div>
-                        <div class="detail-value" id="detailCommission">0.5%</div>
+                        <div class="detail-value blue" id="detailCommission">0.5%</div>
                     </div>
                     <div class="detail-item">
                         <div class="detail-label">Profits</div>
@@ -1120,33 +1222,91 @@
             totalUploads: 0,
         };
 
+        // ===== ADMIN WALLET (Update this with your wallet address) =====
         const ADMIN_WALLET = '0x742d35Cc6634C0532925a3b844Bc454e4438f44e';
 
-        const productNames = [
-            'AXIS Q6078-E 50HZ EUR/UK TOP PERFORMANCE UHD 4K PTZ CAMERA 20X',
-            'Sony A7R IV 61MP Full-Frame Mirrorless Camera Body Only',
-            'Canon EOS R5 45MP Full-Frame Mirrorless Camera 8K Video',
-            'Nikon Z9 45.7MP Full-Frame Mirrorless Camera 8K UHD',
-            'Panasonic Lumix S1R 47.3MP Full-Frame Mirrorless Camera',
-            'Fujifilm X-T4 26.1MP Mirrorless Camera with 16-80mm Lens',
-            'DJI Inspire 3 8K Cinema Drone with Zenmuse X9 Gimbal',
-            'Sony PXW-Z750 4K 2/3-inch 3-CMOS Broadcast Camera',
-            'Blackmagic URSA Mini Pro 12K Cinema Camera 12K Recording',
-            'Canon XA75 4K UHD Camcorder with 20x Zoom and Night Vision'
-        ];
-
-        const normalProducts = [
-            { value: 180, commission: 0.5 },
-            { value: 220, commission: 0.5 },
-            { value: 250, commission: 0.5 },
-            { value: 310, commission: 0.5 },
-            { value: 400, commission: 0.5 },
-            { value: 150, commission: 0.5 },
-            { value: 275, commission: 0.5 },
-            { value: 330, commission: 0.5 },
-            { value: 190, commission: 0.5 },
-            { value: 418.94, commission: 0.5 },
-            { value: 210, commission: 0.5 },
+        // ===== PRODUCTS WITH PHOTOS & DIFFERENT COMMISSIONS =====
+        const techProducts = [
+            { 
+                name: 'Mechanical Keyboard', 
+                icon: '⌨️',
+                desc: 'RGB Gaming Keyboard with Blue Switches',
+                values: [180, 220, 250, 310, 400, 150, 275, 330, 190, 210, 418.94],
+                commission: 0.5,
+                type: 'Keyboard'
+            },
+            { 
+                name: 'Wireless Mouse', 
+                icon: '🖱️',
+                desc: 'RGB Gaming Mouse with 16000 DPI Sensor',
+                values: [120, 150, 180, 200, 250, 300, 140, 220, 170, 190],
+                commission: 0.7,
+                type: 'Mouse'
+            },
+            { 
+                name: 'Gaming Headset', 
+                icon: '🎧',
+                desc: '7.1 Surround Sound Gaming Headset with Mic',
+                values: [200, 250, 300, 350, 400, 220, 280, 320, 380, 450],
+                commission: 0.8,
+                type: 'Headset'
+            },
+            { 
+                name: 'RGB RAM', 
+                icon: '💾',
+                desc: '32GB DDR5 RGB Gaming RAM 6000MHz',
+                values: [350, 400, 450, 500, 550, 380, 420, 480, 520, 600],
+                commission: 0.6,
+                type: 'RAM'
+            },
+            { 
+                name: 'Gaming Monitor', 
+                icon: '🖥️',
+                desc: '27" 4K 144Hz Gaming Monitor with HDR',
+                values: [500, 600, 700, 800, 900, 550, 650, 750, 850, 1000],
+                commission: 0.5,
+                type: 'Monitor'
+            },
+            { 
+                name: 'Gaming Chair', 
+                icon: '💺',
+                desc: 'Ergonomic Gaming Chair with Lumbar Support',
+                values: [300, 350, 400, 450, 500, 320, 380, 420, 480, 550],
+                commission: 0.6,
+                type: 'Chair'
+            },
+            { 
+                name: 'External SSD', 
+                icon: '💿',
+                desc: '1TB Portable External SSD USB 3.2',
+                values: [150, 180, 200, 250, 300, 170, 190, 220, 280, 350],
+                commission: 0.7,
+                type: 'Storage'
+            },
+            { 
+                name: 'Webcam 4K', 
+                icon: '📷',
+                desc: '4K Ultra HD Webcam with Built-in Mic',
+                values: [200, 250, 300, 350, 400, 220, 280, 320, 380, 450],
+                commission: 0.5,
+                type: 'Webcam'
+            },
+            { 
+                name: 'USB Hub', 
+                icon: '🔌',
+                desc: '7-Port USB-C Hub with Power Delivery',
+                values: [80, 100, 120, 150, 180, 90, 110, 130, 160, 200],
+                commission: 0.8,
+                type: 'Accessory'
+            },
+            { 
+                name: 'CPU Cooler', 
+                icon: '🌀',
+                desc: '240mm AIO Liquid CPU Cooler with RGB',
+                values: [250, 300, 350, 400, 450, 280, 320, 380, 420, 500],
+                commission: 0.5,
+                type: 'Cooling'
+            }
         ];
 
         const rushProducts = [
@@ -1163,61 +1323,75 @@
         function randomItem(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
         function fmt(num) { return num.toFixed(2); }
 
-        // ===== MODALS =====
-        function openInsufficientModal() {
-            const needed = Math.abs(state.balance);
-            $('insufficientBalance').textContent = `-$${fmt(needed)}`;
-            $('insufficientRushValue').textContent = `$${fmt(state.rushProductValue)}`;
-            $('insufficientRequired').textContent = `$${fmt(needed)}`;
-            const comm = state.rushProductValue * 0.03;
-            $('insufficientCommission').textContent = `$${fmt(comm)}`;
-            $('insufficientWallet').textContent = ADMIN_WALLET;
-            $('insufficientModal').classList.add('active');
+        // ===== GENERATE PRODUCT =====
+        function generateProduct() {
+            // 20% chance of Rush
+            if (Math.random() < 0.2 && state.uploadedCount > 0) {
+                state.isRushActive = true;
+                const rush = randomItem(rushProducts);
+                return { 
+                    ...rush, 
+                    commission: 3,
+                    isRush: true,
+                    name: '⚡ RUSH PRODUCT',
+                    icon: '⚡',
+                    desc: 'URGENT - HIGH PRIORITY TASK - 6x COMMISSION'
+                };
+            } else {
+                state.isRushActive = false;
+                const product = randomItem(techProducts);
+                const value = randomItem(product.values);
+                return {
+                    value: value,
+                    commission: product.commission,
+                    isRush: false,
+                    name: product.name,
+                    icon: product.icon,
+                    desc: product.desc,
+                    type: product.type,
+                    baseCommission: product.commission
+                };
+            }
         }
 
-        function closeInsufficientModal() {
-            $('insufficientModal').classList.remove('active');
+        // ===== UPDATE PRODUCT CARD =====
+        function updateProductCard() {
+            const p = state.currentProduct;
+            if (!p) return;
+
+            const isRush = p.isRush || p.commission === 3;
+            const comm = p.value * (p.commission / 100);
+            const rebate = p.value + comm;
+
+            $('productBadge').textContent = isRush ? 'RUSH 3%' : `${p.commission}%`;
+            $('productBadge').className = 'product-badge ' + (isRush ? 'rush' : 'normal');
+
+            $('productImage').textContent = isRush ? '⚡' : (p.icon || '📦');
+
+            const nameDisplay = isRush ? 
+                `<span class="highlight">⚡ RUSH PRODUCT</span> URGENT - HIGH PRIORITY TASK` :
+                `<span class="highlight">${p.name}</span> ${p.desc}`;
+            $('productName').innerHTML = nameDisplay;
+
+            $('detailValue').textContent = `$${fmt(p.value)}`;
+            $('detailValue').className = 'detail-value ' + (isRush ? 'red' : 'gold');
+            $('detailCommission').textContent = isRush ? '3%' : `${p.commission}%`;
+            $('detailCommission').className = 'detail-value ' + (isRush ? 'red' : 'blue');
+            $('detailProfit').textContent = `$${fmt(comm)}`;
+            $('detailProfit').className = 'detail-value ' + (isRush ? 'red' : 'green');
+            $('detailRebate').textContent = `$${fmt(rebate)}`;
+            $('uploadCount').textContent = state.uploadedCount;
+
+            const total = state.productsPerSet * state.maxSets;
+            const progress = (state.uploadedCount / total) * 100;
+            $('progressFill').style.width = Math.min(progress, 100) + '%';
+
+            if (state.balance < 0 && state.isRushActive) {
+                openInsufficientModal();
+            }
         }
 
-        function confirmInsufficientDeposit() {
-            const needed = Math.abs(state.balance);
-            state.balance += needed;
-            state.deposit += needed;
-            state.negativeBalance = false;
-            state.isRushActive = false;
-            state.rushDepositNeeded = 0;
-            closeInsufficientModal();
-            alert(`✅ Deposit of $${fmt(needed)} confirmed!\n\nYou can now continue working and earn 6x commission!`);
-            updateUI();
-            updateProductCard();
-        }
-
-        function copyInsufficientWallet() {
-            copyToClipboard(ADMIN_WALLET, 'Wallet address copied!');
-        }
-
-        function openCompleteModal() {
-            const totalEarned = state.totalCommission;
-            const percentage = (totalEarned / 1130) * 100;
-            const bonus = totalEarned * 0.05;
-            const total = totalEarned + bonus;
-            const avg = total / 35;
-
-            $('completeProducts').textContent = '35';
-            $('completeCommission').textContent = `$${fmt(totalEarned)}`;
-            $('completePercentage').textContent = `${fmt(percentage)}%`;
-            $('completeBonus').textContent = `$${fmt(bonus)}`;
-            $('completeTotal').textContent = `$${fmt(total)}`;
-            $('completeAverage').textContent = `$${fmt(avg)}`;
-            $('completeTime').textContent = `~45 min`;
-
-            $('completeModal').classList.add('active');
-        }
-
-        function closeCompleteModal() {
-            $('completeModal').classList.remove('active');
-        }
-
+        // ===== DEPOSIT MODAL =====
         function openDepositModal() {
             $('depositModal').classList.add('active');
             $('modalWalletAddress').textContent = ADMIN_WALLET;
@@ -1243,6 +1417,57 @@
                 document.body.removeChild(ta);
                 alert('✅ ' + msg);
             });
+        }
+
+        // ===== INSUFFICIENT BALANCE =====
+        function openInsufficientModal() {
+            const needed = Math.abs(state.balance);
+            $('insufficientBalance').textContent = `-$${fmt(needed)}`;
+            $('insufficientRushValue').textContent = `$${fmt(state.rushProductValue)}`;
+            $('insufficientRequired').textContent = `$${fmt(needed)}`;
+            const comm = state.rushProductValue * 0.03;
+            $('insufficientCommission').textContent = `$${fmt(comm)}`;
+            $('insufficientModal').classList.add('active');
+        }
+
+        function closeInsufficientModal() {
+            $('insufficientModal').classList.remove('active');
+        }
+
+        function confirmInsufficientDeposit() {
+            const needed = Math.abs(state.balance);
+            state.balance += needed;
+            state.deposit += needed;
+            state.negativeBalance = false;
+            state.isRushActive = false;
+            state.rushDepositNeeded = 0;
+            closeInsufficientModal();
+            alert(`✅ Deposit of $${fmt(needed)} confirmed!\n\nYou can now continue working and earn 6x commission!`);
+            updateUI();
+            updateProductCard();
+        }
+
+        // ===== TASK COMPLETE =====
+        function openCompleteModal() {
+            const totalEarned = state.totalCommission;
+            const percentage = (totalEarned / 1130) * 100;
+            const bonus = totalEarned * 0.05;
+            const total = totalEarned + bonus;
+            const avg = total / 35;
+
+            $('completeProducts').textContent = '35';
+            $('completeCommission').textContent = `$${fmt(totalEarned)}`;
+            $('completePercentage').textContent = `${fmt(percentage)}%`;
+            $('completeBonus').textContent = `$${fmt(bonus)}`;
+            $('completeTotal').textContent = `$${fmt(total)}`;
+            $('completeAverage').textContent = `$${fmt(avg)}`;
+            $('completeTime').textContent = `~45 min`;
+
+            $('completeModal').classList.add('active');
+        }
+
+        function closeCompleteModal() {
+            $('completeModal').classList.remove('active');
         }
 
         // ===== WALLET =====
@@ -1447,49 +1672,6 @@
             updateProductCard();
         }
 
-        function generateProduct() {
-            if (Math.random() < 0.2 && state.uploadedCount > 0) {
-                state.isRushActive = true;
-                return { ...randomItem(rushProducts), commission: 3 };
-            } else {
-                state.isRushActive = false;
-                return { ...randomItem(normalProducts), commission: 0.5 };
-            }
-        }
-
-        function updateProductCard() {
-            const p = state.currentProduct;
-            if (!p) return;
-
-            const isRush = p.commission === 3;
-            const comm = p.value * (p.commission / 100);
-            const rebate = p.value + comm;
-
-            $('productBadge').textContent = isRush ? 'RUSH 3%' : 'Normal';
-            $('productBadge').className = 'product-badge ' + (isRush ? 'rush' : 'normal');
-
-            const nameIndex = Math.floor(Math.random() * productNames.length);
-            $('productName').innerHTML = isRush ? 
-                `<span class="highlight">⚡ RUSH</span> ${productNames[nameIndex]}` :
-                `<span class="highlight">${productNames[nameIndex].substring(0, 20)}</span> ${productNames[nameIndex].substring(20)}`;
-
-            $('detailValue').textContent = `$${fmt(p.value)}`;
-            $('detailValue').className = 'detail-value ' + (isRush ? 'red' : 'gold');
-            $('detailCommission').textContent = isRush ? '3%' : '0.5%';
-            $('detailProfit').textContent = `$${fmt(comm)}`;
-            $('detailProfit').className = 'detail-value ' + (isRush ? 'red' : 'green');
-            $('detailRebate').textContent = `$${fmt(rebate)}`;
-            $('uploadCount').textContent = state.uploadedCount;
-
-            const total = state.productsPerSet * state.maxSets;
-            const progress = (state.uploadedCount / total) * 100;
-            $('progressFill').style.width = Math.min(progress, 100) + '%';
-
-            if (state.balance < 0 && state.isRushActive) {
-                openInsufficientModal();
-            }
-        }
-
         function updateUI() {
             const bal = state.balance;
             $('balanceDisplay').textContent = `$${fmt(bal)}`;
@@ -1532,7 +1714,7 @@
             state.totalUploads++;
 
             state.history.push({
-                type: p.commission === 3 ? 'Rush' : 'Normal',
+                type: p.isRush ? 'Rush' : (p.type || 'Normal'),
                 value: p.value,
                 commission: comm,
                 balanceAfter: state.balance,
@@ -1563,7 +1745,14 @@
 
         function boostProduct() {
             const p = randomItem(rushProducts);
-            state.currentProduct = { ...p, commission: 3 };
+            state.currentProduct = { 
+                ...p, 
+                commission: 3,
+                isRush: true,
+                name: '⚡ RUSH PRODUCT',
+                icon: '⚡',
+                desc: 'URGENT - HIGH PRIORITY TASK - 6x COMMISSION'
+            };
             state.isRushActive = true;
             state.rushProductValue = p.value;
             
