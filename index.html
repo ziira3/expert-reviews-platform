@@ -535,144 +535,12 @@
         .deposit-modal .btn-cs-deposit:hover {
             background: #0a7a6e;
         }
-
-        .login-box {
-            max-width: 420px;
-            width: 100%;
-            background: #141b2b;
-            border-radius: 24px;
-            padding: 40px 30px;
-            border: 1px solid #2a3450;
-        }
-
-        .login-box .logo {
-            text-align: center;
-            font-size: 28px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #f0b34b, #ff7e5f);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 4px;
-        }
-
-        .login-box .subtitle {
-            text-align: center;
-            color: #8892b0;
-            font-size: 14px;
-            margin-bottom: 24px;
-        }
-
-        .login-box .input-group {
-            margin-bottom: 14px;
-        }
-
-        .login-box .input-group label {
-            display: block;
-            font-size: 13px;
-            color: #8892b0;
-            margin-bottom: 4px;
-        }
-
-        .login-box .input-group input {
-            width: 100%;
-            padding: 14px;
-            border-radius: 12px;
-            border: 1px solid #27304a;
-            background: #0b0e1a;
-            color: white;
-            font-size: 16px;
-            outline: none;
-        }
-
-        .login-box .input-group input:focus {
-            border-color: #f0b34b;
-        }
-
-        .login-box .btn-login {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #f0b34b, #e8903a);
-            color: #0b0e1a;
-            font-weight: 700;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-top: 8px;
-        }
-
-        .login-box .btn-login:hover {
-            transform: scale(1.02);
-        }
-
-        .login-box .footer {
-            text-align: center;
-            margin-top: 16px;
-            color: #8892b0;
-            font-size: 13px;
-        }
-
-        .login-box .footer a {
-            color: #f0b34b;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .login-box .whatsapp-btn {
-            display: block;
-            text-align: center;
-            margin-top: 12px;
-            padding: 12px;
-            background: #075e54;
-            color: white;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-
-        .login-box .whatsapp-btn:hover {
-            background: #0a7a6e;
-        }
-
-        .hidden {
-            display: none !important;
-        }
     </style>
 </head>
 <body>
 
-    <!-- LOGIN SCREEN -->
-    <div id="loginScreen" class="login-box">
-        <div class="logo">🚀 Crypto Trade</div>
-        <div class="subtitle">Login to your account</div>
-
-        <div class="input-group">
-            <label><i class="fas fa-phone"></i> Phone Number</label>
-            <input type="text" id="loginPhone" placeholder="Enter phone number" value="+31631969427" />
-        </div>
-        <div class="input-group">
-            <label><i class="fas fa-lock"></i> Password</label>
-            <input type="password" id="loginPassword" placeholder="Enter password" value="123456" />
-        </div>
-
-        <button class="btn-login" onclick="loginUser()">
-            <i class="fas fa-sign-in-alt"></i> Login
-        </button>
-
-        <a href="https://wa.me/16064285188?text=Hello%20Crypto%20Trade%2C%20I%20need%20help%20with%20my%20account" 
-           class="whatsapp-btn" target="_blank">
-            <i class="fab fa-whatsapp"></i> Need Help? Chat on WhatsApp
-        </a>
-
-        <div class="footer">
-            New user? Contact <a href="https://wa.me/16064285188" target="_blank">Support</a> to register
-        </div>
-    </div>
-
-    <!-- DASHBOARD -->
-    <div id="dashboardScreen" class="container hidden">
+    <!-- DASHBOARD - NO LOGIN, DIRECT ACCESS -->
+    <div class="container">
         <div class="header">
             <div class="logo">🚀 Crypto Trade</div>
             <div class="user-icon" id="userDisplay">👤 Oliver</div>
@@ -728,4 +596,89 @@
 
         <div class="tabs">
             <button class="tab active" onclick="showTab('open')">Open</button>
-            <button class="tab" onclick="showTab('pending'
+            <button class="tab" onclick="showTab('pending')">Pending</button>
+            <button class="tab" onclick="showTab('closed')">Closed</button>
+        </div>
+
+        <div id="tabContent">
+            <div class="empty-state">
+                <i class="fas fa-chart-pie"></i>
+                <p>No open positions</p>
+                <p style="font-size:12px;color:#4a5577;">ETH-Trade • Explore more instruments</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            © 2026 Crypto Trade • <span id="footerPhone">+31631969427</span>
+        </div>
+    </div>
+
+    <!-- WITHDRAW MODAL -->
+    <div class="modal-overlay" id="withdrawModal">
+        <div class="modal-box withdraw-modal">
+            <button class="close-modal" onclick="closeWithdrawModal()">✕</button>
+            <div class="modal-icon">🔒</div>
+            <div class="modal-title">Account Frozen</div>
+            <div class="modal-sub">Your account is currently frozen. Please contact customer service or make a deposit.</div>
+
+            <div class="info-box">
+                <div class="info-row">
+                    <span class="label">👤 Account Holder</span>
+                    <span class="value">Oliver Reijke</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">🏦 IBAN</span>
+                    <span class="value">NL21KNAB0259414484</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">💰 Current Balance</span>
+                    <span class="value gold" id="withdrawBalance">$6,654.22</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">🎯 Target Balance</span>
+                    <span class="value green">$10,000.00</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">💵 Amount to Deposit</span>
+                    <span class="value red" id="withdrawNeeded">$3,345.78</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">🔒 Account Status</span>
+                    <span class="value red">Frozen</span>
+                </div>
+            </div>
+
+            <div class="btn-row-2">
+                <a href="https://wa.me/16064285188?text=Hello%20Crypto%20Trade%2C%20my%20account%20is%20frozen.%20Please%20help%20me%20unfreeze%20it.%20My%20name%20is%20Oliver%20Reijke" 
+                   class="btn-cs" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Contact CS
+                </a>
+                <button class="btn-deposit-modal" onclick="closeWithdrawModal(); openDepositModal();">
+                    <i class="fas fa-coins"></i> Deposit Now
+                </button>
+            </div>
+
+            <div style="text-align:center;margin-top:12px;color:#8892b0;font-size:12px;">
+                ⏱ Contact CS to unfreeze your account
+            </div>
+        </div>
+    </div>
+
+    <!-- DEPOSIT MODAL -->
+    <div class="modal-overlay" id="depositModal">
+        <div class="modal-box deposit-modal">
+            <button class="close-modal" onclick="closeDepositModal()">✕</button>
+            <div class="modal-icon">💰</div>
+            <div class="modal-title">Deposit USDC</div>
+            <div class="modal-sub">Send funds to the wallet address below</div>
+
+            <div class="wallet-box">
+                <div class="wallet-label">📤 Send to this address:</div>
+                <div class="wallet-address">0x5883088D57B75E9d9513ddD7fDD96FB2FCF513A5</div>
+                <button class="copy-btn" onclick="copyWallet()">
+                    <i class="fas fa-copy"></i> Copy Address
+                </button>
+            </div>
+
+            <div class="info-grid">
+                <di
