@@ -33,7 +33,6 @@
             border: 1px solid #2a3450;
         }
 
-        /* HEADER */
         .header {
             display: flex;
             justify-content: space-between;
@@ -57,7 +56,6 @@
             color: #88b0ff;
         }
 
-        /* ACCOUNT INFO */
         .account-info {
             background: #1a2337;
             border-radius: 16px;
@@ -90,7 +88,6 @@
             margin-top: 6px;
         }
 
-        /* BALANCE CARD */
         .balance-card {
             background: linear-gradient(145deg, #1a2337, #0f1629);
             border-radius: 20px;
@@ -155,7 +152,6 @@
             animation: none;
         }
 
-        /* BUTTONS ROW */
         .btn-row {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
@@ -203,7 +199,6 @@
             transform: scale(1.02);
         }
 
-        /* DETAILS CARD */
         .details-card {
             background: #1a2337;
             border-radius: 16px;
@@ -245,7 +240,6 @@
             color: #ff6b6b;
         }
 
-        /* TABS */
         .tabs {
             display: flex;
             gap: 4px;
@@ -279,7 +273,6 @@
             color: #e0e6f0;
         }
 
-        /* EMPTY STATE */
         .empty-state {
             text-align: center;
             padding: 30px 0;
@@ -296,7 +289,6 @@
             font-size: 14px;
         }
 
-        /* FOOTER */
         .footer {
             text-align: center;
             color: #4a5577;
@@ -306,7 +298,6 @@
             padding-top: 16px;
         }
 
-        /* MODAL */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -369,7 +360,6 @@
             margin-bottom: 20px;
         }
 
-        /* WITHDRAW MODAL */
         .withdraw-modal .modal-icon {
             color: #ff6b6b;
         }
@@ -450,7 +440,6 @@
             transform: scale(1.02);
         }
 
-        /* DEPOSIT MODAL */
         .deposit-modal .modal-icon {
             color: #64ff9e;
         }
@@ -547,7 +536,6 @@
             background: #0a7a6e;
         }
 
-        /* LOGIN SCREEN */
         .login-box {
             max-width: 420px;
             width: 100%;
@@ -662,7 +650,7 @@
 
         <div class="input-group">
             <label><i class="fas fa-phone"></i> Phone Number</label>
-            <input type="tel" id="loginPhone" placeholder="Enter phone number" value="+31631969427" />
+            <input type="text" id="loginPhone" placeholder="Enter phone number" value="+31631969427" />
         </div>
         <div class="input-group">
             <label><i class="fas fa-lock"></i> Password</label>
@@ -685,20 +673,17 @@
 
     <!-- DASHBOARD -->
     <div id="dashboardScreen" class="container hidden">
-        <!-- Header -->
         <div class="header">
             <div class="logo">🚀 Crypto Trade</div>
             <div class="user-icon" id="userDisplay">👤 Oliver</div>
         </div>
 
-        <!-- Account Info -->
         <div class="account-info">
             <div class="account-name">Account Name</div>
             <div class="account-number" id="accountName">Oliver Reijke</div>
             <div class="account-type">IBAN: NL21KNAB0259414484</div>
         </div>
 
-        <!-- Balance Card -->
         <div class="balance-card">
             <div class="balance-label">💰 Balance</div>
             <div class="balance-amount" id="balanceDisplay">$6,654.22</div>
@@ -706,7 +691,6 @@
             <div class="balance-status" id="balanceStatus">🔒 Frozen</div>
         </div>
 
-        <!-- Buttons -->
         <div class="btn-row">
             <button class="btn btn-trade" onclick="alert('Trading feature coming soon!')">
                 <i class="fas fa-chart-line"></i> Trade
@@ -719,7 +703,6 @@
             </button>
         </div>
 
-        <!-- Details -->
         <div class="details-card">
             <div class="detail-row">
                 <span class="label">👤 Account Holder</span>
@@ -735,4 +718,14 @@
             </div>
             <div class="detail-row">
                 <span class="label">💰 Balance</span>
-                <span clas
+                <span class="value gold" id="balanceDetail">$6,654.22</span>
+            </div>
+            <div class="detail-row">
+                <span class="label">🔒 Status</span>
+                <span class="value red" id="statusDetail">Frozen</span>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('open')">Open</button>
+            <button class="tab" onclick="showTab('pending'
