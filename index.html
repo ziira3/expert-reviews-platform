@@ -298,25 +298,26 @@
             padding-top: 16px;
         }
 
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.85);
+        /* MODAL */
+        .modal {
             display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
             justify-content: center;
             align-items: center;
-            z-index: 1000;
             padding: 20px;
         }
 
-        .modal-overlay.active {
-            display: flex;
+        .modal.show {
+            display: flex !important;
         }
 
-        .modal-box {
+        .modal-content {
             background: #141b2b;
             border-radius: 24px;
             padding: 30px;
@@ -327,7 +328,7 @@
             overflow-y: auto;
         }
 
-        .modal-box .close-modal {
+        .modal-content .close {
             float: right;
             background: none;
             border: none;
@@ -336,38 +337,31 @@
             cursor: pointer;
         }
 
-        .modal-box .close-modal:hover {
+        .modal-content .close:hover {
             color: white;
         }
 
-        .modal-box .modal-icon {
+        .modal-content .modal-icon {
             text-align: center;
             font-size: 48px;
             margin-bottom: 8px;
         }
 
-        .modal-box .modal-title {
+        .modal-content .modal-title {
             text-align: center;
             font-size: 20px;
             font-weight: 700;
             margin-bottom: 4px;
         }
 
-        .modal-box .modal-sub {
+        .modal-content .modal-sub {
             text-align: center;
             color: #8892b0;
             font-size: 14px;
             margin-bottom: 20px;
         }
 
-        .withdraw-modal .modal-icon {
-            color: #ff6b6b;
-        }
-        .withdraw-modal .modal-title {
-            color: #ff6b6b;
-        }
-
-        .withdraw-modal .info-box {
+        .modal-content .info-box {
             background: #0b0e1a;
             border-radius: 12px;
             padding: 16px;
@@ -375,39 +369,38 @@
             margin-bottom: 16px;
         }
 
-        .withdraw-modal .info-box .info-row {
+        .modal-content .info-box .info-row {
             display: flex;
             justify-content: space-between;
             padding: 6px 0;
             font-size: 14px;
         }
 
-        .withdraw-modal .info-box .info-row .label {
+        .modal-content .info-box .info-row .label {
             color: #8892b0;
         }
-        .withdraw-modal .info-box .info-row .value {
+        .modal-content .info-box .info-row .value {
             font-weight: 600;
             color: #e0e6f0;
         }
-
-        .withdraw-modal .info-box .info-row .value.red {
+        .modal-content .info-box .info-row .value.red {
             color: #ff6b6b;
         }
-        .withdraw-modal .info-box .info-row .value.green {
+        .modal-content .info-box .info-row .value.green {
             color: #64ff9e;
         }
-        .withdraw-modal .info-box .info-row .value.gold {
+        .modal-content .info-box .info-row .value.gold {
             color: #f0b34b;
         }
 
-        .withdraw-modal .btn-row-2 {
+        .modal-content .btn-row-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
             margin-top: 16px;
         }
 
-        .withdraw-modal .btn-cs {
+        .modal-content .btn-cs {
             background: #075e54;
             color: white;
             border: none;
@@ -421,11 +414,11 @@
             display: block;
         }
 
-        .withdraw-modal .btn-cs:hover {
+        .modal-content .btn-cs:hover {
             background: #0a7a6e;
         }
 
-        .withdraw-modal .btn-deposit-modal {
+        .modal-content .btn-deposit-modal {
             background: linear-gradient(135deg, #f0b34b, #e8903a);
             color: #0b0e1a;
             border: none;
@@ -436,18 +429,11 @@
             transition: 0.2s;
         }
 
-        .withdraw-modal .btn-deposit-modal:hover {
+        .modal-content .btn-deposit-modal:hover {
             transform: scale(1.02);
         }
 
-        .deposit-modal .modal-icon {
-            color: #64ff9e;
-        }
-        .deposit-modal .modal-title {
-            color: #64ff9e;
-        }
-
-        .deposit-modal .wallet-box {
+        .modal-content .wallet-box {
             background: #0b0e1a;
             border-radius: 12px;
             padding: 16px;
@@ -455,13 +441,13 @@
             margin-bottom: 16px;
         }
 
-        .deposit-modal .wallet-box .wallet-label {
+        .modal-content .wallet-box .wallet-label {
             font-size: 12px;
             color: #8892b0;
             margin-bottom: 6px;
         }
 
-        .deposit-modal .wallet-box .wallet-address {
+        .modal-content .wallet-box .wallet-address {
             font-family: 'Courier New', monospace;
             font-size: 12px;
             color: #88b0ff;
@@ -474,7 +460,7 @@
             font-weight: 700;
         }
 
-        .deposit-modal .wallet-box .copy-btn {
+        .modal-content .wallet-box .copy-btn {
             background: #2a3a5c;
             color: #88b0ff;
             border: none;
@@ -486,11 +472,11 @@
             margin-top: 8px;
         }
 
-        .deposit-modal .wallet-box .copy-btn:hover {
+        .modal-content .wallet-box .copy-btn:hover {
             background: #3e4b6b;
         }
 
-        .deposit-modal .info-grid {
+        .modal-content .info-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
@@ -501,23 +487,23 @@
             margin-bottom: 16px;
         }
 
-        .deposit-modal .info-grid .info-item {
+        .modal-content .info-grid .info-item {
             text-align: center;
         }
 
-        .deposit-modal .info-grid .info-item .info-label {
+        .modal-content .info-grid .info-item .info-label {
             font-size: 10px;
             color: #8892b0;
             text-transform: uppercase;
         }
 
-        .deposit-modal .info-grid .info-item .info-value {
+        .modal-content .info-grid .info-item .info-value {
             font-size: 14px;
             font-weight: 700;
             margin-top: 2px;
         }
 
-        .deposit-modal .btn-cs-deposit {
+        .modal-content .btn-cs-deposit {
             background: #075e54;
             color: white;
             border: none;
@@ -532,14 +518,28 @@
             width: 100%;
         }
 
-        .deposit-modal .btn-cs-deposit:hover {
+        .modal-content .btn-cs-deposit:hover {
             background: #0a7a6e;
+        }
+
+        .withdraw-modal .modal-icon {
+            color: #ff6b6b;
+        }
+        .withdraw-modal .modal-title {
+            color: #ff6b6b;
+        }
+
+        .deposit-modal .modal-icon {
+            color: #64ff9e;
+        }
+        .deposit-modal .modal-title {
+            color: #64ff9e;
         }
     </style>
 </head>
 <body>
 
-    <!-- DASHBOARD - NO LOGIN, DIRECT ACCESS -->
+    <!-- DASHBOARD -->
     <div class="container">
         <div class="header">
             <div class="logo">🚀 Crypto Trade</div>
@@ -563,10 +563,10 @@
             <button class="btn btn-trade" onclick="alert('Trading feature coming soon!')">
                 <i class="fas fa-chart-line"></i> Trade
             </button>
-            <button class="btn btn-deposit" onclick="openDepositModal()">
+            <button class="btn btn-deposit" onclick="openDeposit()">
                 <i class="fas fa-arrow-down"></i> Deposit
             </button>
-            <button class="btn btn-withdraw" onclick="openWithdrawModal()">
+            <button class="btn btn-withdraw" onclick="openWithdraw()">
                 <i class="fas fa-arrow-up"></i> Withdraw
             </button>
         </div>
@@ -614,9 +614,9 @@
     </div>
 
     <!-- WITHDRAW MODAL -->
-    <div class="modal-overlay" id="withdrawModal">
-        <div class="modal-box withdraw-modal">
-            <button class="close-modal" onclick="closeWithdrawModal()">✕</button>
+    <div id="withdrawModal" class="modal withdraw-modal">
+        <div class="modal-content">
+            <button class="close" onclick="closeWithdraw()">✕</button>
             <div class="modal-icon">🔒</div>
             <div class="modal-title">Account Frozen</div>
             <div class="modal-sub">Your account is currently frozen. Please contact customer service or make a deposit.</div>
@@ -632,7 +632,7 @@
                 </div>
                 <div class="info-row">
                     <span class="label">💰 Current Balance</span>
-                    <span class="value gold" id="withdrawBalance">$6,654.22</span>
+                    <span class="value gold">$6,654.22</span>
                 </div>
                 <div class="info-row">
                     <span class="label">🎯 Target Balance</span>
@@ -640,7 +640,7 @@
                 </div>
                 <div class="info-row">
                     <span class="label">💵 Amount to Deposit</span>
-                    <span class="value red" id="withdrawNeeded">$3,345.78</span>
+                    <span class="value red">$3,345.78</span>
                 </div>
                 <div class="info-row">
                     <span class="label">🔒 Account Status</span>
@@ -653,7 +653,7 @@
                    class="btn-cs" target="_blank">
                     <i class="fab fa-whatsapp"></i> Contact CS
                 </a>
-                <button class="btn-deposit-modal" onclick="closeWithdrawModal(); openDepositModal();">
+                <button class="btn-deposit-modal" onclick="closeWithdraw(); openDeposit();">
                     <i class="fas fa-coins"></i> Deposit Now
                 </button>
             </div>
@@ -665,9 +665,9 @@
     </div>
 
     <!-- DEPOSIT MODAL -->
-    <div class="modal-overlay" id="depositModal">
-        <div class="modal-box deposit-modal">
-            <button class="close-modal" onclick="closeDepositModal()">✕</button>
+    <div id="depositModal" class="modal deposit-modal">
+        <div class="modal-content">
+            <button class="close" onclick="closeDeposit()">✕</button>
             <div class="modal-icon">💰</div>
             <div class="modal-title">Deposit USDC</div>
             <div class="modal-sub">Send funds to the wallet address below</div>
@@ -681,4 +681,6 @@
             </div>
 
             <div class="info-grid">
-                <di
+                <div class="info-item">
+                    <div class="info-label">🌐 Network</div>
+                 
