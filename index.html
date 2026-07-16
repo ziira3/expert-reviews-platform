@@ -298,275 +298,66 @@
             padding-top: 16px;
         }
 
-        /* MODAL */
-        .modal {
-            display: none;
+        .whatsapp-float {
             position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .modal.show {
-            display: flex !important;
-        }
-
-        .modal-content {
-            background: #141b2b;
-            border-radius: 24px;
-            padding: 30px;
-            max-width: 440px;
-            width: 100%;
-            border: 1px solid #2a3450;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .modal-content .close {
-            float: right;
-            background: none;
-            border: none;
-            color: #8892b0;
-            font-size: 24px;
-            cursor: pointer;
-        }
-
-        .modal-content .close:hover {
+            bottom: 20px;
+            right: 20px;
+            background: #25d366;
             color: white;
-        }
-
-        .modal-content .modal-icon {
-            text-align: center;
-            font-size: 48px;
-            margin-bottom: 8px;
-        }
-
-        .modal-content .modal-title {
-            text-align: center;
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .modal-content .modal-sub {
-            text-align: center;
-            color: #8892b0;
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-
-        .modal-content .info-box {
-            background: #0b0e1a;
-            border-radius: 12px;
-            padding: 16px;
-            border: 1px solid #2a3450;
-            margin-bottom: 16px;
-        }
-
-        .modal-content .info-box .info-row {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
             display: flex;
-            justify-content: space-between;
-            padding: 6px 0;
-            font-size: 14px;
-        }
-
-        .modal-content .info-box .info-row .label {
-            color: #8892b0;
-        }
-        .modal-content .info-box .info-row .value {
-            font-weight: 600;
-            color: #e0e6f0;
-        }
-        .modal-content .info-box .info-row .value.red {
-            color: #ff6b6b;
-        }
-        .modal-content .info-box .info-row .value.green {
-            color: #64ff9e;
-        }
-        .modal-content .info-box .info-row .value.gold {
-            color: #f0b34b;
-        }
-
-        .modal-content .btn-row-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 16px;
-        }
-
-        .modal-content .btn-cs {
-            background: #075e54;
-            color: white;
-            border: none;
-            padding: 14px;
-            border-radius: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.2s;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
             text-decoration: none;
-            text-align: center;
-            display: block;
+            z-index: 999;
+            transition: 0.3s;
         }
 
-        .modal-content .btn-cs:hover {
-            background: #0a7a6e;
-        }
-
-        .modal-content .btn-deposit-modal {
-            background: linear-gradient(135deg, #f0b34b, #e8903a);
-            color: #0b0e1a;
-            border: none;
-            padding: 14px;
-            border-radius: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .modal-content .btn-deposit-modal:hover {
-            transform: scale(1.02);
-        }
-
-        .modal-content .wallet-box {
-            background: #0b0e1a;
-            border-radius: 12px;
-            padding: 16px;
-            border: 1px solid #2a3450;
-            margin-bottom: 16px;
-        }
-
-        .modal-content .wallet-box .wallet-label {
-            font-size: 12px;
-            color: #8892b0;
-            margin-bottom: 6px;
-        }
-
-        .modal-content .wallet-box .wallet-address {
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
-            color: #88b0ff;
-            word-break: break-all;
-            background: #0b0e1a;
-            padding: 12px;
-            border-radius: 10px;
-            border: 1px solid #1e2740;
-            text-align: center;
-            font-weight: 700;
-        }
-
-        .modal-content .wallet-box .copy-btn {
-            background: #2a3a5c;
-            color: #88b0ff;
-            border: none;
-            padding: 10px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 600;
-            width: 100%;
-            margin-top: 8px;
-        }
-
-        .modal-content .wallet-box .copy-btn:hover {
-            background: #3e4b6b;
-        }
-
-        .modal-content .info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            background: #1a2337;
-            padding: 12px;
-            border-radius: 10px;
-            border: 1px solid #2a3450;
-            margin-bottom: 16px;
-        }
-
-        .modal-content .info-grid .info-item {
-            text-align: center;
-        }
-
-        .modal-content .info-grid .info-item .info-label {
-            font-size: 10px;
-            color: #8892b0;
-            text-transform: uppercase;
-        }
-
-        .modal-content .info-grid .info-item .info-value {
-            font-size: 14px;
-            font-weight: 700;
-            margin-top: 2px;
-        }
-
-        .modal-content .btn-cs-deposit {
-            background: #075e54;
-            color: white;
-            border: none;
-            padding: 14px;
-            border-radius: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.2s;
-            text-decoration: none;
-            text-align: center;
-            display: block;
-            width: 100%;
-        }
-
-        .modal-content .btn-cs-deposit:hover {
-            background: #0a7a6e;
-        }
-
-        .withdraw-modal .modal-icon {
-            color: #ff6b6b;
-        }
-        .withdraw-modal .modal-title {
-            color: #ff6b6b;
-        }
-
-        .deposit-modal .modal-icon {
-            color: #64ff9e;
-        }
-        .deposit-modal .modal-title {
-            color: #64ff9e;
+        .whatsapp-float:hover {
+            transform: scale(1.1);
         }
     </style>
 </head>
 <body>
 
+    <!-- WHATSAPP FLOATING BUTTON -->
+    <a href="https://wa.me/16064285188?text=Hello%20Crypto%20Trade%2C%20I%20need%20help" 
+       class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
     <!-- DASHBOARD -->
     <div class="container">
         <div class="header">
             <div class="logo">🚀 Crypto Trade</div>
-            <div class="user-icon" id="userDisplay">👤 Oliver</div>
+            <div class="user-icon">👤 Oliver</div>
         </div>
 
         <div class="account-info">
             <div class="account-name">Account Name</div>
-            <div class="account-number" id="accountName">Oliver Reijke</div>
+            <div class="account-number">Oliver Reijke</div>
             <div class="account-type">IBAN: NL21KNAB0259414484</div>
         </div>
 
         <div class="balance-card">
             <div class="balance-label">💰 Balance</div>
-            <div class="balance-amount" id="balanceDisplay">$6,654.22</div>
+            <div class="balance-amount">$6,654.22</div>
             <div class="balance-usd">≈ $6,654.22 USD</div>
-            <div class="balance-status" id="balanceStatus">🔒 Frozen</div>
+            <div class="balance-status">🔒 Frozen</div>
         </div>
 
         <div class="btn-row">
-            <button class="btn btn-trade" onclick="alert('Trading feature coming soon!')">
+            <button class="btn btn-trade" onclick="alert('📊 Trading feature coming soon!')">
                 <i class="fas fa-chart-line"></i> Trade
             </button>
-            <button class="btn btn-deposit" onclick="openDeposit()">
+            <button class="btn btn-deposit" onclick="showDeposit()">
                 <i class="fas fa-arrow-down"></i> Deposit
             </button>
-            <button class="btn btn-withdraw" onclick="openWithdraw()">
+            <button class="btn btn-withdraw" onclick="showWithdraw()">
                 <i class="fas fa-arrow-up"></i> Withdraw
             </button>
         </div>
@@ -574,23 +365,23 @@
         <div class="details-card">
             <div class="detail-row">
                 <span class="label">👤 Account Holder</span>
-                <span class="value" id="accountHolder">Oliver Reijke</span>
+                <span class="value">Oliver Reijke</span>
             </div>
             <div class="detail-row">
                 <span class="label">🏦 IBAN</span>
-                <span class="value" id="ibanDisplay">NL21KNAB0259414484</span>
+                <span class="value">NL21KNAB0259414484</span>
             </div>
             <div class="detail-row">
                 <span class="label">📞 Phone</span>
-                <span class="value" id="phoneDisplay">+31631969427</span>
+                <span class="value">+31631969427</span>
             </div>
             <div class="detail-row">
                 <span class="label">💰 Balance</span>
-                <span class="value gold" id="balanceDetail">$6,654.22</span>
+                <span class="value gold">$6,654.22</span>
             </div>
             <div class="detail-row">
                 <span class="label">🔒 Status</span>
-                <span class="value red" id="statusDetail">Frozen</span>
+                <span class="value red">Frozen</span>
             </div>
         </div>
 
@@ -609,78 +400,75 @@
         </div>
 
         <div class="footer">
-            © 2026 Crypto Trade • <span id="footerPhone">+31631969427</span>
+            © 2026 Crypto Trade • <span>+31631969427</span>
         </div>
     </div>
 
-    <!-- WITHDRAW MODAL -->
-    <div id="withdrawModal" class="modal withdraw-modal">
-        <div class="modal-content">
-            <button class="close" onclick="closeWithdraw()">✕</button>
-            <div class="modal-icon">🔒</div>
-            <div class="modal-title">Account Frozen</div>
-            <div class="modal-sub">Your account is currently frozen. Please contact customer service or make a deposit.</div>
+    <script>
+        // ===== DEPOSIT =====
+        function showDeposit() {
+            var wallet = '0x5883088D57B75E9d9513ddD7fDD96FB2FCF513A5';
+            var message = '💰 DEPOSIT USDC\n\n' +
+                          '📤 Send to this address:\n' +
+                          wallet + '\n\n' +
+                          '🌐 Network: Ethereum (ERC20)\n' +
+                          '🪙 Token: USDC\n' +
+                          '⏱ Processing: 5-15 minutes\n' +
+                          '💵 Minimum: $50 USDC\n\n' +
+                          '📞 Contact CS after sending: +1(606) 428-5188';
+            alert(message);
+        }
 
-            <div class="info-box">
-                <div class="info-row">
-                    <span class="label">👤 Account Holder</span>
-                    <span class="value">Oliver Reijke</span>
-                </div>
-                <div class="info-row">
-                    <span class="label">🏦 IBAN</span>
-                    <span class="value">NL21KNAB0259414484</span>
-                </div>
-                <div class="info-row">
-                    <span class="label">💰 Current Balance</span>
-                    <span class="value gold">$6,654.22</span>
-                </div>
-                <div class="info-row">
-                    <span class="label">🎯 Target Balance</span>
-                    <span class="value green">$10,000.00</span>
-                </div>
-                <div class="info-row">
-                    <span class="label">💵 Amount to Deposit</span>
-                    <span class="value red">$3,345.78</span>
-                </div>
-                <div class="info-row">
-                    <span class="label">🔒 Account Status</span>
-                    <span class="value red">Frozen</span>
-                </div>
-            </div>
+        // ===== WITHDRAW =====
+        function showWithdraw() {
+            var message = '🔒 ACCOUNT FROZEN\n\n' +
+                          '👤 Account: Oliver Reijke\n' +
+                          '🏦 IBAN: NL21KNAB0259414484\n' +
+                          '💰 Balance: $6,654.22\n' +
+                          '🎯 Target: $10,000.00\n' +
+                          '💵 Need to Deposit: $3,345.78\n\n' +
+                          '📞 Contact CS to unfreeze:\n' +
+                          '+1(606) 428-5188';
+            alert(message);
+        }
 
-            <div class="btn-row-2">
-                <a href="https://wa.me/16064285188?text=Hello%20Crypto%20Trade%2C%20my%20account%20is%20frozen.%20Please%20help%20me%20unfreeze%20it.%20My%20name%20is%20Oliver%20Reijke" 
-                   class="btn-cs" target="_blank">
-                    <i class="fab fa-whatsapp"></i> Contact CS
-                </a>
-                <button class="btn-deposit-modal" onclick="closeWithdraw(); openDeposit();">
-                    <i class="fas fa-coins"></i> Deposit Now
-                </button>
-            </div>
+        // ===== TABS =====
+        function showTab(tab) {
+            var tabs = document.querySelectorAll('.tab');
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove('active');
+            }
 
-            <div style="text-align:center;margin-top:12px;color:#8892b0;font-size:12px;">
-                ⏱ Contact CS to unfreeze your account
-            </div>
-        </div>
-    </div>
+            if (tab === 'open') {
+                tabs[0].classList.add('active');
+                document.getElementById('tabContent').innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-chart-pie"></i>
+                        <p>No open positions</p>
+                        <p style="font-size:12px;color:#4a5577;">ETH-Trade • Explore more instruments</p>
+                    </div>
+                `;
+            } else if (tab === 'pending') {
+                tabs[1].classList.add('active');
+                document.getElementById('tabContent').innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-clock"></i>
+                        <p>No pending orders</p>
+                        <p style="font-size:12px;color:#4a5577;">All orders are processed</p>
+                    </div>
+                `;
+            } else if (tab === 'closed') {
+                tabs[2].classList.add('active');
+                document.getElementById('tabContent').innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-check-circle"></i>
+                        <p>No closed positions</p>
+                        <p style="font-size:12px;color:#4a5577;">Start trading to see history</p>
+                    </div>
+                `;
+            }
+        }
+    </script>
 
-    <!-- DEPOSIT MODAL -->
-    <div id="depositModal" class="modal deposit-modal">
-        <div class="modal-content">
-            <button class="close" onclick="closeDeposit()">✕</button>
-            <div class="modal-icon">💰</div>
-            <div class="modal-title">Deposit USDC</div>
-            <div class="modal-sub">Send funds to the wallet address below</div>
-
-            <div class="wallet-box">
-                <div class="wallet-label">📤 Send to this address:</div>
-                <div class="wallet-address">0x5883088D57B75E9d9513ddD7fDD96FB2FCF513A5</div>
-                <button class="copy-btn" onclick="copyWallet()">
-                    <i class="fas fa-copy"></i> Copy Address
-                </button>
-            </div>
-
-            <div class="info-grid">
-                <div class="info-item">
-                    <div class="info-label">🌐 Network</div>
-                 
+</body>
+                </html>
