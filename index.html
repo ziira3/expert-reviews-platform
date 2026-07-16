@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Expert Reviews Platform</title>
+    <title>Crypto Trading Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
         * {
@@ -12,6 +12,7 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+
         body {
             background: #0b0e1a;
             color: #e0e6f0;
@@ -21,494 +22,291 @@
             align-items: center;
             padding: 20px;
         }
+
         .container {
-            max-width: 480px;
-            width: 100%;
-            background: #141b2b;
-            border-radius: 24px;
-            padding: 28px 22px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
-            border: 1px solid #2a3450;
-        }
-        h1 {
-            font-size: 26px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #f0b34b, #ff7e5f);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-align: center;
-            margin-bottom: 6px;
-        }
-        .subtitle {
-            text-align: center;
-            color: #8892b0;
-            font-size: 14px;
-            margin-bottom: 22px;
-            border-bottom: 1px solid #1e2740;
-            padding-bottom: 16px;
-        }
-        .card {
-            background: #1a2337;
-            border-radius: 16px;
-            padding: 18px 16px;
-            margin-bottom: 16px;
-            border: 1px solid #27304a;
-        }
-        .flex {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .balance {
-            font-size: 32px;
-            font-weight: 700;
-            color: #64ff9e;
-        }
-        .balance.negative {
-            color: #ff6b6b;
-        }
-        .label {
-            color: #8892b0;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-        .badge-normal {
-            background: #2a3a5c;
-            color: #88b0ff;
-        }
-        .badge-rush {
-            background: #5c2a2a;
-            color: #ff8888;
-        }
-        .badge-success {
-            background: #1f4a3a;
-            color: #64ff9e;
-        }
-        .badge-warning {
-            background: #5c4a1a;
-            color: #f0b34b;
-        }
-        .btn {
-            background: #2a3a5c;
-            border: none;
-            color: white;
-            padding: 12px 20px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 15px;
-            cursor: pointer;
-            transition: 0.2s;
-            width: 100%;
-            margin-top: 8px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, #f0b34b, #e8903a);
-            color: #0b0e1a;
-        }
-        .btn-primary:hover {
-            transform: scale(1.02);
-            box-shadow: 0 4px 20px rgba(240, 179, 75, 0.3);
-        }
-        .btn-danger {
-            background: #5c2a2a;
-            color: #ff8888;
-        }
-        .btn-danger:hover {
-            background: #7a3535;
-        }
-        .btn-success {
-            background: #1f4a3a;
-            color: #64ff9e;
-        }
-        .btn-success:hover {
-            background: #2a5f4a;
-        }
-        .btn-whatsapp {
-            background: #075e54;
-            color: white;
-        }
-        .btn-whatsapp:hover {
-            background: #0a7a6e;
-        }
-        .btn-deposit {
-            background: linear-gradient(135deg, #f7931a, #f0b34b);
-            color: #0b0e1a;
-        }
-        .btn-deposit:hover {
-            transform: scale(1.02);
-            box-shadow: 0 4px 20px rgba(247, 147, 26, 0.3);
-        }
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-        .mt-8 {
-            margin-top: 8px;
-        }
-        .hidden {
-            display: none !important;
-        }
-        .input-group {
-            margin-bottom: 14px;
-        }
-        .input-group label {
-            display: block;
-            font-size: 13px;
-            color: #8892b0;
-            margin-bottom: 4px;
-        }
-        .input-group input {
-            width: 100%;
-            padding: 12px 14px;
-            border-radius: 10px;
-            border: 1px solid #27304a;
-            background: #0b0e1a;
-            color: white;
-            font-size: 15px;
-            outline: none;
-        }
-        .input-group input:focus {
-            border-color: #f0b34b;
-        }
-        .small-text {
-            font-size: 13px;
-            color: #8892b0;
-        }
-        .history-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #1a2337;
-            font-size: 14px;
-        }
-        .history-item:last-child {
-            border-bottom: none;
-        }
-        .profit-green {
-            color: #64ff9e;
-        }
-        .profit-red {
-            color: #ff6b6b;
-        }
-        .whatsapp-float {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #25d366;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-            text-decoration: none;
-            z-index: 999;
-            transition: 0.3s;
-        }
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-        }
-        .login-box {
             max-width: 420px;
             width: 100%;
             background: #141b2b;
             border-radius: 24px;
-            padding: 40px 30px;
+            padding: 24px 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
             border: 1px solid #2a3450;
         }
-        .login-box .logo {
-            text-align: center;
-            font-size: 32px;
+
+        /* HEADER */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .header .logo {
+            font-size: 22px;
             font-weight: 700;
             background: linear-gradient(135deg, #f0b34b, #ff7e5f);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 8px;
-        }
-        .login-box .btn {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #f0b34b, #e8903a);
-            color: #0b0e1a;
-            font-weight: 700;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-top: 8px;
-        }
-        .login-box .btn:hover {
-            transform: scale(1.02);
-        }
-        .login-box .footer {
-            text-align: center;
-            margin-top: 20px;
-            color: #8892b0;
-            font-size: 13px;
-        }
-        .login-box .footer a {
-            color: #f0b34b;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        .whatsapp-btn {
-            display: block;
-            text-align: center;
-            margin-top: 16px;
-            padding: 12px;
-            background: #075e54;
-            color: white;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-        .whatsapp-btn:hover {
-            background: #0a7a6e;
-        }
-        .wallet-display {
-            background: #0b0e1a;
-            padding: 12px 14px;
-            border-radius: 10px;
-            border: 1px solid #2a3a5c;
-            margin-top: 8px;
-        }
-        .wallet-display .address {
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
-            color: #88b0ff;
-            word-break: break-all;
-        }
-        .wallet-actions {
-            display: flex;
-            gap: 8px;
-            margin-top: 10px;
-        }
-        .wallet-actions button {
-            flex: 1;
-            padding: 10px;
-            border: none;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 14px;
-            transition: 0.2s;
-        }
-        .wallet-actions .copy-btn {
-            background: #2a3a5c;
-            color: #88b0ff;
-        }
-        .wallet-actions .copy-btn:hover {
-            background: #3e4b6b;
-        }
-        .wallet-actions .deposit-btn {
-            background: linear-gradient(135deg, #f7931a, #f0b34b);
-            color: #0b0e1a;
-        }
-        .wallet-actions .deposit-btn:hover {
-            transform: scale(1.02);
-        }
-        .wallet-input {
-            display: flex;
-            gap: 8px;
-            margin-top: 8px;
-        }
-        .wallet-input input {
-            flex: 1;
-            padding: 10px 14px;
-            border-radius: 10px;
-            border: 1px solid #27304a;
-            background: #0b0e1a;
-            color: white;
-            font-size: 14px;
-            outline: none;
-        }
-        .wallet-input input:focus {
-            border-color: #f0b34b;
-        }
-        .wallet-input button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 10px;
-            background: #1f4a3a;
-            color: #64ff9e;
-            font-weight: 600;
-            cursor: pointer;
-            white-space: nowrap;
-        }
-        .wallet-input button:hover {
-            background: #2a5f4a;
         }
 
-        /* PRODUCT CARD */
-        .product-card {
-            background: linear-gradient(145deg, #1a2337, #141b2b);
+        .header .user-icon {
+            background: #1f2a44;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: #88b0ff;
+        }
+
+        /* ACCOUNT INFO */
+        .account-info {
+            background: #1a2337;
             border-radius: 16px;
-            padding: 20px 18px;
+            padding: 16px;
+            margin-bottom: 16px;
+            border: 1px solid #27304a;
+        }
+
+        .account-info .account-name {
+            font-size: 14px;
+            color: #8892b0;
+            margin-bottom: 4px;
+        }
+
+        .account-info .account-number {
+            font-size: 16px;
+            font-weight: 600;
+            color: #e0e6f0;
+            letter-spacing: 1px;
+        }
+
+        .account-info .account-type {
+            display: inline-block;
+            background: #1f4a3a;
+            color: #64ff9e;
+            padding: 2px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 6px;
+        }
+
+        /* BALANCE CARD */
+        .balance-card {
+            background: linear-gradient(145deg, #1a2337, #0f1629);
+            border-radius: 20px;
+            padding: 24px 20px;
             border: 1px solid #2a3450;
+            margin-bottom: 20px;
             position: relative;
             overflow: hidden;
         }
-        .product-card .product-badge {
+
+        .balance-card::before {
+            content: '';
             position: absolute;
-            top: 12px;
-            right: 12px;
-            padding: 4px 14px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 700;
+            top: -50%;
+            right: -20%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(240, 179, 75, 0.05), transparent 70%);
+            border-radius: 50%;
+        }
+
+        .balance-card .balance-label {
+            font-size: 13px;
+            color: #8892b0;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            z-index: 5;
+            letter-spacing: 1px;
         }
-        .product-card .product-badge.normal {
-            background: #1f2a44;
-            color: #88b0ff;
+
+        .balance-card .balance-amount {
+            font-size: 42px;
+            font-weight: 700;
+            color: #64ff9e;
+            margin: 4px 0 6px;
+            font-family: 'Courier New', monospace;
         }
-        .product-card .product-badge.rush {
+
+        .balance-card .balance-usd {
+            font-size: 18px;
+            color: #8892b0;
+        }
+
+        .balance-card .balance-status {
+            display: inline-block;
             background: #5c2a2a;
             color: #ff6b6b;
-            animation: pulse-badge 2s infinite;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 8px;
+            animation: pulse-status 2s infinite;
         }
-        @keyframes pulse-badge {
+
+        @keyframes pulse-status {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.6; }
         }
 
-        .product-card .product-image {
-            text-align: center;
-            padding: 10px 0;
-            border-radius: 12px;
-            margin-bottom: 14px;
-            background: #0b0e1a;
-            border: 1px solid #1e2740;
-            height: 140px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-        .product-card .product-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 12px;
-        }
-        .product-card .product-name {
-            font-size: 14px;
-            font-weight: 600;
-            color: #e0e6f0;
-            margin-bottom: 16px;
-            padding-right: 80px;
-            line-height: 1.4;
-            text-align: center;
-        }
-        .product-card .product-name .highlight {
-            color: #f0b34b;
-        }
-        .product-card .product-details {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-        .product-card .product-details .detail-item {
-            background: #0b0e1a;
-            border-radius: 10px;
-            padding: 10px 12px;
-            border: 1px solid #1e2740;
-            text-align: center;
-        }
-        .product-card .product-details .detail-item .detail-label {
-            font-size: 10px;
-            text-transform: uppercase;
-            color: #8892b0;
-            letter-spacing: 0.5px;
-            margin-bottom: 2px;
-        }
-        .product-card .product-details .detail-item .detail-value {
-            font-size: 16px;
-            font-weight: 700;
-            color: #e0e6f0;
-        }
-        .product-card .product-details .detail-item .detail-value.green {
+        .balance-card .balance-status.active {
+            background: #1f4a3a;
             color: #64ff9e;
-        }
-        .product-card .product-details .detail-item .detail-value.gold {
-            color: #f0b34b;
-        }
-        .product-card .product-details .detail-item .detail-value.red {
-            color: #ff6b6b;
-        }
-        .product-card .product-details .detail-item .detail-value.blue {
-            color: #88b0ff;
-        }
-        .product-card .product-actions {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-        .product-card .product-actions .btn-upload {
-            background: linear-gradient(135deg, #f0b34b, #e8903a);
-            border: none;
-            color: #0b0e1a;
-            padding: 12px;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 14px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .product-card .product-actions .btn-upload:hover {
-            transform: scale(1.02);
-        }
-        .product-card .product-actions .btn-cancel {
-            background: #2a3a5c;
-            border: none;
-            color: #8892b0;
-            padding: 12px;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .product-card .product-actions .btn-cancel:hover {
-            background: #3e4b6b;
-        }
-        .progress-bar {
-            width: 100%;
-            height: 4px;
-            background: #1a2337;
-            border-radius: 4px;
-            margin-top: 8px;
-            overflow: hidden;
-        }
-        .progress-bar .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #f0b34b, #64ff9e);
-            border-radius: 4px;
-            transition: width 0.5s;
-            width: 0%;
+            animation: none;
         }
 
-        /* MODALS */
+        /* BUTTONS ROW */
+        .btn-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .btn-row .btn {
+            padding: 14px 10px;
+            border: none;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.2s;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+        }
+
+        .btn-row .btn-trade {
+            background: linear-gradient(135deg, #f0b34b, #e8903a);
+            color: #0b0e1a;
+        }
+
+        .btn-row .btn-trade:hover {
+            transform: scale(1.02);
+        }
+
+        .btn-row .btn-deposit {
+            background: linear-gradient(135deg, #1f4a3a, #2a5f4a);
+            color: #64ff9e;
+        }
+
+        .btn-row .btn-deposit:hover {
+            transform: scale(1.02);
+        }
+
+        .btn-row .btn-withdraw {
+            background: linear-gradient(135deg, #5c2a2a, #7a3535);
+            color: #ff6b6b;
+        }
+
+        .btn-row .btn-withdraw:hover {
+            transform: scale(1.02);
+        }
+
+        /* DETAILS CARD */
+        .details-card {
+            background: #1a2337;
+            border-radius: 16px;
+            padding: 16px;
+            border: 1px solid #27304a;
+            margin-bottom: 16px;
+        }
+
+        .details-card .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #1e2740;
+            font-size: 14px;
+        }
+
+        .details-card .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .details-card .detail-row .label {
+            color: #8892b0;
+        }
+
+        .details-card .detail-row .value {
+            color: #e0e6f0;
+            font-weight: 600;
+        }
+
+        .details-card .detail-row .value.green {
+            color: #64ff9e;
+        }
+
+        .details-card .detail-row .value.gold {
+            color: #f0b34b;
+        }
+
+        .details-card .detail-row .value.red {
+            color: #ff6b6b;
+        }
+
+        /* TABS */
+        .tabs {
+            display: flex;
+            gap: 4px;
+            background: #0b0e1a;
+            border-radius: 12px;
+            padding: 4px;
+            margin-bottom: 16px;
+        }
+
+        .tabs .tab {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            border: none;
+            border-radius: 10px;
+            background: transparent;
+            color: #8892b0;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .tabs .tab.active {
+            background: #1f2a44;
+            color: #e0e6f0;
+        }
+
+        .tabs .tab:hover {
+            background: #1f2a44;
+            color: #e0e6f0;
+        }
+
+        /* EMPTY STATE */
+        .empty-state {
+            text-align: center;
+            padding: 30px 0;
+            color: #8892b0;
+        }
+
+        .empty-state i {
+            font-size: 48px;
+            color: #2a3a5c;
+            margin-bottom: 12px;
+        }
+
+        .empty-state p {
+            font-size: 14px;
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            color: #4a5577;
+            font-size: 12px;
+            margin-top: 16px;
+            border-top: 1px solid #1e2740;
+            padding-top: 16px;
+        }
+
+        /* MODAL */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -522,9 +320,11 @@
             z-index: 1000;
             padding: 20px;
         }
+
         .modal-overlay.active {
             display: flex;
         }
+
         .modal-box {
             background: #141b2b;
             border-radius: 24px;
@@ -535,6 +335,7 @@
             max-height: 90vh;
             overflow-y: auto;
         }
+
         .modal-box .close-modal {
             float: right;
             background: none;
@@ -543,85 +344,99 @@
             font-size: 24px;
             cursor: pointer;
         }
+
         .modal-box .close-modal:hover {
             color: white;
         }
 
-        .insufficient-modal .modal-icon {
+        .modal-box .modal-icon {
             text-align: center;
             font-size: 48px;
-            color: #ff6b6b;
             margin-bottom: 8px;
         }
-        .insufficient-modal .modal-title {
+
+        .modal-box .modal-title {
             text-align: center;
             font-size: 20px;
             font-weight: 700;
-            color: #ff6b6b;
             margin-bottom: 4px;
         }
-        .insufficient-modal .modal-sub {
+
+        .modal-box .modal-sub {
             text-align: center;
             color: #8892b0;
             font-size: 14px;
             margin-bottom: 20px;
         }
-        .insufficient-modal .balance-display {
+
+        /* WITHDRAW MODAL */
+        .withdraw-modal .modal-icon {
+            color: #ff6b6b;
+        }
+        .withdraw-modal .modal-title {
+            color: #ff6b6b;
+        }
+
+        .withdraw-modal .info-box {
             background: #0b0e1a;
             border-radius: 12px;
             padding: 16px;
             border: 1px solid #2a3450;
             margin-bottom: 16px;
         }
-        .insufficient-modal .balance-display .bal-row {
+
+        .withdraw-modal .info-box .info-row {
             display: flex;
             justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #1a2337;
+            padding: 6px 0;
             font-size: 14px;
         }
-        .insufficient-modal .balance-display .bal-row:last-child {
-            border-bottom: none;
-        }
-        .insufficient-modal .balance-display .bal-row .bal-label {
+
+        .withdraw-modal .info-box .info-row .label {
             color: #8892b0;
         }
-        .insufficient-modal .balance-display .bal-row .bal-value.negative {
+        .withdraw-modal .info-box .info-row .value {
+            font-weight: 600;
+            color: #e0e6f0;
+        }
+
+        .withdraw-modal .info-box .info-row .value.red {
             color: #ff6b6b;
-            font-weight: 700;
         }
-        .insufficient-modal .balance-display .bal-row .bal-value.green {
+        .withdraw-modal .info-box .info-row .value.green {
             color: #64ff9e;
-            font-weight: 700;
         }
-        .insufficient-modal .balance-display .bal-row .bal-value.gold {
+        .withdraw-modal .info-box .info-row .value.gold {
             color: #f0b34b;
-            font-weight: 700;
         }
-        .insufficient-modal .modal-actions {
+
+        .withdraw-modal .btn-row-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
             margin-top: 16px;
         }
-        .insufficient-modal .modal-actions .btn-cs {
+
+        .withdraw-modal .btn-cs {
             background: #075e54;
             color: white;
             border: none;
             padding: 14px;
             border-radius: 12px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             transition: 0.2s;
             text-decoration: none;
             text-align: center;
             display: block;
         }
-        .insufficient-modal .modal-actions .btn-cs:hover {
+
+        .withdraw-modal .btn-cs:hover {
             background: #0a7a6e;
         }
-        .insufficient-modal .modal-actions .btn-deposit-modal {
-            background: linear-gradient(135deg, #f7931a, #f0b34b);
+
+        .withdraw-modal .btn-deposit-modal {
+            background: linear-gradient(135deg, #f0b34b, #e8903a);
             color: #0b0e1a;
             border: none;
             padding: 14px;
@@ -630,56 +445,294 @@
             cursor: pointer;
             transition: 0.2s;
         }
-        .insufficient-modal .modal-actions .btn-deposit-modal:hover {
+
+        .withdraw-modal .btn-deposit-modal:hover {
             transform: scale(1.02);
         }
 
-        .complete-modal .modal-icon {
-            text-align: center;
-            font-size: 48px;
+        /* DEPOSIT MODAL */
+        .deposit-modal .modal-icon {
             color: #64ff9e;
-            margin-bottom: 8px;
         }
-        .complete-modal .modal-title {
-            text-align: center;
-            font-size: 20px;
-            font-weight: 700;
+        .deposit-modal .modal-title {
             color: #64ff9e;
-            margin-bottom: 4px;
         }
-        .complete-modal .modal-sub {
-            text-align: center;
-            color: #8892b0;
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-        .complete-modal .earnings-display {
+
+        .deposit-modal .wallet-box {
             background: #0b0e1a;
             border-radius: 12px;
             padding: 16px;
             border: 1px solid #2a3450;
             margin-bottom: 16px;
         }
-        .complete-modal .earnings-display .earn-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #1a2337;
-            font-size: 14px;
-        }
-        .complete-modal .earnings-display .earn-row:last-child {
-            border-bottom: none;
-        }
-        .complete-modal .earnings-display .earn-row .earn-label {
+
+        .deposit-modal .wallet-box .wallet-label {
+            font-size: 12px;
             color: #8892b0;
+            margin-bottom: 6px;
         }
-        .complete-modal .earnings-display .earn-row .earn-value.green {
-            color: #64ff9e;
+
+        .deposit-modal .wallet-box .wallet-address {
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: #88b0ff;
+            word-break: break-all;
+            background: #0b0e1a;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #1e2740;
+            text-align: center;
             font-weight: 700;
         }
-        .complete-modal .earnings-display .earn-row .earn-value.gold {
+
+        .deposit-modal .wallet-box .copy-btn {
+            background: #2a3a5c;
+            color: #88b0ff;
+            border: none;
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 8px;
+        }
+
+        .deposit-modal .wallet-box .copy-btn:hover {
+            background: #3e4b6b;
+        }
+
+        .deposit-modal .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            background: #1a2337;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #2a3450;
+            margin-bottom: 16px;
+        }
+
+        .deposit-modal .info-grid .info-item {
+            text-align: center;
+        }
+
+        .deposit-modal .info-grid .info-item .info-label {
+            font-size: 10px;
+            color: #8892b0;
+            text-transform: uppercase;
+        }
+
+        .deposit-modal .info-grid .info-item .info-value {
+            font-size: 14px;
+            font-weight: 700;
+            margin-top: 2px;
+        }
+
+        .deposit-modal .btn-cs-deposit {
+            background: #075e54;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            text-decoration: none;
+            text-align: center;
+            display: block;
+            width: 100%;
+        }
+
+        .deposit-modal .btn-cs-deposit:hover {
+            background: #0a7a6e;
+        }
+
+        /* LOGIN SCREEN */
+        .login-box {
+            max-width: 420px;
+            width: 100%;
+            background: #141b2b;
+            border-radius: 24px;
+            padding: 40px 30px;
+            border: 1px solid #2a3450;
+        }
+
+        .login-box .logo {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #f0b34b, #ff7e5f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 4px;
+        }
+
+        .login-box .subtitle {
+            text-align: center;
+            color: #8892b0;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .login-box .input-group {
+            margin-bottom: 14px;
+        }
+
+        .login-box .input-group label {
+            display: block;
+            font-size: 13px;
+            color: #8892b0;
+            margin-bottom: 4px;
+        }
+
+        .login-box .input-group input {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            border: 1px solid #27304a;
+            background: #0b0e1a;
+            color: white;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .login-box .input-group input:focus {
+            border-color: #f0b34b;
+        }
+
+        .login-box .btn-login {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #f0b34b, #e8903a);
+            color: #0b0e1a;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 8px;
+        }
+
+        .login-box .btn-login:hover {
+            transform: scale(1.02);
+        }
+
+        .login-box .footer {
+            text-align: center;
+            margin-top: 16px;
+            color: #8892b0;
+            font-size: 13px;
+        }
+
+        .login-box .footer a {
             color: #f0b34b;
-            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
         }
-        .complete-modal .earnings-display .earn-row .earn-value.white {
-     
+
+        .login-box .whatsapp-btn {
+            display: block;
+            text-align: center;
+            margin-top: 12px;
+            padding: 12px;
+            background: #075e54;
+            color: white;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .login-box .whatsapp-btn:hover {
+            background: #0a7a6e;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- LOGIN SCREEN -->
+    <div id="loginScreen" class="login-box">
+        <div class="logo">🚀 Crypto Trade</div>
+        <div class="subtitle">Login to your account</div>
+
+        <div class="input-group">
+            <label><i class="fas fa-phone"></i> Phone Number</label>
+            <input type="tel" id="loginPhone" placeholder="Enter phone number" value="+31631969427" />
+        </div>
+        <div class="input-group">
+            <label><i class="fas fa-lock"></i> Password</label>
+            <input type="password" id="loginPassword" placeholder="Enter password" value="123456" />
+        </div>
+
+        <button class="btn-login" onclick="loginUser()">
+            <i class="fas fa-sign-in-alt"></i> Login
+        </button>
+
+        <a href="https://wa.me/31631969427?text=Hello%20Crypto%20Trade%2C%20I%20need%20help%20with%20my%20account" 
+           class="whatsapp-btn" target="_blank">
+            <i class="fab fa-whatsapp"></i> Need Help? Chat on WhatsApp
+        </a>
+
+        <div class="footer">
+            New user? Contact <a href="https://wa.me/31631969427" target="_blank">Support</a> to register
+        </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div id="dashboardScreen" class="container hidden">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">🚀 Crypto Trade</div>
+            <div class="user-icon" id="userDisplay">👤 Oliver</div>
+        </div>
+
+        <!-- Account Info -->
+        <div class="account-info">
+            <div class="account-name">Account Name</div>
+            <div class="account-number" id="accountName">Oliver Reijke</div>
+            <div class="account-type">IBAN: NL21KNAB0259414484</div>
+        </div>
+
+        <!-- Balance Card -->
+        <div class="balance-card">
+            <div class="balance-label">💰 Balance</div>
+            <div class="balance-amount" id="balanceDisplay">$6,654.22</div>
+            <div class="balance-usd">≈ $6,654.22 USD</div>
+            <div class="balance-status" id="balanceStatus">🔒 Frozen</div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="btn-row">
+            <button class="btn btn-trade" onclick="alert('Trading feature coming soon!')">
+                <i class="fas fa-chart-line"></i> Trade
+            </button>
+            <button class="btn btn-deposit" onclick="openDepositModal()">
+                <i class="fas fa-arrow-down"></i> Deposit
+            </button>
+            <button class="btn btn-withdraw" onclick="openWithdrawModal()">
+                <i class="fas fa-arrow-up"></i> Withdraw
+            </button>
+        </div>
+
+        <!-- Details -->
+        <div class="details-card">
+            <div class="detail-row">
+                <span class="label">👤 Account Holder</span>
+                <span class="value" id="accountHolder">Oliver Reijke</span>
+            </div>
+            <div class="detail-row">
+                <span class="label">🏦 IBAN</span>
+                <span class="value" id="ibanDisplay">NL21KNAB0259414484</span>
+            </div>
+            <div class="detail-row">
+                <span class="label">📞 Phone</span>
+                <span class="value" id="phoneDisplay">+31631969427</span>
+            </div>
+            <div class="detail-row">
+                <span class="label">💰 Balance</span>
+                <span clas
