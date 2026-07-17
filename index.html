@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Crypto Trading Dashboard</title>
+    <title>Expert Reviews Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
         * {
@@ -41,7 +41,7 @@
         }
 
         .header .logo {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 700;
             background: linear-gradient(135deg, #f0b34b, #ff7e5f);
             -webkit-background-clip: text;
@@ -50,42 +50,10 @@
 
         .header .user-icon {
             background: #1f2a44;
-            padding: 8px 14px;
+            padding: 6px 14px;
             border-radius: 20px;
-            font-size: 13px;
+            font-size: 12px;
             color: #88b0ff;
-        }
-
-        .account-info {
-            background: #1a2337;
-            border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 16px;
-            border: 1px solid #27304a;
-        }
-
-        .account-info .account-name {
-            font-size: 14px;
-            color: #8892b0;
-            margin-bottom: 4px;
-        }
-
-        .account-info .account-number {
-            font-size: 16px;
-            font-weight: 600;
-            color: #e0e6f0;
-            letter-spacing: 1px;
-        }
-
-        .account-info .account-type {
-            display: inline-block;
-            background: #1f4a3a;
-            color: #64ff9e;
-            padding: 2px 12px;
-            border-radius: 12px;
-            font-size: 11px;
-            font-weight: 600;
-            margin-top: 6px;
         }
 
         .balance-card {
@@ -94,19 +62,7 @@
             padding: 24px 20px;
             border: 1px solid #2a3450;
             margin-bottom: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .balance-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(240, 179, 75, 0.05), transparent 70%);
-            border-radius: 50%;
+            text-align: center;
         }
 
         .balance-card .balance-label {
@@ -125,350 +81,393 @@
         }
 
         .balance-card .balance-usd {
-            font-size: 18px;
+            font-size: 16px;
             color: #8892b0;
         }
 
-        .balance-card .balance-status {
-            display: inline-block;
-            background: #5c2a2a;
+        .card {
+            background: #1a2337;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 16px;
+            border: 1px solid #27304a;
+        }
+
+        .card .card-title {
+            font-size: 13px;
+            color: #8892b0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .flex .value {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .flex .value.green {
+            color: #64ff9e;
+        }
+        .flex .value.gold {
+            color: #f0b34b;
+        }
+        .flex .value.red {
             color: #ff6b6b;
-            padding: 4px 16px;
-            border-radius: 20px;
+        }
+        .flex .value.blue {
+            color: #88b0ff;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #0b0e1a;
+            border-radius: 4px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .progress-bar .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #f0b34b, #64ff9e);
+            border-radius: 4px;
+            transition: width 0.5s;
+        }
+
+        .divider {
+            border-top: 1px solid #1e2740;
+            margin: 12px 0;
+        }
+
+        .task-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #1e2740;
+        }
+
+        .task-item:last-child {
+            border-bottom: none;
+        }
+
+        .task-item .task-name {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .task-item .task-status {
             font-size: 12px;
             font-weight: 600;
-            margin-top: 8px;
-            animation: pulse-status 2s infinite;
+            padding: 4px 12px;
+            border-radius: 20px;
         }
 
-        @keyframes pulse-status {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
-        }
-
-        .balance-card .balance-status.active {
+        .task-item .task-status.paid {
             background: #1f4a3a;
             color: #64ff9e;
-            animation: none;
         }
 
-        .btn-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 20px;
+        .task-item .task-status.pending {
+            background: #5c4a1a;
+            color: #f0b34b;
         }
 
-        .btn-row .btn {
-            padding: 14px 10px;
-            border: none;
-            border-radius: 14px;
-            font-weight: 700;
+        .task-item .task-status.incomplete {
+            background: #5c2a2a;
+            color: #ff6b6b;
+        }
+
+        .task-item .task-status.completed {
+            background: #1f4a3a;
+            color: #64ff9e;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
             font-size: 14px;
-            cursor: pointer;
-            transition: 0.2s;
-            text-align: center;
-            text-decoration: none;
-            display: block;
         }
 
-        .btn-row .btn-trade {
+        .info-row .label {
+            color: #8892b0;
+        }
+
+        .info-row .value {
+            font-weight: 600;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 8px;
+        }
+
+        .btn-primary {
             background: linear-gradient(135deg, #f0b34b, #e8903a);
             color: #0b0e1a;
         }
 
-        .btn-row .btn-trade:hover {
+        .btn-primary:hover {
             transform: scale(1.02);
         }
 
-        .btn-row .btn-deposit {
-            background: linear-gradient(135deg, #1f4a3a, #2a5f4a);
-            color: #64ff9e;
+        .btn-whatsapp {
+            background: #075e54;
+            color: white;
         }
 
-        .btn-row .btn-deposit:hover {
+        .btn-whatsapp:hover {
+            background: #0a7a6e;
             transform: scale(1.02);
         }
 
-        .btn-row .btn-withdraw {
-            background: linear-gradient(135deg, #5c2a2a, #7a3535);
+        .btn-danger {
+            background: #5c2a2a;
             color: #ff6b6b;
         }
 
-        .btn-row .btn-withdraw:hover {
-            transform: scale(1.02);
-        }
-
-        .details-card {
-            background: #1a2337;
-            border-radius: 16px;
-            padding: 16px;
-            border: 1px solid #27304a;
-            margin-bottom: 16px;
-        }
-
-        .details-card .detail-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #1e2740;
-            font-size: 14px;
-        }
-
-        .details-card .detail-row:last-child {
-            border-bottom: none;
-        }
-
-        .details-card .detail-row .label {
-            color: #8892b0;
-        }
-
-        .details-card .detail-row .value {
-            color: #e0e6f0;
-            font-weight: 600;
-        }
-
-        .details-card .detail-row .value.green {
-            color: #64ff9e;
-        }
-
-        .details-card .detail-row .value.gold {
-            color: #f0b34b;
-        }
-
-        .details-card .detail-row .value.red {
-            color: #ff6b6b;
-        }
-
-        .tabs {
-            display: flex;
-            gap: 4px;
-            background: #0b0e1a;
-            border-radius: 12px;
-            padding: 4px;
-            margin-bottom: 16px;
-        }
-
-        .tabs .tab {
-            flex: 1;
-            padding: 10px;
-            text-align: center;
-            border: none;
-            border-radius: 10px;
-            background: transparent;
-            color: #8892b0;
-            font-weight: 600;
-            font-size: 13px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .tabs .tab.active {
-            background: #1f2a44;
-            color: #e0e6f0;
-        }
-
-        .tabs .tab:hover {
-            background: #1f2a44;
-            color: #e0e6f0;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 30px 0;
-            color: #8892b0;
-        }
-
-        .empty-state i {
-            font-size: 48px;
-            color: #2a3a5c;
-            margin-bottom: 12px;
-        }
-
-        .empty-state p {
-            font-size: 14px;
+        .btn-danger:hover {
+            background: #7a3535;
         }
 
         .footer {
             text-align: center;
             color: #4a5577;
-            font-size: 12px;
+            font-size: 11px;
             margin-top: 16px;
             border-top: 1px solid #1e2740;
             padding-top: 16px;
         }
 
-        .whatsapp-float {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #25d366;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-            text-decoration: none;
-            z-index: 999;
-            transition: 0.3s;
+        .status-badge {
+            display: inline-block;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
         }
 
-        .whatsapp-float:hover {
-            transform: scale(1.1);
+        .status-badge.active {
+            background: #1f4a3a;
+            color: #64ff9e;
+        }
+
+        .status-badge.warning {
+            background: #5c4a1a;
+            color: #f0b34b;
+        }
+
+        .status-badge.danger {
+            background: #5c2a2a;
+            color: #ff6b6b;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
         }
     </style>
 </head>
 <body>
 
-    <!-- WHATSAPP FLOATING BUTTON -->
-    <a href="https://wa.me/16064285188?text=Hello%20Crypto%20Trade%2C%20I%20need%20help" 
-       class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <!-- DASHBOARD -->
     <div class="container">
+
+        <!-- HEADER -->
         <div class="header">
-            <div class="logo">🚀 Crypto Trade</div>
-            <div class="user-icon">👤 Oliver</div>
+            <div class="logo">📊 Expert Reviews</div>
+            <div class="user-icon" id="userDisplay">👤 Johnny</div>
         </div>
 
-        <div class="account-info">
-            <div class="account-name">Account Name</div>
-            <div class="account-number">Oliver Reijke</div>
-            <div class="account-type">IBAN: NL21KNAB0259414484</div>
-        </div>
-
+        <!-- BALANCE CARD -->
         <div class="balance-card">
             <div class="balance-label">💰 Balance</div>
-            <div class="balance-amount">$6,654.22</div>
-            <div class="balance-usd">≈ $6,654.22 USD</div>
-            <div class="balance-status">🔒 Frozen</div>
+            <div class="balance-amount" id="balanceDisplay">$20.00</div>
+            <div class="balance-usd">≈ $20.00 USD</div>
         </div>
 
-        <div class="btn-row">
-            <button class="btn btn-trade" onclick="alert('📊 Trading feature coming soon!')">
-                <i class="fas fa-chart-line"></i> Trade
-            </button>
-            <button class="btn btn-deposit" onclick="showDeposit()">
-                <i class="fas fa-arrow-down"></i> Deposit
-            </button>
-            <button class="btn btn-withdraw" onclick="showWithdraw()">
-                <i class="fas fa-arrow-up"></i> Withdraw
-            </button>
-        </div>
-
-        <div class="details-card">
-            <div class="detail-row">
-                <span class="label">👤 Account Holder</span>
-                <span class="value">Oliver Reijke</span>
+        <!-- ACCOUNT INFO -->
+        <div class="card">
+            <div class="card-title">👤 Account Details</div>
+            <div class="info-row">
+                <span class="label">Name</span>
+                <span class="value" id="accountName">Johnny</span>
             </div>
-            <div class="detail-row">
-                <span class="label">🏦 IBAN</span>
-                <span class="value">NL21KNAB0259414484</span>
+            <div class="info-row">
+                <span class="label">Email</span>
+                <span class="value" id="accountEmail">johnnyvandiest77@gmail.com</span>
             </div>
-            <div class="detail-row">
-                <span class="label">📞 Phone</span>
-                <span class="value">+31631969427</span>
+            <div class="info-row">
+                <span class="label">Phone</span>
+                <span class="value" id="accountPhone">06-85575556</span>
             </div>
-            <div class="detail-row">
-                <span class="label">💰 Balance</span>
-                <span class="value gold">$6,654.22</span>
-            </div>
-            <div class="detail-row">
-                <span class="label">🔒 Status</span>
-                <span class="value red">Frozen</span>
+            <div class="info-row">
+                <span class="label">Status</span>
+                <span class="value"><span class="status-badge warning">🟡 Active</span></span>
             </div>
         </div>
 
-        <div class="tabs">
-            <button class="tab active" onclick="showTab('open')">Open</button>
-            <button class="tab" onclick="showTab('pending')">Pending</button>
-            <button class="tab" onclick="showTab('closed')">Closed</button>
-        </div>
-
-        <div id="tabContent">
-            <div class="empty-state">
-                <i class="fas fa-chart-pie"></i>
-                <p>No open positions</p>
-                <p style="font-size:12px;color:#4a5577;">ETH-Trade • Explore more instruments</p>
+        <!-- TASKS SUMMARY -->
+        <div class="card">
+            <div class="card-title">📋 Tasks Summary</div>
+            <div class="grid-2">
+                <div style="text-align:center;padding:8px;background:#0b0e1a;border-radius:10px;">
+                    <div style="font-size:24px;font-weight:700;color:#64ff9e;">3</div>
+                    <div style="font-size:11px;color:#8892b0;">Total Tasks</div>
+                </div>
+                <div style="text-align:center;padding:8px;background:#0b0e1a;border-radius:10px;">
+                    <div style="font-size:24px;font-weight:700;color:#64ff9e;">1</div>
+                    <div style="font-size:11px;color:#8892b0;">Paid</div>
+                </div>
+                <div style="text-align:center;padding:8px;background:#0b0e1a;border-radius:10px;">
+                    <div style="font-size:24px;font-weight:700;color:#f0b34b;">2</div>
+                    <div style="font-size:11px;color:#8892b0;">Pending</div>
+                </div>
+                <div style="text-align:center;padding:8px;background:#0b0e1a;border-radius:10px;">
+                    <div style="font-size:24px;font-weight:700;color:#88b0ff;">5</div>
+                    <div style="font-size:11px;color:#8892b0;">Daily Tasks</div>
+                </div>
             </div>
         </div>
 
+        <!-- DAILY TASKS PROGRESS -->
+        <div class="card">
+            <div class="card-title">📌 Daily Tasks Progress</div>
+            <div class="flex">
+                <span style="font-size:14px;">2 out of 5 tasks done</span>
+                <span style="font-size:14px;font-weight:600;color:#f0b34b;">40%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width:40%;"></div>
+            </div>
+            <div style="margin-top:12px;font-size:12px;color:#8892b0;text-align:center;">
+                Complete all 5 tasks to receive your salary
+            </div>
+        </div>
+
+        <!-- TASK LIST -->
+        <div class="card">
+            <div class="card-title">📝 Task List</div>
+
+            <div class="task-item">
+                <span class="task-name">Task 1</span>
+                <span class="task-status paid">✅ Paid</span>
+            </div>
+
+            <div class="task-item">
+                <span class="task-name">Task 2</span>
+                <span class="task-status pending">⏳ Pending</span>
+            </div>
+
+            <div class="task-item">
+                <span class="task-name">Task 3</span>
+                <span class="task-status pending">⏳ Pending</span>
+            </div>
+
+            <div class="task-item">
+                <span class="task-name">Task 4</span>
+                <span class="task-status incomplete">❌ Not Done</span>
+            </div>
+
+            <div class="task-item">
+                <span class="task-name">Task 5</span>
+                <span class="task-status incomplete">❌ Not Done</span>
+            </div>
+        </div>
+
+        <!-- EARNINGS INFO -->
+        <div class="card">
+            <div class="card-title">💰 Earnings Info</div>
+            <div class="info-row">
+                <span class="label">Prepaid</span>
+                <span class="value gold">$250.00</span>
+            </div>
+            <div class="info-row">
+                <span class="label">You Will Receive</span>
+                <span class="value green">$450.00</span>
+            </div>
+            <div class="divider"></div>
+            <div class="info-row">
+                <span class="label">Current Balance</span>
+                <span class="value blue">$20.00</span>
+            </div>
+            <div style="margin-top:10px;font-size:12px;color:#8892b0;text-align:center;">
+                ⚠️ Complete all daily tasks to receive your full salary
+            </div>
+        </div>
+
+        <!-- BUTTONS -->
+        <button class="btn btn-primary" onclick="alert('✅ Starting your next task!')">
+            <i class="fas fa-play"></i> Start Next Task
+        </button>
+
+        <a href="https://wa.me/16064285188?text=Hello%20Expert%20Reviews%2C%20I%20am%20Johnny%20and%20I%20need%20help%20with%20my%20tasks" 
+           class="btn btn-whatsapp" target="_blank" style="text-decoration:none;display:block;">
+            <i class="fab fa-whatsapp"></i> Contact Support
+        </a>
+
+        <button class="btn btn-danger" onclick="alert('⚠️ All tasks must be completed to get salary!')">
+            <i class="fas fa-exclamation-triangle"></i> Check Salary Status
+        </button>
+
+        <!-- FOOTER -->
         <div class="footer">
-            © 2026 Crypto Trade • <span>+31631969427</span>
+            © 2026 Expert Reviews • Johnny • 06-85575556
         </div>
+
     </div>
 
     <script>
-        // ===== DEPOSIT =====
-        function showDeposit() {
-            var wallet = '0x5883088D57B75E9d9513ddD7fDD96FB2FCF513A5';
-            var message = '💰 DEPOSIT USDC\n\n' +
-                          '📤 Send to this address:\n' +
-                          wallet + '\n\n' +
-                          '🌐 Network: Ethereum (ERC20)\n' +
-                          '🪙 Token: USDC\n' +
-                          '⏱ Processing: 5-15 minutes\n' +
-                          '💵 Minimum: $50 USDC\n\n' +
-                          '📞 Contact CS after sending: +1(606) 428-5188';
-            alert(message);
+        // ===== UPDATE DASHBOARD =====
+        function updateDashboard() {
+            var balance = 20.00;
+            var totalTasks = 3;
+            var paidTasks = 1;
+            var pendingTasks = 2;
+            var dailyTasks = 5;
+            var tasksDone = 2;
+            var prepaid = 250.00;
+            var willReceive = 450.00;
+
+            document.getElementById('balanceDisplay').innerHTML = '$' + balance.toFixed(2);
+            document.getElementById('accountName').innerHTML = 'Johnny';
+            document.getElementById('accountEmail').innerHTML = 'johnnyvandiest77@gmail.com';
+            document.getElementById('accountPhone').innerHTML = '06-85575556';
         }
 
-        // ===== WITHDRAW =====
-        function showWithdraw() {
-            var message = '🔒 ACCOUNT FROZEN\n\n' +
-                          '👤 Account: Oliver Reijke\n' +
-                          '🏦 IBAN: NL21KNAB0259414484\n' +
-                          '💰 Balance: $6,654.22\n' +
-                          '🎯 Target: $10,000.00\n' +
-                          '💵 Need to Deposit: $3,345.78\n\n' +
-                          '📞 Contact CS to unfreeze:\n' +
-                          '+1(606) 428-5188';
-            alert(message);
+        // ===== SHOW STATUS =====
+        function showStatus() {
+            alert('📊 ACCOUNT STATUS\n\n' +
+                  '👤 Name: Johnny\n' +
+                  '📧 Email: johnnyvandiest77@gmail.com\n' +
+                  '📞 Phone: 06-85575556\n\n' +
+                  '💰 Balance: $20.00\n' +
+                  '📋 Tasks Done: 3\n' +
+                  '✅ Paid: 1\n' +
+                  '⏳ Pending: 2\n' +
+                  '📌 Daily Tasks: 2/5 done\n\n' +
+                  '💰 Prepaid: $250.00\n' +
+                  '💰 Will Receive: $450.00\n\n' +
+                  '⚠️ Complete all daily tasks to get salary!');
         }
 
-        // ===== TABS =====
-        function showTab(tab) {
-            var tabs = document.querySelectorAll('.tab');
-            for (var i = 0; i < tabs.length; i++) {
-                tabs[i].classList.remove('active');
-            }
-
-            if (tab === 'open') {
-                tabs[0].classList.add('active');
-                document.getElementById('tabContent').innerHTML = `
-                    <div class="empty-state">
-                        <i class="fas fa-chart-pie"></i>
-                        <p>No open positions</p>
-                        <p style="font-size:12px;color:#4a5577;">ETH-Trade • Explore more instruments</p>
-                    </div>
-                `;
-            } else if (tab === 'pending') {
-                tabs[1].classList.add('active');
-                document.getElementById('tabContent').innerHTML = `
-                    <div class="empty-state">
-                        <i class="fas fa-clock"></i>
-                        <p>No pending orders</p>
-                        <p style="font-size:12px;color:#4a5577;">All orders are processed</p>
-                    </div>
-                `;
-            } else if (tab === 'closed') {
-                tabs[2].classList.add('active');
-                document.getElementById('tabContent').innerHTML = `
-                    <div class="empty-state">
-                        <i class="fas fa-check-circle"></i>
-                        <p>No closed positions</p>
-                        <p style="font-size:12px;color:#4a5577;">Start trading to see history</p>
-                    </div>
-                `;
-            }
-        }
+        updateDashboard();
     </script>
 
 </body>
-                </html>
+                        </html>
