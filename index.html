@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Expert Reviews Dashboard</title>
+    <title>Expert Reviews - Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
         * {
@@ -33,19 +33,48 @@
             border: 1px solid #2a3450;
         }
 
-        .header {
+        .nl-header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            gap: 12px;
             margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #1e2740;
         }
 
-        .header .logo {
+        .nl-flag {
+            display: flex;
+            flex-direction: column;
+            width: 40px;
+            height: 28px;
+            border-radius: 4px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .nl-flag .red { background: #AE1C28; height: 33.33%; width: 100%; }
+        .nl-flag .white { background: #FFFFFF; height: 33.33%; width: 100%; }
+        .nl-flag .blue { background: #21468B; height: 33.34%; width: 100%; }
+
+        .nl-title {
             font-size: 20px;
             font-weight: 700;
             background: linear-gradient(135deg, #f0b34b, #ff7e5f);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        .nl-sub {
+            font-size: 11px;
+            color: #8892b0;
+            margin-left: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
         }
 
         .header .user-icon {
@@ -63,6 +92,19 @@
             border: 1px solid #2a3450;
             margin-bottom: 20px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .balance-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(240, 179, 75, 0.05), transparent 70%);
+            border-radius: 50%;
         }
 
         .balance-card .balance-label {
@@ -70,6 +112,8 @@
             color: #8892b0;
             text-transform: uppercase;
             letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
         }
 
         .balance-card .balance-amount {
@@ -78,11 +122,23 @@
             color: #64ff9e;
             margin: 4px 0 6px;
             font-family: 'Courier New', monospace;
+            position: relative;
+            z-index: 1;
         }
 
         .balance-card .balance-usd {
             font-size: 16px;
             color: #8892b0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .balance-card .balance-euro {
+            font-size: 14px;
+            color: #f0b34b;
+            position: relative;
+            z-index: 1;
+            margin-top: 4px;
         }
 
         .card {
@@ -112,18 +168,11 @@
             font-size: 16px;
         }
 
-        .flex .value.green {
-            color: #64ff9e;
-        }
-        .flex .value.gold {
-            color: #f0b34b;
-        }
-        .flex .value.red {
-            color: #ff6b6b;
-        }
-        .flex .value.blue {
-            color: #88b0ff;
-        }
+        .flex .value.green { color: #64ff9e; }
+        .flex .value.gold { color: #f0b34b; }
+        .flex .value.red { color: #ff6b6b; }
+        .flex .value.blue { color: #88b0ff; }
+        .flex .value.orange { color: #ff8c00; }
 
         .progress-bar {
             width: 100%;
@@ -170,25 +219,10 @@
             border-radius: 20px;
         }
 
-        .task-item .task-status.paid {
-            background: #1f4a3a;
-            color: #64ff9e;
-        }
-
-        .task-item .task-status.pending {
-            background: #5c4a1a;
-            color: #f0b34b;
-        }
-
-        .task-item .task-status.incomplete {
-            background: #5c2a2a;
-            color: #ff6b6b;
-        }
-
-        .task-item .task-status.completed {
-            background: #1f4a3a;
-            color: #64ff9e;
-        }
+        .task-item .task-status.paid { background: #1f4a3a; color: #64ff9e; }
+        .task-item .task-status.pending { background: #5c4a1a; color: #f0b34b; }
+        .task-item .task-status.incomplete { background: #5c2a2a; color: #ff6b6b; }
+        .task-item .task-status.completed { background: #1f4a3a; color: #64ff9e; }
 
         .info-row {
             display: flex;
@@ -245,6 +279,40 @@
             background: #7a3535;
         }
 
+        .btn-nl {
+            background: linear-gradient(135deg, #AE1C28, #21468B);
+            color: white;
+        }
+
+        .btn-nl:hover {
+            transform: scale(1.02);
+        }
+
+        .btn-copy {
+            background: #2a3a5c;
+            color: #88b0ff;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .btn-copy:hover {
+            background: #3e4b6b;
+            transform: scale(1.02);
+        }
+
+        .btn-revolut {
+            background: linear-gradient(135deg, #0077B6, #00B4D8);
+            color: white;
+        }
+
+        .btn-revolut:hover {
+            transform: scale(1.02);
+        }
+
         .footer {
             text-align: center;
             color: #4a5577;
@@ -262,25 +330,97 @@
             font-weight: 600;
         }
 
-        .status-badge.active {
-            background: #1f4a3a;
-            color: #64ff9e;
-        }
-
-        .status-badge.warning {
-            background: #5c4a1a;
-            color: #f0b34b;
-        }
-
-        .status-badge.danger {
-            background: #5c2a2a;
-            color: #ff6b6b;
-        }
+        .status-badge.active { background: #1f4a3a; color: #64ff9e; }
+        .status-badge.warning { background: #5c4a1a; color: #f0b34b; }
+        .status-badge.danger { background: #5c2a2a; color: #ff6b6b; }
 
         .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
+        }
+
+        .nl-flag-small {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: #8892b0;
+        }
+
+        .nl-flag-small .flag-dot {
+            display: inline-block;
+            width: 18px;
+            height: 12px;
+            border-radius: 2px;
+            background: linear-gradient(180deg, #AE1C28 33%, #FFFFFF 33%, #FFFFFF 66%, #21468B 66%);
+            flex-shrink: 0;
+        }
+
+        .iban-box {
+            background: #0b0e1a;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #2a3a5c;
+            margin-top: 6px;
+        }
+
+        .iban-box .iban-text {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #88b0ff;
+            word-break: break-all;
+            text-align: center;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .iban-box .iban-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 8px;
+        }
+
+        .revolut-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #0077B6, #00B4D8);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .revolut-balance {
+            background: linear-gradient(145deg, #0b0e1a, #141b2b);
+            border-radius: 12px;
+            padding: 12px;
+            border: 1px solid #2a3a5c;
+            margin-top: 8px;
+        }
+
+        .revolut-balance .bal-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            font-size: 13px;
+        }
+
+        .revolut-balance .bal-row .bal-label {
+            color: #8892b0;
+        }
+
+        .revolut-balance .bal-row .bal-value {
+            font-weight: 600;
+        }
+
+        .revolut-balance .bal-row .bal-value.negative {
+            color: #ff6b6b;
+        }
+
+        .revolut-balance .bal-row .bal-value.positive {
+            color: #64ff9e;
         }
     </style>
 </head>
@@ -288,186 +428,189 @@
 
     <div class="container">
 
+        <!-- NETHERLANDS HEADER -->
+        <div class="nl-header">
+            <div class="nl-flag">
+                <div class="red"></div>
+                <div class="white"></div>
+                <div class="blue"></div>
+            </div>
+            <div class="nl-title">Expert Reviews</div>
+            <div class="nl-sub">🇳🇱 Nederland</div>
+        </div>
+
         <!-- HEADER -->
         <div class="header">
-            <div class="logo">📊 Expert Reviews</div>
+            <div style="font-size:13px;color:#8892b0;">
+                <span class="nl-flag-small">
+                    <span class="flag-dot"></span> Johnny
+                </span>
+            </div>
             <div class="user-icon" id="userDisplay">👤 Johnny</div>
         </div>
 
         <!-- BALANCE CARD -->
         <div class="balance-card">
-            <div class="balance-label">💰 Balance</div>
+            <div class="balance-label">💰 Saldo</div>
             <div class="balance-amount" id="balanceDisplay">$20.00</div>
             <div class="balance-usd">≈ $20.00 USD</div>
+            <div class="balance-euro">🇳🇱 €18.50 EUR</div>
         </div>
 
         <!-- ACCOUNT INFO -->
         <div class="card">
-            <div class="card-title">👤 Account Details</div>
+            <div class="card-title">👤 Account Gegevens</div>
             <div class="info-row">
-                <span class="label">Name</span>
-                <span class="value" id="accountName">Johnny</span>
+                <span class="label">Naam</span>
+                <span class="value" id="accountName">Johnny van Diest</span>
             </div>
             <div class="info-row">
                 <span class="label">Email</span>
                 <span class="value" id="accountEmail">johnnyvandiest77@gmail.com</span>
             </div>
             <div class="info-row">
-                <span class="label">Phone</span>
+                <span class="label">Telefoon</span>
                 <span class="value" id="accountPhone">06-85575556</span>
             </div>
             <div class="info-row">
                 <span class="label">Status</span>
-                <span class="value"><span class="status-badge warning">🟡 Active</span></span>
+                <span class="value"><span class="status-badge warning">🟡 Actief</span></span>
+            </div>
+            <div class="info-row">
+                <span class="label">Land</span>
+                <span class="value" style="color:#ff8c00;">🇳🇱 Nederland</span>
+            </div>
+        </div>
+
+        <!-- REVOLUT ACCOUNT -->
+        <div class="card" style="border-color:#0077B6;">
+            <div class="card-title"><i class="fab fa-rev"></i> Revolut Account</div>
+            <div class="info-row">
+                <span class="label">Rekeninghouder</span>
+                <span class="value" style="color:#f0b34b;">Johnny van Diest</span>
+            </div>
+            <div class="info-row">
+                <span class="label">IBAN</span>
+                <span class="value" style="color:#88b0ff;font-family:monospace;font-size:13px;">NL65REVO2515467245</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Valuta</span>
+                <span class="value" style="color:#f0b34b;">EUR</span>
+            </div>
+            <div class="iban-box">
+                <div class="iban-text" id="ibanDisplay">NL65REVO2515467245</div>
+                <div class="iban-row">
+                    <span style="font-size:11px;color:#8892b0;">IBAN</span>
+                    <button class="btn-copy" onclick="copyIBAN()">
+                        <i class="fas fa-copy"></i> Kopieer IBAN
+                    </button>
+                </div>
+            </div>
+            <div style="margin-top:8px;display:flex;align-items:center;gap:8px;">
+                <span class="revolut-badge"><i class="fab fa-rev"></i> Revolut</span>
+                <span style="font-size:12px;color:#8892b0;">Betaalmethode</span>
+            </div>
+            <div style="margin-top:6px;font-size:12px;color:#8892b0;">
+                <i class="fas fa-info-circle"></i> Betalingen worden verwerkt via Revolut
+            </div>
+        </div>
+
+        <!-- REVOLUT TRANSACTIONS -->
+        <div class="card" style="border-color:#0077B6;">
+            <div class="card-title">📊 Recente Transacties</div>
+            
+            <div style="background:#0b0e1a;border-radius:10px;padding:8px 12px;margin-top:4px;border:1px solid #1e2740;">
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;">
+                    <div>
+                        <div style="font-size:13px;font-weight:600;">Johnny van Diest</div>
+                        <div style="font-size:11px;color:#8892b0;">Vandaag, 13:41</div>
+                    </div>
+                    <div style="font-size:16px;font-weight:700;color:#ff6b6b;">- €24</div>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-top:1px solid #1e2740;margin-top:4px;">
+                    <div>
+                        <div style="font-size:13px;font-weight:600;">Johnny van Diest</div>
+                        <div style="font-size:11px;color:#8892b0;">Vandaag, 13:41</div>
+                    </div>
+                    <div style="font-size:16px;font-weight:700;color:#ff6b6b;">- €10</div>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-top:1px solid #1e2740;margin-top:4px;">
+                    <div>
+                        <div style="font-size:13px;font-weight:600;">Saldo</div>
+                        <div style="font-size:11px;color:#8892b0;">Huidig</div>
+                    </div>
+                    <div style="font-size:16px;font-weight:700;color:#ff6b6b;">€ -24</div>
+                </div>
+            </div>
+
+            <div style="margin-top:8px;background:#0b0e1a;border-radius:10px;padding:8px 12px;border:1px solid #1e2740;">
+                <div style="display:flex;justify-content:space-between;">
+                    <span style="font-size:12px;color:#8892b0;">Persoonlijk · EUR</span>
+                    <span style="font-size:12px;color:#8892b0;">€ 0,39</span>
+                </div>
+                <div style="text-align:center;font-size:11px;color:#4a5577;margin-top:4px;">
+                    NL65 REVO 2515 4672 45
+                </div>
             </div>
         </div>
 
         <!-- TASKS SUMMARY -->
         <div class="card">
-            <div class="card-title">📋 Tasks Summary</div>
+            <div class="card-title">📋 Taken Overzicht</div>
             <div class="grid-2">
                 <div style="text-align:center;padding:8px;background:#0b0e1a;border-radius:10px;">
                     <div style="font-size:24px;font-weight:700;color:#64ff9e;">3</div>
-                    <div style="font-size:11px;color:#8892b0;">Total Tasks</div>
+                    <div style="font-size:11px;color:#8892b0;">Totaal Taken</div>
                 </div>
                 <div style="text-align:center;padding:8px;background:#0b0e1a;border-radius:10px;">
                     <div style="font-size:24px;font-weight:700;color:#64ff9e;">1</div>
-                    <div style="font-size:11px;color:#8892b0;">Paid</div>
+                    <div style="font-size:11px;color:#8892b0;">Betaald</div>
                 </div>
                 <div style="text-align:center;padding:8px;background:#0b0e1a;border-radius:10px;">
                     <div style="font-size:24px;font-weight:700;color:#f0b34b;">2</div>
-                    <div style="font-size:11px;color:#8892b0;">Pending</div>
+                    <div style="font-size:11px;color:#8892b0;">In Afwachting</div>
                 </div>
                 <div style="text-align:center;padding:8px;background:#0b0e1a;border-radius:10px;">
                     <div style="font-size:24px;font-weight:700;color:#88b0ff;">5</div>
-                    <div style="font-size:11px;color:#8892b0;">Daily Tasks</div>
+                    <div style="font-size:11px;color:#8892b0;">Dagelijkse Taken</div>
                 </div>
             </div>
         </div>
 
         <!-- DAILY TASKS PROGRESS -->
         <div class="card">
-            <div class="card-title">📌 Daily Tasks Progress</div>
+            <div class="card-title">📌 Dagelijkse Taken Voortgang</div>
             <div class="flex">
-                <span style="font-size:14px;">2 out of 5 tasks done</span>
+                <span style="font-size:14px;">2 van de 5 taken gedaan</span>
                 <span style="font-size:14px;font-weight:600;color:#f0b34b;">40%</span>
             </div>
             <div class="progress-bar">
                 <div class="progress-fill" style="width:40%;"></div>
             </div>
             <div style="margin-top:12px;font-size:12px;color:#8892b0;text-align:center;">
-                Complete all 5 tasks to receive your salary
+                🇳🇱 Voltooi alle 5 taken om je salaris te ontvangen
             </div>
         </div>
 
         <!-- TASK LIST -->
         <div class="card">
-            <div class="card-title">📝 Task List</div>
+            <div class="card-title">📝 Taken Lijst</div>
 
             <div class="task-item">
-                <span class="task-name">Task 1</span>
-                <span class="task-status paid">✅ Paid</span>
-            </div>
-
-            <div class="task-item">
-                <span class="task-name">Task 2</span>
-                <span class="task-status pending">⏳ Pending</span>
+                <span class="task-name">Taak 1</span>
+                <span class="task-status paid">✅ Betaald</span>
             </div>
 
             <div class="task-item">
-                <span class="task-name">Task 3</span>
-                <span class="task-status pending">⏳ Pending</span>
+                <span class="task-name">Taak 2</span>
+                <span class="task-status pending">⏳ In Afwachting</span>
             </div>
 
             <div class="task-item">
-                <span class="task-name">Task 4</span>
-                <span class="task-status incomplete">❌ Not Done</span>
+                <span class="task-name">Taak 3</span>
+                <span class="task-status pending">⏳ In Afwachting</span>
             </div>
 
             <div class="task-item">
-                <span class="task-name">Task 5</span>
-                <span class="task-status incomplete">❌ Not Done</span>
-            </div>
-        </div>
-
-        <!-- EARNINGS INFO -->
-        <div class="card">
-            <div class="card-title">💰 Earnings Info</div>
-            <div class="info-row">
-                <span class="label">Prepaid</span>
-                <span class="value gold">$250.00</span>
-            </div>
-            <div class="info-row">
-                <span class="label">You Will Receive</span>
-                <span class="value green">$450.00</span>
-            </div>
-            <div class="divider"></div>
-            <div class="info-row">
-                <span class="label">Current Balance</span>
-                <span class="value blue">$20.00</span>
-            </div>
-            <div style="margin-top:10px;font-size:12px;color:#8892b0;text-align:center;">
-                ⚠️ Complete all daily tasks to receive your full salary
-            </div>
-        </div>
-
-        <!-- BUTTONS -->
-        <button class="btn btn-primary" onclick="alert('✅ Starting your next task!')">
-            <i class="fas fa-play"></i> Start Next Task
-        </button>
-
-        <a href="https://wa.me/16064285188?text=Hello%20Expert%20Reviews%2C%20I%20am%20Johnny%20and%20I%20need%20help%20with%20my%20tasks" 
-           class="btn btn-whatsapp" target="_blank" style="text-decoration:none;display:block;">
-            <i class="fab fa-whatsapp"></i> Contact Support
-        </a>
-
-        <button class="btn btn-danger" onclick="alert('⚠️ All tasks must be completed to get salary!')">
-            <i class="fas fa-exclamation-triangle"></i> Check Salary Status
-        </button>
-
-        <!-- FOOTER -->
-        <div class="footer">
-            © 2026 Expert Reviews • Johnny • 06-85575556
-        </div>
-
-    </div>
-
-    <script>
-        // ===== UPDATE DASHBOARD =====
-        function updateDashboard() {
-            var balance = 20.00;
-            var totalTasks = 3;
-            var paidTasks = 1;
-            var pendingTasks = 2;
-            var dailyTasks = 5;
-            var tasksDone = 2;
-            var prepaid = 250.00;
-            var willReceive = 450.00;
-
-            document.getElementById('balanceDisplay').innerHTML = '$' + balance.toFixed(2);
-            document.getElementById('accountName').innerHTML = 'Johnny';
-            document.getElementById('accountEmail').innerHTML = 'johnnyvandiest77@gmail.com';
-            document.getElementById('accountPhone').innerHTML = '06-85575556';
-        }
-
-        // ===== SHOW STATUS =====
-        function showStatus() {
-            alert('📊 ACCOUNT STATUS\n\n' +
-                  '👤 Name: Johnny\n' +
-                  '📧 Email: johnnyvandiest77@gmail.com\n' +
-                  '📞 Phone: 06-85575556\n\n' +
-                  '💰 Balance: $20.00\n' +
-                  '📋 Tasks Done: 3\n' +
-                  '✅ Paid: 1\n' +
-                  '⏳ Pending: 2\n' +
-                  '📌 Daily Tasks: 2/5 done\n\n' +
-                  '💰 Prepaid: $250.00\n' +
-                  '💰 Will Receive: $450.00\n\n' +
-                  '⚠️ Complete all daily tasks to get salary!');
-        }
-
-        updateDashboard();
-    </script>
-
-</body>
-                        </html>
+                <span class="task-name">Taak 4</span>
+              
