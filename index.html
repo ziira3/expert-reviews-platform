@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Expert Reviews - Dashboard</title>
+    <title>Crypto Trading Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
         * {
@@ -33,43 +33,6 @@
             border: 1px solid #2a3450;
         }
 
-        .nl-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid #1e2740;
-        }
-
-        .nl-flag {
-            display: flex;
-            flex-direction: column;
-            width: 40px;
-            height: 28px;
-            border-radius: 4px;
-            overflow: hidden;
-            flex-shrink: 0;
-        }
-
-        .nl-flag .red { background: #AE1C28; height: 33.33%; width: 100%; }
-        .nl-flag .white { background: #FFFFFF; height: 33.33%; width: 100%; }
-        .nl-flag .blue { background: #21468B; height: 33.34%; width: 100%; }
-
-        .nl-title {
-            font-size: 20px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #f0b34b, #ff7e5f);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .nl-sub {
-            font-size: 11px;
-            color: #8892b0;
-            margin-left: auto;
-        }
-
         .header {
             display: flex;
             justify-content: space-between;
@@ -77,12 +40,52 @@
             margin-bottom: 20px;
         }
 
+        .header .logo {
+            font-size: 22px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #f0b34b, #ff7e5f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
         .header .user-icon {
             background: #1f2a44;
-            padding: 6px 14px;
+            padding: 8px 14px;
             border-radius: 20px;
-            font-size: 12px;
+            font-size: 13px;
             color: #88b0ff;
+        }
+
+        .account-info {
+            background: #1a2337;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 16px;
+            border: 1px solid #27304a;
+        }
+
+        .account-info .account-name {
+            font-size: 14px;
+            color: #8892b0;
+            margin-bottom: 4px;
+        }
+
+        .account-info .account-number {
+            font-size: 16px;
+            font-weight: 600;
+            color: #e0e6f0;
+            letter-spacing: 1px;
+        }
+
+        .account-info .account-type {
+            display: inline-block;
+            background: #1f4a3a;
+            color: #64ff9e;
+            padding: 2px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 6px;
         }
 
         .balance-card {
@@ -91,7 +94,6 @@
             padding: 24px 20px;
             border: 1px solid #2a3450;
             margin-bottom: 20px;
-            text-align: center;
             position: relative;
             overflow: hidden;
         }
@@ -112,8 +114,6 @@
             color: #8892b0;
             text-transform: uppercase;
             letter-spacing: 1px;
-            position: relative;
-            z-index: 1;
         }
 
         .balance-card .balance-amount {
@@ -122,495 +122,563 @@
             color: #64ff9e;
             margin: 4px 0 6px;
             font-family: 'Courier New', monospace;
-            position: relative;
-            z-index: 1;
         }
 
         .balance-card .balance-usd {
-            font-size: 16px;
+            font-size: 18px;
             color: #8892b0;
-            position: relative;
-            z-index: 1;
         }
 
-        .balance-card .balance-euro {
+        .balance-card .balance-status {
+            display: inline-block;
+            background: #5c2a2a;
+            color: #ff6b6b;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 8px;
+            animation: pulse-status 2s infinite;
+        }
+
+        @keyframes pulse-status {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        .balance-card .balance-status.active {
+            background: #1f4a3a;
+            color: #64ff9e;
+            animation: none;
+        }
+
+        .btn-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .btn-row .btn {
+            padding: 14px 10px;
+            border: none;
+            border-radius: 14px;
+            font-weight: 700;
             font-size: 14px;
-            color: #f0b34b;
-            position: relative;
-            z-index: 1;
-            margin-top: 4px;
+            cursor: pointer;
+            transition: 0.2s;
+            text-align: center;
+            text-decoration: none;
+            display: block;
         }
 
-        .card {
+        .btn-row .btn-trade {
+            background: linear-gradient(135deg, #f0b34b, #e8903a);
+            color: #0b0e1a;
+        }
+
+        .btn-row .btn-trade:hover {
+            transform: scale(1.02);
+        }
+
+        .btn-row .btn-deposit {
+            background: linear-gradient(135deg, #1f4a3a, #2a5f4a);
+            color: #64ff9e;
+        }
+
+        .btn-row .btn-deposit:hover {
+            transform: scale(1.02);
+        }
+
+        .btn-row .btn-withdraw {
+            background: linear-gradient(135deg, #5c2a2a, #7a3535);
+            color: #ff6b6b;
+        }
+
+        .btn-row .btn-withdraw:hover {
+            transform: scale(1.02);
+        }
+
+        .details-card {
             background: #1a2337;
             border-radius: 16px;
             padding: 16px;
-            margin-bottom: 16px;
             border: 1px solid #27304a;
+            margin-bottom: 16px;
         }
 
-        .card .card-title {
-            font-size: 13px;
-            color: #8892b0;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 10px;
-        }
-
-        .flex {
+        .details-card .detail-row {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-        }
-
-        .flex .value {
-            font-weight: 600;
-            font-size: 16px;
-        }
-
-        .flex .value.green { color: #64ff9e; }
-        .flex .value.gold { color: #f0b34b; }
-        .flex .value.red { color: #ff6b6b; }
-        .flex .value.blue { color: #88b0ff; }
-        .flex .value.orange { color: #ff8c00; }
-
-        .progress-bar {
-            width: 100%;
-            height: 6px;
-            background: #0b0e1a;
-            border-radius: 4px;
-            margin-top: 8px;
-            overflow: hidden;
-        }
-
-        .progress-bar .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #f0b34b, #64ff9e);
-            border-radius: 4px;
-            transition: width 0.5s;
-        }
-
-        .divider {
-            border-top: 1px solid #1e2740;
-            margin: 12px 0;
-        }
-
-        .task-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
+            padding: 8px 0;
             border-bottom: 1px solid #1e2740;
+            font-size: 14px;
         }
 
-        .task-item:last-child {
+        .details-card .detail-row:last-child {
             border-bottom: none;
         }
 
-        .task-item .task-name {
-            font-size: 14px;
-            font-weight: 500;
+        .details-card .detail-row .label {
+            color: #8892b0;
         }
 
-        .task-item .task-status {
-            font-size: 12px;
+        .details-card .detail-row .value {
+            color: #e0e6f0;
             font-weight: 600;
-            padding: 4px 12px;
-            border-radius: 20px;
         }
 
-        .task-item .task-status.paid { background: #1f4a3a; color: #64ff9e; }
-        .task-item .task-status.pending { background: #5c4a1a; color: #f0b34b; }
-        .task-item .task-status.incomplete { background: #5c2a2a; color: #ff6b6b; }
-        .task-item .task-status.completed { background: #1f4a3a; color: #64ff9e; }
+        .details-card .detail-row .value.green {
+            color: #64ff9e;
+        }
 
-        .info-row {
+        .details-card .detail-row .value.gold {
+            color: #f0b34b;
+        }
+
+        .details-card .detail-row .value.red {
+            color: #ff6b6b;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 4px;
+            background: #0b0e1a;
+            border-radius: 12px;
+            padding: 4px;
+            margin-bottom: 16px;
+        }
+
+        .tabs .tab {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            border: none;
+            border-radius: 10px;
+            background: transparent;
+            color: #8892b0;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .tabs .tab.active {
+            background: #1f2a44;
+            color: #e0e6f0;
+        }
+
+        .tabs .tab:hover {
+            background: #1f2a44;
+            color: #e0e6f0;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 30px 0;
+            color: #8892b0;
+        }
+
+        .empty-state i {
+            font-size: 48px;
+            color: #2a3a5c;
+            margin-bottom: 12px;
+        }
+
+        .empty-state p {
+            font-size: 14px;
+        }
+
+        .footer {
+            text-align: center;
+            color: #4a5577;
+            font-size: 12px;
+            margin-top: 16px;
+            border-top: 1px solid #1e2740;
+            padding-top: 16px;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-box {
+            background: #141b2b;
+            border-radius: 24px;
+            padding: 30px;
+            max-width: 440px;
+            width: 100%;
+            border: 1px solid #2a3450;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-box .close-modal {
+            float: right;
+            background: none;
+            border: none;
+            color: #8892b0;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .modal-box .close-modal:hover {
+            color: white;
+        }
+
+        .modal-box .modal-icon {
+            text-align: center;
+            font-size: 48px;
+            margin-bottom: 8px;
+        }
+
+        .modal-box .modal-title {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .modal-box .modal-sub {
+            text-align: center;
+            color: #8892b0;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .withdraw-modal .modal-icon {
+            color: #ff6b6b;
+        }
+        .withdraw-modal .modal-title {
+            color: #ff6b6b;
+        }
+
+        .withdraw-modal .info-box {
+            background: #0b0e1a;
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid #2a3450;
+            margin-bottom: 16px;
+        }
+
+        .withdraw-modal .info-box .info-row {
             display: flex;
             justify-content: space-between;
             padding: 6px 0;
             font-size: 14px;
         }
 
-        .info-row .label {
+        .withdraw-modal .info-box .info-row .label {
             color: #8892b0;
         }
-
-        .info-row .value {
+        .withdraw-modal .info-box .info-row .value {
             font-weight: 600;
+            color: #e0e6f0;
         }
 
-        .btn {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-top: 8px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #f0b34b, #e8903a);
-            color: #0b0e1a;
-        }
-
-        .btn-primary:hover {
-            transform: scale(1.02);
-        }
-
-        .btn-whatsapp {
-            background: #075e54;
-            color: white;
-        }
-
-        .btn-whatsapp:hover {
-            background: #0a7a6e;
-            transform: scale(1.02);
-        }
-
-        .btn-danger {
-            background: #5c2a2a;
+        .withdraw-modal .info-box .info-row .value.red {
             color: #ff6b6b;
         }
-
-        .btn-danger:hover {
-            background: #7a3535;
+        .withdraw-modal .info-box .info-row .value.green {
+            color: #64ff9e;
+        }
+        .withdraw-modal .info-box .info-row .value.gold {
+            color: #f0b34b;
         }
 
-        .btn-nl {
-            background: linear-gradient(135deg, #AE1C28, #21468B);
-            color: white;
-        }
-
-        .btn-nl:hover {
-            transform: scale(1.02);
-        }
-
-        .btn-copy {
-            background: #2a3a5c;
-            color: #88b0ff;
-            padding: 8px 16px;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 13px;
-        }
-
-        .btn-copy:hover {
-            background: #3e4b6b;
-            transform: scale(1.02);
-        }
-
-        .btn-revolut {
-            background: linear-gradient(135deg, #0077B6, #00B4D8);
-            color: white;
-        }
-
-        .btn-revolut:hover {
-            transform: scale(1.02);
-        }
-
-        .footer {
-            text-align: center;
-            color: #4a5577;
-            font-size: 11px;
-            margin-top: 16px;
-            border-top: 1px solid #1e2740;
-            padding-top: 16px;
-        }
-
-        .status-badge {
-            display: inline-block;
-            padding: 4px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .status-badge.active { background: #1f4a3a; color: #64ff9e; }
-        .status-badge.warning { background: #5c4a1a; color: #f0b34b; }
-        .status-badge.danger { background: #5c2a2a; color: #ff6b6b; }
-
-        .grid-2 {
+        .withdraw-modal .btn-row-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
+            margin-top: 16px;
         }
 
-        .nl-flag-small {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
+        .withdraw-modal .btn-cs {
+            background: #075e54;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            text-decoration: none;
+            text-align: center;
+            display: block;
+        }
+
+        .withdraw-modal .btn-cs:hover {
+            background: #0a7a6e;
+        }
+
+        .withdraw-modal .btn-deposit-modal {
+            background: linear-gradient(135deg, #f0b34b, #e8903a);
+            color: #0b0e1a;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .withdraw-modal .btn-deposit-modal:hover {
+            transform: scale(1.02);
+        }
+
+        .deposit-modal .modal-icon {
+            color: #64ff9e;
+        }
+        .deposit-modal .modal-title {
+            color: #64ff9e;
+        }
+
+        .deposit-modal .wallet-box {
+            background: #0b0e1a;
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid #2a3450;
+            margin-bottom: 16px;
+        }
+
+        .deposit-modal .wallet-box .wallet-label {
             font-size: 12px;
             color: #8892b0;
+            margin-bottom: 6px;
         }
 
-        .nl-flag-small .flag-dot {
-            display: inline-block;
-            width: 18px;
-            height: 12px;
-            border-radius: 2px;
-            background: linear-gradient(180deg, #AE1C28 33%, #FFFFFF 33%, #FFFFFF 66%, #21468B 66%);
-            flex-shrink: 0;
-        }
-
-        .iban-box {
+        .deposit-modal .wallet-box .wallet-address {
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: #88b0ff;
+            word-break: break-all;
             background: #0b0e1a;
             padding: 12px;
             border-radius: 10px;
-            border: 1px solid #2a3a5c;
-            margin-top: 6px;
-        }
-
-        .iban-box .iban-text {
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            color: #88b0ff;
-            word-break: break-all;
+            border: 1px solid #1e2740;
             text-align: center;
             font-weight: 700;
-            letter-spacing: 1px;
         }
 
-        .iban-box .iban-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 8px;
-        }
-
-        .revolut-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #0077B6, #00B4D8);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 700;
-            color: white;
-        }
-
-        .revolut-balance {
-            background: linear-gradient(145deg, #0b0e1a, #141b2b);
-            border-radius: 12px;
-            padding: 12px;
-            border: 1px solid #2a3a5c;
-            margin-top: 8px;
-        }
-
-        .revolut-balance .bal-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 4px 0;
-            font-size: 13px;
-        }
-
-        .revolut-balance .bal-row .bal-label {
-            color: #8892b0;
-        }
-
-        .revolut-balance .bal-row .bal-value {
+        .deposit-modal .wallet-box .copy-btn {
+            background: #2a3a5c;
+            color: #88b0ff;
+            border: none;
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
             font-weight: 600;
+            width: 100%;
+            margin-top: 8px;
         }
 
-        .revolut-balance .bal-row .bal-value.negative {
-            color: #ff6b6b;
+        .deposit-modal .wallet-box .copy-btn:hover {
+            background: #3e4b6b;
         }
 
-        .revolut-balance .bal-row .bal-value.positive {
-            color: #64ff9e;
+        .deposit-modal .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            background: #1a2337;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #2a3450;
+            margin-bottom: 16px;
+        }
+
+        .deposit-modal .info-grid .info-item {
+            text-align: center;
+        }
+
+        .deposit-modal .info-grid .info-item .info-label {
+            font-size: 10px;
+            color: #8892b0;
+            text-transform: uppercase;
+        }
+
+        .deposit-modal .info-grid .info-item .info-value {
+            font-size: 14px;
+            font-weight: 700;
+            margin-top: 2px;
+        }
+
+        .deposit-modal .btn-cs-deposit {
+            background: #075e54;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            text-decoration: none;
+            text-align: center;
+            display: block;
+            width: 100%;
+        }
+
+        .deposit-modal .btn-cs-deposit:hover {
+            background: #0a7a6e;
         }
     </style>
 </head>
 <body>
 
+    <!-- DASHBOARD - NO LOGIN, DIRECT ACCESS -->
     <div class="container">
-
-        <!-- NETHERLANDS HEADER -->
-        <div class="nl-header">
-            <div class="nl-flag">
-                <div class="red"></div>
-                <div class="white"></div>
-                <div class="blue"></div>
-            </div>
-            <div class="nl-title">Expert Reviews</div>
-            <div class="nl-sub">🇳🇱 Nederland</div>
-        </div>
-
-        <!-- HEADER -->
         <div class="header">
-            <div style="font-size:13px;color:#8892b0;">
-                <span class="nl-flag-small">
-                    <span class="flag-dot"></span> Johnny
-                </span>
-            </div>
-            <div class="user-icon" id="userDisplay">👤 Johnny</div>
+            <div class="logo">🚀 Crypto Trade</div>
+            <div class="user-icon" id="userDisplay">👤 Oliver</div>
         </div>
 
-        <!-- BALANCE CARD -->
+        <div class="account-info">
+            <div class="account-name">Account Name</div>
+            <div class="account-number" id="accountName">Oliver Reijke</div>
+            <div class="account-type">IBAN: NL21KNAB0259414484</div>
+        </div>
+
         <div class="balance-card">
-            <div class="balance-label">💰 Saldo</div>
-            <div class="balance-amount" id="balanceDisplay">$20.00</div>
-            <div class="balance-usd">≈ $20.00 USD</div>
-            <div class="balance-euro">🇳🇱 €18.50 EUR</div>
+            <div class="balance-label">💰 Balance</div>
+            <div class="balance-amount" id="balanceDisplay">$6,654.22</div>
+            <div class="balance-usd">≈ $6,654.22 USD</div>
+            <div class="balance-status" id="balanceStatus">🔒 Frozen</div>
         </div>
 
-        <!-- ACCOUNT INFO -->
-        <div class="card">
-            <div class="card-title">👤 Account Gegevens</div>
-            <div class="info-row">
-                <span class="label">Naam</span>
-                <span class="value" id="accountName">Johnny van Diest</span>
-            </div>
-            <div class="info-row">
-                <span class="label">Email</span>
-                <span class="value" id="accountEmail">johnnyvandiest77@gmail.com</span>
-            </div>
-            <div class="info-row">
-                <span class="label">Telefoon</span>
-                <span class="value" id="accountPhone">06-85575556</span>
-            </div>
-            <div class="info-row">
-                <span class="label">Status</span>
-                <span class="value"><span class="status-badge warning">🟡 Actief</span></span>
-            </div>
-            <div class="info-row">
-                <span class="label">Land</span>
-                <span class="value" style="color:#ff8c00;">🇳🇱 Nederland</span>
-            </div>
+        <div class="btn-row">
+            <button class="btn btn-trade" onclick="alert('Trading feature coming soon!')">
+                <i class="fas fa-chart-line"></i> Trade
+            </button>
+            <button class="btn btn-deposit" onclick="openDepositModal()">
+                <i class="fas fa-arrow-down"></i> Deposit
+            </button>
+            <button class="btn btn-withdraw" onclick="openWithdrawModal()">
+                <i class="fas fa-arrow-up"></i> Withdraw
+            </button>
         </div>
 
-        <!-- REVOLUT ACCOUNT -->
-        <div class="card" style="border-color:#0077B6;">
-            <div class="card-title"><i class="fab fa-rev"></i> Revolut Account</div>
-            <div class="info-row">
-                <span class="label">Rekeninghouder</span>
-                <span class="value" style="color:#f0b34b;">Johnny van Diest</span>
+        <div class="details-card">
+            <div class="detail-row">
+                <span class="label">👤 Account Holder</span>
+                <span class="value" id="accountHolder">Oliver Reijke</span>
             </div>
-            <div class="info-row">
-                <span class="label">IBAN</span>
-                <span class="value" style="color:#88b0ff;font-family:monospace;font-size:13px;">NL65REVO2515467245</span>
+            <div class="detail-row">
+                <span class="label">🏦 IBAN</span>
+                <span class="value" id="ibanDisplay">NL21KNAB0259414484</span>
             </div>
-            <div class="info-row">
-                <span class="label">Valuta</span>
-                <span class="value" style="color:#f0b34b;">EUR</span>
+            <div class="detail-row">
+                <span class="label">📞 Phone</span>
+                <span class="value" id="phoneDisplay">+31631969427</span>
             </div>
-            <div class="iban-box">
-                <div class="iban-text" id="ibanDisplay">NL65REVO2515467245</div>
-                <div class="iban-row">
-                    <span style="font-size:11px;color:#8892b0;">IBAN</span>
-                    <button class="btn-copy" onclick="copyIBAN()">
-                        <i class="fas fa-copy"></i> Kopieer IBAN
-                    </button>
-                </div>
+            <div class="detail-row">
+                <span class="label">💰 Balance</span>
+                <span class="value gold" id="balanceDetail">$6,654.22</span>
             </div>
-            <div style="margin-top:8px;display:flex;align-items:center;gap:8px;">
-                <span class="revolut-badge"><i class="fab fa-rev"></i> Revolut</span>
-                <span style="font-size:12px;color:#8892b0;">Betaalmethode</span>
-            </div>
-            <div style="margin-top:6px;font-size:12px;color:#8892b0;">
-                <i class="fas fa-info-circle"></i> Betalingen worden verwerkt via Revolut
+            <div class="detail-row">
+                <span class="label">🔒 Status</span>
+                <span class="value red" id="statusDetail">Frozen</span>
             </div>
         </div>
 
-        <!-- REVOLUT TRANSACTIONS -->
-        <div class="card" style="border-color:#0077B6;">
-            <div class="card-title">📊 Recente Transacties</div>
-            
-            <div style="background:#0b0e1a;border-radius:10px;padding:8px 12px;margin-top:4px;border:1px solid #1e2740;">
-                <div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;">
-                    <div>
-                        <div style="font-size:13px;font-weight:600;">Johnny van Diest</div>
-                        <div style="font-size:11px;color:#8892b0;">Vandaag, 13:41</div>
-                    </div>
-                    <div style="font-size:16px;font-weight:700;color:#ff6b6b;">- €24</div>
-                </div>
-                <div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-top:1px solid #1e2740;margin-top:4px;">
-                    <div>
-                        <div style="font-size:13px;font-weight:600;">Johnny van Diest</div>
-                        <div style="font-size:11px;color:#8892b0;">Vandaag, 13:41</div>
-                    </div>
-                    <div style="font-size:16px;font-weight:700;color:#ff6b6b;">- €10</div>
-                </div>
-                <div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-top:1px solid #1e2740;margin-top:4px;">
-                    <div>
-                        <div style="font-size:13px;font-weight:600;">Saldo</div>
-                        <div style="font-size:11px;color:#8892b0;">Huidig</div>
-                    </div>
-                    <div style="font-size:16px;font-weight:700;color:#ff6b6b;">€ -24</div>
-                </div>
-            </div>
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('open')">Open</button>
+            <button class="tab" onclick="showTab('pending')">Pending</button>
+            <button class="tab" onclick="showTab('closed')">Closed</button>
+        </div>
 
-            <div style="margin-top:8px;background:#0b0e1a;border-radius:10px;padding:8px 12px;border:1px solid #1e2740;">
-                <div style="display:flex;justify-content:space-between;">
-                    <span style="font-size:12px;color:#8892b0;">Persoonlijk · EUR</span>
-                    <span style="font-size:12px;color:#8892b0;">€ 0,39</span>
-                </div>
-                <div style="text-align:center;font-size:11px;color:#4a5577;margin-top:4px;">
-                    NL65 REVO 2515 4672 45
-                </div>
+        <div id="tabContent">
+            <div class="empty-state">
+                <i class="fas fa-chart-pie"></i>
+                <p>No open positions</p>
+                <p style="font-size:12px;color:#4a5577;">ETH-Trade • Explore more instruments</p>
             </div>
         </div>
 
-        <!-- TASKS SUMMARY -->
-        <div class="card">
-            <div class="card-title">📋 Taken Overzicht</div>
-            <div class="grid-2">
-                <div style="text-align:center;padding:8px;background:#0b0e1a;border-radius:10px;">
-                    <div style="font-size:24px;font-weight:700;color:#64ff9e;">3</div>
-                    <div style="font-size:11px;color:#8892b0;">Totaal Taken</div>
+        <div class="footer">
+            © 2026 Crypto Trade • <span id="footerPhone">+31631969427</span>
+        </div>
+    </div>
+
+    <!-- WITHDRAW MODAL -->
+    <div class="modal-overlay" id="withdrawModal">
+        <div class="modal-box withdraw-modal">
+            <button class="close-modal" onclick="closeWithdrawModal()">✕</button>
+            <div class="modal-icon">🔒</div>
+            <div class="modal-title">Account Frozen</div>
+            <div class="modal-sub">Your account is currently frozen. Please contact customer service or make a deposit.</div>
+
+            <div class="info-box">
+                <div class="info-row">
+                    <span class="label">👤 Account Holder</span>
+                    <span class="value">Oliver Reijke</span>
                 </div>
-                <div style="text-align:center;padding:8px;background:#0b0e1a;border-radius:10px;">
-                    <div style="font-size:24px;font-weight:700;color:#64ff9e;">1</div>
-                    <div style="font-size:11px;color:#8892b0;">Betaald</div>
+                <div class="info-row">
+                    <span class="label">🏦 IBAN</span>
+                    <span class="value">NL21KNAB0259414484</span>
                 </div>
-                <div style="text-align:center;padding:8px;background:#0b0e1a;border-radius:10px;">
-                    <div style="font-size:24px;font-weight:700;color:#f0b34b;">2</div>
-                    <div style="font-size:11px;color:#8892b0;">In Afwachting</div>
+                <div class="info-row">
+                    <span class="label">💰 Current Balance</span>
+                    <span class="value gold" id="withdrawBalance">$6,654.22</span>
                 </div>
-                <div style="text-align:center;padding:8px;background:#0b0e1a;border-radius:10px;">
-                    <div style="font-size:24px;font-weight:700;color:#88b0ff;">5</div>
-                    <div style="font-size:11px;color:#8892b0;">Dagelijkse Taken</div>
+                <div class="info-row">
+                    <span class="label">🎯 Target Balance</span>
+                    <span class="value green">$10,000.00</span>
                 </div>
+                <div class="info-row">
+                    <span class="label">💵 Amount to Deposit</span>
+                    <span class="value red" id="withdrawNeeded">$3,345.78</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">🔒 Account Status</span>
+                    <span class="value red">Frozen</span>
+                </div>
+            </div>
+
+            <div class="btn-row-2">
+                <a href="https://wa.me/16064285188?text=Hello%20Crypto%20Trade%2C%20my%20account%20is%20frozen.%20Please%20help%20me%20unfreeze%20it.%20My%20name%20is%20Oliver%20Reijke" 
+                   class="btn-cs" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Contact CS
+                </a>
+                <button class="btn-deposit-modal" onclick="closeWithdrawModal(); openDepositModal();">
+                    <i class="fas fa-coins"></i> Deposit Now
+                </button>
+            </div>
+
+            <div style="text-align:center;margin-top:12px;color:#8892b0;font-size:12px;">
+                ⏱ Contact CS to unfreeze your account
             </div>
         </div>
+    </div>
 
-        <!-- DAILY TASKS PROGRESS -->
-        <div class="card">
-            <div class="card-title">📌 Dagelijkse Taken Voortgang</div>
-            <div class="flex">
-                <span style="font-size:14px;">2 van de 5 taken gedaan</span>
-                <span style="font-size:14px;font-weight:600;color:#f0b34b;">40%</span>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill" style="width:40%;"></div>
-            </div>
-            <div style="margin-top:12px;font-size:12px;color:#8892b0;text-align:center;">
-                🇳🇱 Voltooi alle 5 taken om je salaris te ontvangen
-            </div>
-        </div>
+    <!-- DEPOSIT MODAL -->
+    <div class="modal-overlay" id="depositModal">
+        <div class="modal-box deposit-modal">
+            <button class="close-modal" onclick="closeDepositModal()">✕</button>
+            <div class="modal-icon">💰</div>
+            <div class="modal-title">Deposit USDC</div>
+            <div class="modal-sub">Send funds to the wallet address below</div>
 
-        <!-- TASK LIST -->
-        <div class="card">
-            <div class="card-title">📝 Taken Lijst</div>
-
-            <div class="task-item">
-                <span class="task-name">Taak 1</span>
-                <span class="task-status paid">✅ Betaald</span>
+            <div class="wallet-box">
+                <div class="wallet-label">📤 Send to this address:</div>
+                <div class="wallet-address">0x5883088D57B75E9d9513ddD7fDD96FB2FCF513A5</div>
+                <button class="copy-btn" onclick="copyWallet()">
+                    <i class="fas fa-copy"></i> Copy Address
+                </button>
             </div>
 
-            <div class="task-item">
-                <span class="task-name">Taak 2</span>
-                <span class="task-status pending">⏳ In Afwachting</span>
-            </div>
-
-            <div class="task-item">
-                <span class="task-name">Taak 3</span>
-                <span class="task-status pending">⏳ In Afwachting</span>
-            </div>
-
-            <div class="task-item">
-                <span class="task-name">Taak 4</span>
-              
+            <div class="info-grid">
+                <di
