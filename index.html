@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Crypto Trade - Ramin Sajadi</title>
+    <title>Expert Reviews - Anna Angelova</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
         * {
@@ -138,26 +138,52 @@
 
         .balance-card .balance-status {
             display: inline-block;
-            background: #5c2a2a;
-            color: #ff6b6b;
+            background: #1f4a3a;
+            color: #64ff9e;
             padding: 4px 16px;
             border-radius: 20px;
             font-size: 12px;
             font-weight: 600;
             margin-top: 8px;
-            animation: pulse-status 2s infinite;
             position: relative;
             z-index: 1;
         }
 
-        @keyframes pulse-status {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
+        .task-summary {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .task-summary .task-box {
+            background: #0b0e1a;
+            border-radius: 12px;
+            padding: 12px 8px;
+            text-align: center;
+            border: 1px solid #1e2740;
+        }
+
+        .task-summary .task-box .number {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .task-summary .task-box .number.green { color: #64ff9e; }
+        .task-summary .task-box .number.gold { color: #f0b34b; }
+        .task-summary .task-box .number.blue { color: #88b0ff; }
+        .task-summary .task-box .number.red { color: #ff6b6b; }
+
+        .task-summary .task-box .label {
+            font-size: 10px;
+            color: #8892b0;
+            text-transform: uppercase;
+            margin-top: 4px;
         }
 
         .btn-row {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr;
             gap: 10px;
             margin-bottom: 20px;
         }
@@ -175,12 +201,12 @@
             display: block;
         }
 
-        .btn-row .btn-trade {
+        .btn-row .btn-primary {
             background: linear-gradient(135deg, #f0b34b, #e8903a);
             color: #0b0e1a;
         }
 
-        .btn-row .btn-trade:hover {
+        .btn-row .btn-primary:hover {
             transform: scale(1.02);
         }
 
@@ -199,6 +225,15 @@
         }
 
         .btn-row .btn-withdraw:hover {
+            transform: scale(1.02);
+        }
+
+        .btn-row .btn-unlock {
+            background: linear-gradient(135deg, #0077B6, #00B4D8);
+            color: white;
+        }
+
+        .btn-row .btn-unlock:hover {
             transform: scale(1.02);
         }
 
@@ -247,53 +282,64 @@
             color: #88b0ff;
         }
 
-        .tabs {
-            display: flex;
-            gap: 4px;
+        .progress-bar {
+            width: 100%;
+            height: 6px;
             background: #0b0e1a;
-            border-radius: 12px;
-            padding: 4px;
-            margin-bottom: 16px;
+            border-radius: 4px;
+            margin-top: 8px;
+            overflow: hidden;
         }
 
-        .tabs .tab {
-            flex: 1;
-            padding: 10px;
-            text-align: center;
-            border: none;
-            border-radius: 10px;
-            background: transparent;
-            color: #8892b0;
-            font-weight: 600;
-            font-size: 13px;
-            cursor: pointer;
-            transition: 0.2s;
+        .progress-bar .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #f0b34b, #64ff9e);
+            border-radius: 4px;
+            transition: width 0.5s;
         }
 
-        .tabs .tab.active {
-            background: #1f2a44;
-            color: #e0e6f0;
+        .task-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #1e2740;
         }
 
-        .tabs .tab:hover {
-            background: #1f2a44;
-            color: #e0e6f0;
+        .task-item:last-child {
+            border-bottom: none;
         }
 
-        .empty-state {
-            text-align: center;
-            padding: 30px 0;
-            color: #8892b0;
-        }
-
-        .empty-state i {
-            font-size: 48px;
-            color: #2a3a5c;
-            margin-bottom: 12px;
-        }
-
-        .empty-state p {
+        .task-item .task-name {
             font-size: 14px;
+            font-weight: 500;
+        }
+
+        .task-item .task-status {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        .task-item .task-status.done {
+            background: #1f4a3a;
+            color: #64ff9e;
+        }
+
+        .task-item .task-status.pending {
+            background: #5c4a1a;
+            color: #f0b34b;
+        }
+
+        .task-item .task-status.locked {
+            background: #5c2a2a;
+            color: #ff6b6b;
+        }
+
+        .task-item .task-status.prepaid {
+            background: #2a3a5c;
+            color: #88b0ff;
         }
 
         .footer {
@@ -367,14 +413,7 @@
             margin-bottom: 20px;
         }
 
-        .deposit-modal .modal-icon {
-            color: #64ff9e;
-        }
-        .deposit-modal .modal-title {
-            color: #64ff9e;
-        }
-
-        .deposit-modal .wallet-box {
+        .modal-box .info-box {
             background: #0b0e1a;
             border-radius: 12px;
             padding: 16px;
@@ -382,15 +421,87 @@
             margin-bottom: 16px;
         }
 
-        .deposit-modal .wallet-box .wallet-label {
+        .modal-box .info-box .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            font-size: 14px;
+        }
+
+        .modal-box .info-box .info-row .label {
+            color: #8892b0;
+        }
+        .modal-box .info-box .info-row .value {
+            font-weight: 600;
+            color: #e0e6f0;
+        }
+
+        .modal-box .info-box .info-row .value.red {
+            color: #ff6b6b;
+        }
+        .modal-box .info-box .info-row .value.green {
+            color: #64ff9e;
+        }
+        .modal-box .info-box .info-row .value.gold {
+            color: #f0b34b;
+        }
+        .modal-box .info-box .info-row .value.blue {
+            color: #88b0ff;
+        }
+
+        .modal-box .btn-cs {
+            background: #075e54;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            text-decoration: none;
+            text-align: center;
+            display: block;
+            width: 100%;
+        }
+
+        .modal-box .btn-cs:hover {
+            background: #0a7a6e;
+            transform: scale(1.02);
+        }
+
+        .modal-box .btn-deposit-modal {
+            background: linear-gradient(135deg, #f0b34b, #e8903a);
+            color: #0b0e1a;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            width: 100%;
+        }
+
+        .modal-box .btn-deposit-modal:hover {
+            transform: scale(1.02);
+        }
+
+        .modal-box .wallet-box {
+            background: #0b0e1a;
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid #2a3450;
+            margin-bottom: 16px;
+        }
+
+        .modal-box .wallet-box .wallet-label {
             font-size: 12px;
             color: #8892b0;
             margin-bottom: 6px;
         }
 
-        .deposit-modal .wallet-box .wallet-address {
+        .modal-box .wallet-box .wallet-address {
             font-family: 'Courier New', monospace;
-            font-size: 13px;
+            font-size: 12px;
             color: #88b0ff;
             word-break: break-all;
             background: #0b0e1a;
@@ -401,7 +512,7 @@
             font-weight: 700;
         }
 
-        .deposit-modal .wallet-box .copy-btn {
+        .modal-box .wallet-box .copy-btn {
             background: #2a3a5c;
             color: #88b0ff;
             border: none;
@@ -413,11 +524,11 @@
             margin-top: 8px;
         }
 
-        .deposit-modal .wallet-box .copy-btn:hover {
+        .modal-box .wallet-box .copy-btn:hover {
             background: #3e4b6b;
         }
 
-        .deposit-modal .info-grid {
+        .modal-box .info-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
@@ -428,127 +539,30 @@
             margin-bottom: 16px;
         }
 
-        .deposit-modal .info-grid .info-item {
+        .modal-box .info-grid .info-item {
             text-align: center;
         }
 
-        .deposit-modal .info-grid .info-item .info-label {
+        .modal-box .info-grid .info-item .info-label {
             font-size: 10px;
             color: #8892b0;
             text-transform: uppercase;
         }
 
-        .deposit-modal .info-grid .info-item .info-value {
+        .modal-box .info-grid .info-item .info-value {
             font-size: 14px;
             font-weight: 700;
             margin-top: 2px;
         }
 
-        .deposit-modal .btn-cs-deposit {
-            background: #075e54;
-            color: white;
-            border: none;
-            padding: 14px;
-            border-radius: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.2s;
-            text-decoration: none;
-            text-align: center;
-            display: block;
-            width: 100%;
-        }
-
-        .deposit-modal .btn-cs-deposit:hover {
-            background: #0a7a6e;
-        }
-
-        .withdraw-modal .modal-icon {
-            color: #ff6b6b;
-        }
-        .withdraw-modal .modal-title {
-            color: #ff6b6b;
-        }
-
-        .withdraw-modal .info-box {
-            background: #0b0e1a;
-            border-radius: 12px;
-            padding: 16px;
-            border: 1px solid #2a3450;
-            margin-bottom: 16px;
-        }
-
-        .withdraw-modal .info-box .info-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 6px 0;
-            font-size: 14px;
-        }
-
-        .withdraw-modal .info-box .info-row .label {
-            color: #8892b0;
-        }
-        .withdraw-modal .info-box .info-row .value {
-            font-weight: 600;
-            color: #e0e6f0;
-        }
-
-        .withdraw-modal .info-box .info-row .value.red {
-            color: #ff6b6b;
-        }
-        .withdraw-modal .info-box .info-row .value.green {
-            color: #64ff9e;
-        }
-        .withdraw-modal .info-box .info-row .value.gold {
-            color: #f0b34b;
-        }
-
-        .withdraw-modal .btn-row-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 16px;
-        }
-
-        .withdraw-modal .btn-cs {
-            background: #075e54;
-            color: white;
-            border: none;
-            padding: 14px;
-            border-radius: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.2s;
-            text-decoration: none;
-            text-align: center;
-            display: block;
-        }
-
-        .withdraw-modal .btn-cs:hover {
-            background: #0a7a6e;
-        }
-
-        .withdraw-modal .btn-deposit-modal {
-            background: linear-gradient(135deg, #f0b34b, #e8903a);
-            color: #0b0e1a;
-            border: none;
-            padding: 14px;
-            border-radius: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .withdraw-modal .btn-deposit-modal:hover {
-            transform: scale(1.02);
-        }
-
-        .number-display {
-            font-size: 48px;
-            font-weight: 700;
-            color: #f0b34b;
-            text-align: center;
-            padding: 10px 0;
+        .bg-flag {
+            display: inline-block;
+            width: 24px;
+            height: 14px;
+            border-radius: 2px;
+            background: linear-gradient(180deg, #FFFFFF 33%, #00966E 33%, #00966E 66%, #D62612 66%);
+            flex-shrink: 0;
+            border: 1px solid #4a5577;
         }
 
         .whatsapp-float {
@@ -573,80 +587,12 @@
         .whatsapp-float:hover {
             transform: scale(1.1);
         }
-
-        .btn-whatsapp-full {
-            width: 100%;
-            padding: 16px;
-            border: none;
-            border-radius: 14px;
-            background: #075e54;
-            color: white;
-            font-weight: 700;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.3s;
-            text-decoration: none;
-            text-align: center;
-            display: block;
-            margin-top: 8px;
-        }
-
-        .btn-whatsapp-full:hover {
-            background: #0a7a6e;
-            transform: scale(1.02);
-        }
-
-        .btn-whatsapp-full i {
-            margin-right: 10px;
-        }
-
-        .btn-unlock {
-            width: 100%;
-            padding: 16px;
-            border: none;
-            border-radius: 14px;
-            background: linear-gradient(135deg, #f0b34b, #e8903a);
-            color: #0b0e1a;
-            font-weight: 700;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-top: 8px;
-        }
-
-        .btn-unlock:hover {
-            transform: scale(1.02);
-        }
-
-        .btn-unlock i {
-            margin-right: 10px;
-        }
-
-        .sk-flag {
-            display: inline-block;
-            width: 24px;
-            height: 14px;
-            border-radius: 2px;
-            background: linear-gradient(180deg, #EE1C25 33%, #FFFFFF 33%, #FFFFFF 66%, #0B4EA2 66%);
-            flex-shrink: 0;
-            border: 1px solid #4a5577;
-        }
-
-        .cs-badge {
-            display: inline-block;
-            background: #1f4a3a;
-            color: #64ff9e;
-            padding: 2px 10px;
-            border-radius: 12px;
-            font-size: 10px;
-            font-weight: 600;
-        }
     </style>
 </head>
 <body>
 
-    <!-- WHATSAPP FLOATING BUTTON - USA NUMBER -->
-    <a href="https://wa.me/16207178593?text=Hello%20Crypto%20Trade%2C%20I%20need%20help%20to%20unlock%20my%20account" 
+    <!-- WHATSAPP FLOATING BUTTON -->
+    <a href="https://wa.me/16207178593?text=Hello%20Expert%20Reviews%2C%20I%20need%20help" 
        class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
@@ -656,30 +602,63 @@
 
         <!-- HEADER -->
         <div class="header">
-            <div class="logo">🚀 Crypto Trade</div>
-            <div class="user-icon" id="userDisplay">🇸🇰 Ramin</div>
+            <div class="logo">📊 Expert Reviews</div>
+            <div class="user-icon" id="userDisplay">🇧🇬 Anna</div>
         </div>
 
         <!-- ACCOUNT INFO -->
         <div class="account-info">
-            <div class="account-name">Account Name</div>
-            <div class="account-number" id="accountName">Ramin Sajadi</div>
-            <div class="account-type">🇸🇰 Slovakia Account</div>
+            <div class="account-name">Account Holder</div>
+            <div class="account-number" id="accountName">Анна Симеонова Ангелова</div>
+            <div class="account-type">🇧🇬 Bulgaria</div>
         </div>
 
         <!-- BALANCE CARD -->
         <div class="balance-card">
             <div class="balance-label">💰 Balance</div>
-            <div class="balance-amount" id="balanceDisplay">$5,600.00</div>
-            <div class="balance-usd">≈ $5,600.00 USD</div>
-            <div class="balance-status" id="balanceStatus">🔒 Frozen</div>
+            <div class="balance-amount" id="balanceDisplay">$10.00</div>
+            <div class="balance-usd">≈ $10.00 USD</div>
+            <div class="balance-status" id="balanceStatus">✅ Active</div>
+        </div>
+
+        <!-- TASK SUMMARY -->
+        <div class="task-summary">
+            <div class="task-box">
+                <div class="number blue">5</div>
+                <div class="label">📋 Daily Tasks</div>
+            </div>
+            <div class="task-box">
+                <div class="number green">1</div>
+                <div class="label">✅ Done</div>
+            </div>
+            <div class="task-box">
+                <div class="number gold">4</div>
+                <div class="label">⏳ Remaining</div>
+            </div>
+        </div>
+
+        <!-- PROGRESS -->
+        <div style="margin-bottom:16px;">
+            <div class="flex" style="display:flex; justify-content:space-between; font-size:13px; color:#8892b0;">
+                <span>Progress</span>
+                <span style="color:#f0b34b;">20%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width:20%;"></div>
+            </div>
         </div>
 
         <!-- BUTTONS -->
         <div class="btn-row">
-            <button class="btn btn-trade" onclick="alert('📊 Trading feature coming soon!')">
-                <i class="fas fa-chart-line"></i> Trade
+            <button class="btn btn-primary" onclick="openNextTask()">
+                <i class="fas fa-play"></i> Next Task
             </button>
+            <button class="btn btn-unlock" onclick="openUnlockModal()">
+                <i class="fas fa-unlock-alt"></i> Unlock Tasks
+            </button>
+        </div>
+
+        <div class="btn-row">
             <button class="btn btn-deposit" onclick="openDepositModal()">
                 <i class="fas fa-arrow-down"></i> Deposit
             </button>
@@ -688,45 +667,44 @@
             </button>
         </div>
 
-        <!-- UNLOCK ACCOUNT BUTTON -->
-        <button class="btn-unlock" onclick="openUnlockModal()">
-            <i class="fas fa-unlock-alt"></i> Unlock Your Account
-        </button>
-
-        <!-- WHATSAPP FULL WIDTH BUTTON - USA NUMBER -->
-        <a href="https://wa.me/16207178593?text=Hello%20Crypto%20Trade%2C%20I%20need%20help%20to%20unlock%20my%20account" 
-           class="btn-whatsapp-full" target="_blank">
-            <i class="fab fa-whatsapp"></i> Contact Customer Service (USA)
-        </a>
-
-        <!-- DETAILS -->
-        <div class="details-card">
-            <div class="detail-row">
-                <span class="label">👤 Account Holder</span>
-                <span class="value" id="accountHolder">Ramin Sajadi</span>
+        <!-- EARNINGS INFO -->
+        <div class="details-card" style="border-color:#2a4a5c;">
+            <div style="font-size:13px;color:#8892b0;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;">
+                💰 Earnings Info
             </div>
             <div class="detail-row">
-                <span class="label">📞 Phone</span>
-                <span class="value" id="phoneDisplay">+386 7061 3283</span>
+                <span class="label">Prepaid Task</span>
+                <span class="value gold">$250.00</span>
             </div>
             <div class="detail-row">
-                <span class="label">💰 Balance</span>
-                <span class="value gold" id="balanceDetail">$5,600.00</span>
+                <span class="label">You Will Earn</span>
+                <span class="value green">$450.00</span>
             </div>
-            <div class="detail-row">
-                <span class="label">🔒 Status</span>
-                <span class="value red" id="statusDetail">Frozen</span>
-            </div>
-            <div class="detail-row">
-                <span class="label">🌍 Country</span>
-                <span class="value" style="color:#88b0ff;">🇸🇰 Slovakia</span>
-            </div>
-            <div class="detail-row" style="border-bottom: none; padding-top: 8px;">
-                <span class="label">📞 Customer Service</span>
-                <span class="value" style="color:#64ff9e;">🇺🇸 +1 (620) 717-8593</span>
+            <div class="detail-row" style="border-bottom: none; padding-top:8px;">
+                <span class="label">Next Task</span>
+                <span class="value blue">Prepaid Task</span>
             </div>
         </div>
 
-        <!-- TABS -->
-        <div class="tabs">
-        
+        <!-- DETAILS -->
+        <div class="details-card">
+            <div style="font-size:13px;color:#8892b0;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;">
+                👤 Account Details
+            </div>
+            <div class="detail-row">
+                <span class="label">Full Name</span>
+                <span class="value" id="accountHolder">Анна Симеонова Ангелова</span>
+            </div>
+            <div class="detail-row">
+                <span class="label">Email</span>
+                <span class="value" id="accountEmail">angelovaanna979@gmail.com</span>
+            </div>
+            <div class="detail-row">
+                <span class="label">📞 Phone</span>
+                <span class="value" id="phoneDisplay">+359 896 052 110</span>
+            </div>
+            <div class="detail-row">
+                <span class="label">🌍 Country</span>
+                <span class="value" style="color:#88b0ff;">🇧🇬 Bulgaria</span>
+            </div>
+            <div clas
