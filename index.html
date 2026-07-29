@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Expert Reviews - Anna Angelova</title>
+    <title>Google Hotel Rating - Jean Marc</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
         * {
@@ -33,19 +33,48 @@
             border: 1px solid #2a3450;
         }
 
-        .header {
+        .fr-header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            gap: 12px;
             margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #1e2740;
         }
 
-        .header .logo {
+        .fr-flag {
+            display: flex;
+            flex-direction: column;
+            width: 40px;
+            height: 28px;
+            border-radius: 4px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .fr-flag .blue { background: #002395; height: 33.33%; width: 100%; }
+        .fr-flag .white { background: #FFFFFF; height: 33.33%; width: 100%; }
+        .fr-flag .red { background: #ED2939; height: 33.34%; width: 100%; }
+
+        .fr-title {
             font-size: 20px;
             font-weight: 700;
             background: linear-gradient(135deg, #f0b34b, #ff7e5f);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        .fr-sub {
+            font-size: 11px;
+            color: #8892b0;
+            margin-left: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
         }
 
         .header .user-icon {
@@ -54,38 +83,6 @@
             border-radius: 20px;
             font-size: 12px;
             color: #88b0ff;
-        }
-
-        .account-info {
-            background: #1a2337;
-            border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 16px;
-            border: 1px solid #27304a;
-        }
-
-        .account-info .account-name {
-            font-size: 14px;
-            color: #8892b0;
-            margin-bottom: 4px;
-        }
-
-        .account-info .account-number {
-            font-size: 16px;
-            font-weight: 600;
-            color: #e0e6f0;
-            letter-spacing: 1px;
-        }
-
-        .account-info .account-type {
-            display: inline-block;
-            background: #1f4a3a;
-            color: #64ff9e;
-            padding: 2px 12px;
-            border-radius: 12px;
-            font-size: 11px;
-            font-weight: 600;
-            margin-top: 6px;
         }
 
         .balance-card {
@@ -129,56 +126,64 @@
             z-index: 1;
         }
 
-        .balance-card .balance-usd {
+        .balance-card .balance-euro {
             font-size: 16px;
-            color: #8892b0;
+            color: #f0b34b;
             position: relative;
             z-index: 1;
         }
 
         .balance-card .balance-status {
             display: inline-block;
-            background: #1f4a3a;
-            color: #64ff9e;
+            background: #5c2a2a;
+            color: #ff6b6b;
             padding: 4px 16px;
             border-radius: 20px;
             font-size: 12px;
             font-weight: 600;
             margin-top: 8px;
+            animation: pulse-status 2s infinite;
             position: relative;
             z-index: 1;
         }
 
-        .task-summary {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 8px;
+        @keyframes pulse-status {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        .rating-card {
+            background: #1a2337;
+            border-radius: 16px;
+            padding: 16px;
+            border: 1px solid #27304a;
             margin-bottom: 16px;
-        }
-
-        .task-summary .task-box {
-            background: #0b0e1a;
-            border-radius: 12px;
-            padding: 12px 8px;
             text-align: center;
-            border: 1px solid #1e2740;
         }
 
-        .task-summary .task-box .number {
-            font-size: 24px;
-            font-weight: 700;
+        .rating-card .stars {
+            font-size: 28px;
+            color: #f0b34b;
+            letter-spacing: 4px;
+            margin: 6px 0;
         }
 
-        .task-summary .task-box .number.green { color: #64ff9e; }
-        .task-summary .task-box .number.gold { color: #f0b34b; }
-        .task-summary .task-box .number.blue { color: #88b0ff; }
-        .task-summary .task-box .number.red { color: #ff6b6b; }
-
-        .task-summary .task-box .label {
-            font-size: 10px;
+        .rating-card .rating-label {
+            font-size: 13px;
             color: #8892b0;
             text-transform: uppercase;
-            margin-top: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .rating-card .rating-number {
+            font-size: 36px;
+            font-weight: 700;
+            color: #f0b34b;
+        }
+
+        .rating-card .rating-total {
+            font-size: 14px;
+            color: #8892b0;
         }
 
         .btn-row {
@@ -237,6 +242,35 @@
             transform: scale(1.02);
         }
 
+        .btn-full {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            margin-top: 8px;
+        }
+
+        .btn-whatsapp {
+            background: #075e54;
+            color: white;
+        }
+
+        .btn-whatsapp:hover {
+            background: #0a7a6e;
+            transform: scale(1.02);
+        }
+
+        .btn-whatsapp i {
+            margin-right: 10px;
+        }
+
         .details-card {
             background: #1a2337;
             border-radius: 16px;
@@ -282,66 +316,6 @@
             color: #88b0ff;
         }
 
-        .progress-bar {
-            width: 100%;
-            height: 6px;
-            background: #0b0e1a;
-            border-radius: 4px;
-            margin-top: 8px;
-            overflow: hidden;
-        }
-
-        .progress-bar .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #f0b34b, #64ff9e);
-            border-radius: 4px;
-            transition: width 0.5s;
-        }
-
-        .task-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid #1e2740;
-        }
-
-        .task-item:last-child {
-            border-bottom: none;
-        }
-
-        .task-item .task-name {
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .task-item .task-status {
-            font-size: 12px;
-            font-weight: 600;
-            padding: 4px 12px;
-            border-radius: 20px;
-        }
-
-        .task-item .task-status.done {
-            background: #1f4a3a;
-            color: #64ff9e;
-        }
-
-        .task-item .task-status.pending {
-            background: #5c4a1a;
-            color: #f0b34b;
-        }
-
-        .task-item .task-status.locked {
-            background: #5c2a2a;
-            color: #ff6b6b;
-        }
-
-        .task-item .task-status.prepaid {
-            background: #2a3a5c;
-            color: #88b0ff;
-        }
-
         .footer {
             text-align: center;
             color: #4a5577;
@@ -349,6 +323,29 @@
             margin-top: 16px;
             border-top: 1px solid #1e2740;
             padding-top: 16px;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            text-decoration: none;
+            z-index: 999;
+            transition: 0.3s;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
         }
 
         .modal-overlay {
@@ -444,9 +441,6 @@
         }
         .modal-box .info-box .info-row .value.gold {
             color: #f0b34b;
-        }
-        .modal-box .info-box .info-row .value.blue {
-            color: #88b0ff;
         }
 
         .modal-box .btn-cs {
@@ -554,45 +548,12 @@
             font-weight: 700;
             margin-top: 2px;
         }
-
-        .bg-flag {
-            display: inline-block;
-            width: 24px;
-            height: 14px;
-            border-radius: 2px;
-            background: linear-gradient(180deg, #FFFFFF 33%, #00966E 33%, #00966E 66%, #D62612 66%);
-            flex-shrink: 0;
-            border: 1px solid #4a5577;
-        }
-
-        .whatsapp-float {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #25d366;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-            text-decoration: none;
-            z-index: 999;
-            transition: 0.3s;
-        }
-
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-        }
     </style>
 </head>
 <body>
 
     <!-- WHATSAPP FLOATING BUTTON -->
-    <a href="https://wa.me/16207178593?text=Hello%20Expert%20Reviews%2C%20I%20need%20help" 
+    <a href="https://wa.me/33659962482?text=Bonjour%20Google%20Hotel%20Rating%2C%20j%27ai%20besoin%20d%27aide" 
        class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
@@ -600,111 +561,135 @@
     <!-- DASHBOARD -->
     <div class="container">
 
-        <!-- HEADER -->
-        <div class="header">
-            <div class="logo">📊 Expert Reviews</div>
-            <div class="user-icon" id="userDisplay">🇧🇬 Anna</div>
+        <!-- FRENCH HEADER -->
+        <div class="fr-header">
+            <div class="fr-flag">
+                <div class="blue"></div>
+                <div class="white"></div>
+                <div class="red"></div>
+            </div>
+            <div class="fr-title">🏨 Google Hotel Rating</div>
+            <div class="fr-sub">🇫🇷 France</div>
         </div>
 
-        <!-- ACCOUNT INFO -->
-        <div class="account-info">
-            <div class="account-name">Account Holder</div>
-            <div class="account-number" id="accountName">Анна Симеонова Ангелова</div>
-            <div class="account-type">🇧🇬 Bulgaria</div>
+        <!-- HEADER -->
+        <div class="header">
+            <div style="font-size:13px;color:#8892b0;">
+                <span style="display:inline-flex;align-items:center;gap:6px;">
+                    <span style="display:inline-block;width:18px;height:12px;border-radius:2px;background:linear-gradient(180deg,#002395 33%,#FFFFFF 33%,#FFFFFF 66%,#ED2939 66%);border:1px solid #4a5577;"></span>
+                    Jean
+                </span>
+            </div>
+            <div class="user-icon" id="userDisplay">👤 Jean</div>
         </div>
 
         <!-- BALANCE CARD -->
         <div class="balance-card">
-            <div class="balance-label">💰 Balance</div>
-            <div class="balance-amount" id="balanceDisplay">$10.00</div>
-            <div class="balance-usd">≈ $10.00 USD</div>
-            <div class="balance-status" id="balanceStatus">✅ Active</div>
+            <div class="balance-label">💰 Solde</div>
+            <div class="balance-amount" id="balanceDisplay">€15,000.00</div>
+            <div class="balance-euro">≈ €15,000.00 EUR</div>
+            <div class="balance-status" id="balanceStatus">🔒 Gelé</div>
         </div>
 
-        <!-- TASK SUMMARY -->
-        <div class="task-summary">
-            <div class="task-box">
-                <div class="number blue">5</div>
-                <div class="label">📋 Daily Tasks</div>
-            </div>
-            <div class="task-box">
-                <div class="number green">1</div>
-                <div class="label">✅ Done</div>
-            </div>
-            <div class="task-box">
-                <div class="number gold">4</div>
-                <div class="label">⏳ Remaining</div>
-            </div>
-        </div>
-
-        <!-- PROGRESS -->
-        <div style="margin-bottom:16px;">
-            <div class="flex" style="display:flex; justify-content:space-between; font-size:13px; color:#8892b0;">
-                <span>Progress</span>
-                <span style="color:#f0b34b;">20%</span>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill" style="width:20%;"></div>
+        <!-- GOOGLE HOTEL RATING -->
+        <div class="rating-card">
+            <div class="rating-label">⭐ Évaluation Google Hôtel</div>
+            <div class="stars">★★★★★</div>
+            <div class="rating-number">4.8</div>
+            <div class="rating-total">sur 5 • 1,247 avis</div>
+            <div style="margin-top:8px;font-size:12px;color:#8892b0;">
+                🏆 Excellent - Recommandé par Google
             </div>
         </div>
 
         <!-- BUTTONS -->
         <div class="btn-row">
-            <button class="btn btn-primary" onclick="openNextTask()">
-                <i class="fas fa-play"></i> Next Task
+            <button class="btn btn-primary" onclick="alert('📋 Détails des évaluations chargés!')">
+                <i class="fas fa-star"></i> Voir Avis
             </button>
             <button class="btn btn-unlock" onclick="openUnlockModal()">
-                <i class="fas fa-unlock-alt"></i> Unlock Tasks
+                <i class="fas fa-unlock-alt"></i> Débloquer
             </button>
         </div>
 
         <div class="btn-row">
             <button class="btn btn-deposit" onclick="openDepositModal()">
-                <i class="fas fa-arrow-down"></i> Deposit
+                <i class="fas fa-arrow-down"></i> Dépôt
             </button>
             <button class="btn btn-withdraw" onclick="openWithdrawModal()">
-                <i class="fas fa-arrow-up"></i> Withdraw
+                <i class="fas fa-arrow-up"></i> Retrait
             </button>
         </div>
 
-        <!-- EARNINGS INFO -->
-        <div class="details-card" style="border-color:#2a4a5c;">
-            <div style="font-size:13px;color:#8892b0;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;">
-                💰 Earnings Info
-            </div>
-            <div class="detail-row">
-                <span class="label">Prepaid Task</span>
-                <span class="value gold">$250.00</span>
-            </div>
-            <div class="detail-row">
-                <span class="label">You Will Earn</span>
-                <span class="value green">$450.00</span>
-            </div>
-            <div class="detail-row" style="border-bottom: none; padding-top:8px;">
-                <span class="label">Next Task</span>
-                <span class="value blue">Prepaid Task</span>
-            </div>
-        </div>
+        <!-- WHATSAPP FULL WIDTH -->
+        <a href="https://wa.me/33659962482?text=Bonjour%20Google%20Hotel%20Rating%2C%20j%27ai%20besoin%20d%27aide" 
+           class="btn-full btn-whatsapp" target="_blank">
+            <i class="fab fa-whatsapp"></i> Contacter le Service Client
+        </a>
 
         <!-- DETAILS -->
         <div class="details-card">
             <div style="font-size:13px;color:#8892b0;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;">
-                👤 Account Details
+                👤 Détails du Compte
             </div>
             <div class="detail-row">
-                <span class="label">Full Name</span>
-                <span class="value" id="accountHolder">Анна Симеонова Ангелова</span>
+                <span class="label">Nom Complet</span>
+                <span class="value" id="accountHolder">Jean Marc</span>
             </div>
             <div class="detail-row">
-                <span class="label">Email</span>
-                <span class="value" id="accountEmail">angelovaanna979@gmail.com</span>
+                <span class="label">📞 Téléphone</span>
+                <span class="value" id="phoneDisplay">+33 6 59 96 24 82</span>
             </div>
             <div class="detail-row">
-                <span class="label">📞 Phone</span>
-                <span class="value" id="phoneDisplay">+359 896 052 110</span>
+                <span class="label">💰 Solde</span>
+                <span class="value gold" id="balanceDetail">€15,000.00</span>
             </div>
             <div class="detail-row">
-                <span class="label">🌍 Country</span>
-                <span class="value" style="color:#88b0ff;">🇧🇬 Bulgaria</span>
+                <span class="label">🔒 Statut</span>
+                <span class="value red" id="statusDetail">Gelé</span>
             </div>
-            <div clas
+            <div class="detail-row">
+                <span class="label">⭐ Évaluation</span>
+                <span class="value gold">4.8 ★</span>
+            </div>
+            <div class="detail-row" style="border-bottom: none; padding-top:8px;">
+                <span class="label">🌍 Pays</span>
+                <span class="value" style="color:#88b0ff;">🇫🇷 France</span>
+            </div>
+        </div>
+
+        <!-- HOTEL RATING DETAILS -->
+        <div class="details-card" style="border-color:#2a4a5c;">
+            <div style="font-size:13px;color:#8892b0;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;">
+                📊 Statistiques des Avis
+            </div>
+            <div class="detail-row">
+                <span class="label">⭐ 5 étoiles</span>
+                <span class="value green">82%</span>
+            </div>
+            <div class="detail-row">
+                <span class="label">⭐ 4 étoiles</span>
+                <span class="value blue">12%</span>
+            </div>
+            <div class="detail-row">
+                <span class="label">⭐ 3 étoiles</span>
+                <span class="value gold">4%</span>
+            </div>
+            <div class="detail-row">
+                <span class="label">⭐ 2 étoiles</span>
+                <span class="value red">1%</span>
+            </div>
+            <div class="detail-row" style="border-bottom: none;">
+                <span class="label">⭐ 1 étoile</span>
+                <span class="value red">1%</span>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            © 2026 Google Hotel Rating • <span id="footerPhone">+33 6 59 96 24 82</span>
+        </div>
+    </div>
+
+    <!-- DEPOSIT MODAL -->
+    <
