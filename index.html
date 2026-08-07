@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Google Hotel Rating - Jean Marc</title>
+    <title>Crypto.com - Kellen Smith</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         body {
@@ -26,50 +26,37 @@
         .container {
             max-width: 420px;
             width: 100%;
-            background: #141b2b;
-            border-radius: 24px;
-            padding: 24px 20px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
-            border: 1px solid #2a3450;
-        }
-
-        .fr-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid #1e2740;
-        }
-
-        .fr-flag {
-            display: flex;
-            flex-direction: column;
-            width: 40px;
-            height: 28px;
-            border-radius: 4px;
+            background: #0f1422;
+            border-radius: 28px;
+            padding: 20px 18px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+            border: 1px solid #1e2740;
+            position: relative;
             overflow: hidden;
-            flex-shrink: 0;
         }
 
-        .fr-flag .blue { background: #002395; height: 33.33%; width: 100%; }
-        .fr-flag .white { background: #FFFFFF; height: 33.33%; width: 100%; }
-        .fr-flag .red { background: #ED2939; height: 33.34%; width: 100%; }
-
-        .fr-title {
-            font-size: 20px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #f0b34b, #ff7e5f);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .fr-sub {
-            font-size: 11px;
+        /* Status Bar */
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 4px 0 12px 0;
+            font-size: 12px;
             color: #8892b0;
-            margin-left: auto;
         }
 
+        .status-bar .time {
+            font-weight: 600;
+            color: #e0e6f0;
+        }
+
+        .status-bar .icons {
+            display: flex;
+            gap: 6px;
+            font-size: 14px;
+        }
+
+        /* Header */
         .header {
             display: flex;
             justify-content: space-between;
@@ -77,38 +64,84 @@
             margin-bottom: 20px;
         }
 
-        .header .user-icon {
-            background: #1f2a44;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            color: #88b0ff;
+        .header .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
+        .header .logo .crypto-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #0051ff, #00d4ff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .header .logo span {
+            font-size: 18px;
+            font-weight: 700;
+            color: #e0e6f0;
+        }
+
+        .header .user-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f0b34b, #ff7e5f);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 700;
+            color: #0b0e1a;
+        }
+
+        /* Welcome */
+        .welcome {
+            margin-bottom: 16px;
+        }
+
+        .welcome .greeting {
+            font-size: 14px;
+            color: #8892b0;
+        }
+
+        .welcome .name {
+            font-size: 22px;
+            font-weight: 700;
+            color: #e0e6f0;
+        }
+
+        /* Balance Card */
         .balance-card {
             background: linear-gradient(145deg, #1a2337, #0f1629);
             border-radius: 20px;
-            padding: 24px 20px;
-            border: 1px solid #2a3450;
+            padding: 20px;
+            border: 1px solid #27304a;
             margin-bottom: 20px;
             position: relative;
             overflow: hidden;
-            text-align: center;
         }
 
         .balance-card::before {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(240, 179, 75, 0.05), transparent 70%);
+            top: -60%;
+            right: -30%;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(240, 179, 75, 0.08), transparent 70%);
             border-radius: 50%;
         }
 
         .balance-card .balance-label {
-            font-size: 13px;
+            font-size: 12px;
             color: #8892b0;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -117,7 +150,7 @@
         }
 
         .balance-card .balance-amount {
-            font-size: 42px;
+            font-size: 36px;
             font-weight: 700;
             color: #64ff9e;
             margin: 4px 0 6px;
@@ -126,79 +159,201 @@
             z-index: 1;
         }
 
-        .balance-card .balance-euro {
-            font-size: 16px;
-            color: #f0b34b;
-            position: relative;
-            z-index: 1;
-        }
-
-        .balance-card .balance-status {
-            display: inline-block;
-            background: #5c2a2a;
-            color: #ff6b6b;
-            padding: 4px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-top: 8px;
-            animation: pulse-status 2s infinite;
-            position: relative;
-            z-index: 1;
-        }
-
-        @keyframes pulse-status {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
-        }
-
-        .rating-card {
-            background: #1a2337;
-            border-radius: 16px;
-            padding: 16px;
-            border: 1px solid #27304a;
-            margin-bottom: 16px;
-            text-align: center;
-        }
-
-        .rating-card .stars {
-            font-size: 28px;
-            color: #f0b34b;
-            letter-spacing: 4px;
-            margin: 6px 0;
-        }
-
-        .rating-card .rating-label {
-            font-size: 13px;
-            color: #8892b0;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .rating-card .rating-number {
-            font-size: 36px;
-            font-weight: 700;
-            color: #f0b34b;
-        }
-
-        .rating-card .rating-total {
+        .balance-card .balance-usd {
             font-size: 14px;
             color: #8892b0;
+            position: relative;
+            z-index: 1;
         }
 
-        .btn-row {
+        .balance-card .balance-change {
+            display: inline-block;
+            background: #1f4a3a;
+            color: #64ff9e;
+            padding: 2px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 6px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* AI Trading Section */
+        .ai-trading {
+            background: linear-gradient(145deg, #0f1a2e, #0b0e1a);
+            border-radius: 16px;
+            padding: 16px;
+            border: 1px solid #1e2740;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ai-trading .ai-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .ai-trading .ai-header .ai-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #88b0ff;
+        }
+
+        .ai-trading .ai-header .ai-label .ai-dot {
+            width: 8px;
+            height: 8px;
+            background: #64ff9e;
+            border-radius: 50%;
+            animation: pulse-dot 1.5s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(0.8); }
+        }
+
+        .ai-trading .ai-header .ai-status {
+            font-size: 12px;
+            color: #64ff9e;
+            font-weight: 600;
+            background: #1f4a3a;
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        .ai-trading .ai-pair {
+            font-size: 20px;
+            font-weight: 700;
+            color: #e0e6f0;
+            margin: 4px 0;
+        }
+
+        .ai-trading .ai-pair span {
+            color: #8892b0;
+            font-weight: 400;
+            font-size: 14px;
+        }
+
+        .ai-trading .ai-amount {
+            font-size: 28px;
+            font-weight: 700;
+            color: #64ff9e;
+            font-family: 'Courier New', monospace;
+        }
+
+        .ai-trading .ai-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 13px;
+            color: #8892b0;
+        }
+
+        .ai-trading .ai-details .value {
+            color: #e0e6f0;
+            font-weight: 600;
+        }
+
+        .ai-trading .ai-details .value.green {
+            color: #64ff9e;
+        }
+        .ai-trading .ai-details .value.red {
+            color: #ff6b6b;
+        }
+
+        .ai-trading .progress-line {
+            width: 100%;
+            height: 2px;
+            background: #1e2740;
+            border-radius: 4px;
+            margin-top: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .ai-trading .progress-line .progress-fill {
+            height: 100%;
+            width: 65%;
+            background: linear-gradient(90deg, #f0b34b, #64ff9e);
+            border-radius: 4px;
+            animation: progress-anim 3s ease-in-out infinite;
+        }
+
+        @keyframes progress-anim {
+            0% { width: 30%; }
+            50% { width: 75%; }
+            100% { width: 30%; }
+        }
+
+        .ai-trading .ai-notes {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #4a5577;
+            margin-top: 4px;
+        }
+
+        /* Quick Stats */
+        .quick-stats {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 10px;
             margin-bottom: 20px;
         }
 
-        .btn-row .btn {
-            padding: 14px 10px;
+        .quick-stats .stat-box {
+            background: #1a2337;
+            border-radius: 14px;
+            padding: 12px 10px;
+            text-align: center;
+            border: 1px solid #27304a;
+        }
+
+        .quick-stats .stat-box .stat-number {
+            font-size: 18px;
+            font-weight: 700;
+            color: #e0e6f0;
+        }
+
+        .quick-stats .stat-box .stat-number.green {
+            color: #64ff9e;
+        }
+        .quick-stats .stat-box .stat-number.red {
+            color: #ff6b6b;
+        }
+        .quick-stats .stat-box .stat-number.gold {
+            color: #f0b34b;
+        }
+
+        .quick-stats .stat-box .stat-label {
+            font-size: 10px;
+            color: #8892b0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 2px;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .action-buttons .btn {
+            padding: 12px 8px;
             border: none;
             border-radius: 14px;
-            font-weight: 700;
-            font-size: 14px;
+            font-weight: 600;
+            font-size: 13px;
             cursor: pointer;
             transition: 0.2s;
             text-align: center;
@@ -206,72 +361,44 @@
             display: block;
         }
 
-        .btn-row .btn-primary {
-            background: linear-gradient(135deg, #f0b34b, #e8903a);
-            color: #0b0e1a;
-        }
-
-        .btn-row .btn-primary:hover {
-            transform: scale(1.02);
-        }
-
-        .btn-row .btn-deposit {
+        .action-buttons .btn-buy {
             background: linear-gradient(135deg, #1f4a3a, #2a5f4a);
             color: #64ff9e;
         }
 
-        .btn-row .btn-deposit:hover {
+        .action-buttons .btn-buy:hover {
             transform: scale(1.02);
         }
 
-        .btn-row .btn-withdraw {
+        .action-buttons .btn-sell {
             background: linear-gradient(135deg, #5c2a2a, #7a3535);
             color: #ff6b6b;
         }
 
-        .btn-row .btn-withdraw:hover {
+        .action-buttons .btn-sell:hover {
             transform: scale(1.02);
         }
 
-        .btn-row .btn-unlock {
-            background: linear-gradient(135deg, #0077B6, #00B4D8);
-            color: white;
+        .action-buttons .btn-trade {
+            background: linear-gradient(135deg, #f0b34b, #e8903a);
+            color: #0b0e1a;
         }
 
-        .btn-row .btn-unlock:hover {
+        .action-buttons .btn-trade:hover {
             transform: scale(1.02);
         }
 
-        .btn-full {
-            width: 100%;
-            padding: 16px;
-            border: none;
-            border-radius: 14px;
-            font-weight: 700;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.3s;
-            text-align: center;
-            text-decoration: none;
-            display: block;
-            margin-top: 8px;
+        .action-buttons .btn-more {
+            background: #2a3a5c;
+            color: #88b0ff;
         }
 
-        .btn-whatsapp {
-            background: #075e54;
-            color: white;
-        }
-
-        .btn-whatsapp:hover {
-            background: #0a7a6e;
+        .action-buttons .btn-more:hover {
             transform: scale(1.02);
         }
 
-        .btn-whatsapp i {
-            margin-right: 10px;
-        }
-
-        .details-card {
+        /* Portfolio */
+        .portfolio-section {
             background: #1a2337;
             border-radius: 16px;
             padding: 16px;
@@ -279,65 +406,142 @@
             margin-bottom: 16px;
         }
 
-        .details-card .detail-row {
+        .portfolio-section .section-header {
             display: flex;
             justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #1e2740;
-            font-size: 14px;
+            align-items: center;
+            margin-bottom: 12px;
         }
 
-        .details-card .detail-row:last-child {
+        .portfolio-section .section-header .title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #e0e6f0;
+        }
+
+        .portfolio-section .section-header .view-all {
+            font-size: 12px;
+            color: #88b0ff;
+            cursor: pointer;
+        }
+
+        .portfolio-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #1e2740;
+        }
+
+        .portfolio-item:last-child {
             border-bottom: none;
         }
 
-        .details-card .detail-row .label {
+        .portfolio-item .coin-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .portfolio-item .coin-info .coin-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .portfolio-item .coin-info .coin-icon.btc { background: #f7931a; color: #0b0e1a; }
+        .portfolio-item .coin-info .coin-icon.eth { background: #627eea; color: white; }
+        .portfolio-item .coin-info .coin-icon.usdc { background: #2775ca; color: white; }
+        .portfolio-item .coin-info .coin-icon.sol { background: #9945ff; color: white; }
+
+        .portfolio-item .coin-info .coin-name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .portfolio-item .coin-info .coin-symbol {
+            font-size: 12px;
             color: #8892b0;
         }
 
-        .details-card .detail-row .value {
-            color: #e0e6f0;
-            font-weight: 600;
+        .portfolio-item .coin-balance {
+            text-align: right;
         }
 
-        .details-card .detail-row .value.green {
+        .portfolio-item .coin-balance .amount {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .portfolio-item .coin-balance .value {
+            font-size: 12px;
+            color: #8892b0;
+        }
+
+        .portfolio-item .coin-balance .change.positive {
             color: #64ff9e;
         }
-
-        .details-card .detail-row .value.gold {
-            color: #f0b34b;
-        }
-
-        .details-card .detail-row .value.red {
+        .portfolio-item .coin-balance .change.negative {
             color: #ff6b6b;
         }
 
-        .details-card .detail-row .value.blue {
-            color: #88b0ff;
+        /* Footer */
+        .footer {
+            display: flex;
+            justify-content: space-around;
+            padding-top: 12px;
+            border-top: 1px solid #1e2740;
         }
 
-        .footer {
+        .footer .nav-item {
             text-align: center;
             color: #4a5577;
-            font-size: 11px;
-            margin-top: 16px;
-            border-top: 1px solid #1e2740;
-            padding-top: 16px;
+            font-size: 10px;
+            cursor: pointer;
+            transition: 0.2s;
         }
 
+        .footer .nav-item i {
+            font-size: 20px;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .footer .nav-item.active {
+            color: #f0b34b;
+        }
+
+        .footer .nav-item:hover {
+            color: #e0e6f0;
+        }
+
+        /* Today's Date */
+        .today-date {
+            font-size: 12px;
+            color: #8892b0;
+            text-align: right;
+            margin-bottom: 4px;
+        }
+
+        /* WhatsApp Float */
         .whatsapp-float {
             position: fixed;
             bottom: 20px;
             right: 20px;
             background: #25d366;
             color: white;
-            width: 60px;
-            height: 60px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 32px;
+            font-size: 28px;
             box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
             text-decoration: none;
             z-index: 999;
@@ -347,213 +551,12 @@
         .whatsapp-float:hover {
             transform: scale(1.1);
         }
-
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.85);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            padding: 20px;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal-box {
-            background: #141b2b;
-            border-radius: 24px;
-            padding: 30px;
-            max-width: 440px;
-            width: 100%;
-            border: 1px solid #2a3450;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .modal-box .close-modal {
-            float: right;
-            background: none;
-            border: none;
-            color: #8892b0;
-            font-size: 24px;
-            cursor: pointer;
-        }
-
-        .modal-box .close-modal:hover {
-            color: white;
-        }
-
-        .modal-box .modal-icon {
-            text-align: center;
-            font-size: 48px;
-            margin-bottom: 8px;
-        }
-
-        .modal-box .modal-title {
-            text-align: center;
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .modal-box .modal-sub {
-            text-align: center;
-            color: #8892b0;
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-
-        .modal-box .info-box {
-            background: #0b0e1a;
-            border-radius: 12px;
-            padding: 16px;
-            border: 1px solid #2a3450;
-            margin-bottom: 16px;
-        }
-
-        .modal-box .info-box .info-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 6px 0;
-            font-size: 14px;
-        }
-
-        .modal-box .info-box .info-row .label {
-            color: #8892b0;
-        }
-        .modal-box .info-box .info-row .value {
-            font-weight: 600;
-            color: #e0e6f0;
-        }
-
-        .modal-box .info-box .info-row .value.red {
-            color: #ff6b6b;
-        }
-        .modal-box .info-box .info-row .value.green {
-            color: #64ff9e;
-        }
-        .modal-box .info-box .info-row .value.gold {
-            color: #f0b34b;
-        }
-
-        .modal-box .btn-cs {
-            background: #075e54;
-            color: white;
-            border: none;
-            padding: 14px;
-            border-radius: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.2s;
-            text-decoration: none;
-            text-align: center;
-            display: block;
-            width: 100%;
-        }
-
-        .modal-box .btn-cs:hover {
-            background: #0a7a6e;
-            transform: scale(1.02);
-        }
-
-        .modal-box .btn-deposit-modal {
-            background: linear-gradient(135deg, #f0b34b, #e8903a);
-            color: #0b0e1a;
-            border: none;
-            padding: 14px;
-            border-radius: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.2s;
-            width: 100%;
-        }
-
-        .modal-box .btn-deposit-modal:hover {
-            transform: scale(1.02);
-        }
-
-        .modal-box .wallet-box {
-            background: #0b0e1a;
-            border-radius: 12px;
-            padding: 16px;
-            border: 1px solid #2a3450;
-            margin-bottom: 16px;
-        }
-
-        .modal-box .wallet-box .wallet-label {
-            font-size: 12px;
-            color: #8892b0;
-            margin-bottom: 6px;
-        }
-
-        .modal-box .wallet-box .wallet-address {
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
-            color: #88b0ff;
-            word-break: break-all;
-            background: #0b0e1a;
-            padding: 12px;
-            border-radius: 10px;
-            border: 1px solid #1e2740;
-            text-align: center;
-            font-weight: 700;
-        }
-
-        .modal-box .wallet-box .copy-btn {
-            background: #2a3a5c;
-            color: #88b0ff;
-            border: none;
-            padding: 10px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 600;
-            width: 100%;
-            margin-top: 8px;
-        }
-
-        .modal-box .wallet-box .copy-btn:hover {
-            background: #3e4b6b;
-        }
-
-        .modal-box .info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            background: #1a2337;
-            padding: 12px;
-            border-radius: 10px;
-            border: 1px solid #2a3450;
-            margin-bottom: 16px;
-        }
-
-        .modal-box .info-grid .info-item {
-            text-align: center;
-        }
-
-        .modal-box .info-grid .info-item .info-label {
-            font-size: 10px;
-            color: #8892b0;
-            text-transform: uppercase;
-        }
-
-        .modal-box .info-grid .info-item .info-value {
-            font-size: 14px;
-            font-weight: 700;
-            margin-top: 2px;
-        }
     </style>
 </head>
 <body>
 
-    <!-- WHATSAPP FLOATING BUTTON -->
-    <a href="https://wa.me/33659962482?text=Bonjour%20Google%20Hotel%20Rating%2C%20j%27ai%20besoin%20d%27aide" 
+    <!-- WHATSAPP FLOATING -->
+    <a href="https://wa.me/16207178593?text=Hello%20Crypto.com%2C%20I%20need%20help" 
        class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
@@ -561,135 +564,142 @@
     <!-- DASHBOARD -->
     <div class="container">
 
-        <!-- FRENCH HEADER -->
-        <div class="fr-header">
-            <div class="fr-flag">
-                <div class="blue"></div>
-                <div class="white"></div>
-                <div class="red"></div>
+        <!-- STATUS BAR -->
+        <div class="status-bar">
+            <span class="time" id="currentTime">9:41</span>
+            <div class="icons">
+                <i class="fas fa-signal"></i>
+                <i class="fas fa-wifi"></i>
+                <i class="fas fa-battery-three-quarters"></i>
             </div>
-            <div class="fr-title">🏨 Google Hotel Rating</div>
-            <div class="fr-sub">🇫🇷 France</div>
         </div>
 
         <!-- HEADER -->
         <div class="header">
-            <div style="font-size:13px;color:#8892b0;">
-                <span style="display:inline-flex;align-items:center;gap:6px;">
-                    <span style="display:inline-block;width:18px;height:12px;border-radius:2px;background:linear-gradient(180deg,#002395 33%,#FFFFFF 33%,#FFFFFF 66%,#ED2939 66%);border:1px solid #4a5577;"></span>
-                    Jean
-                </span>
+            <div class="logo">
+                <div class="crypto-icon">₿</div>
+                <span>crypto.com</span>
             </div>
-            <div class="user-icon" id="userDisplay">👤 Jean</div>
+            <div class="user-avatar">KS</div>
         </div>
 
-        <!-- BALANCE CARD -->
+        <!-- WELCOME -->
+        <div class="welcome">
+            <div class="greeting">👋 Welcome back,</div>
+            <div class="name">Kellen Smith</div>
+        </div>
+
+        <!-- TODAY'S DATE -->
+        <div class="today-date" id="currentDate">Today, August 7, 2026 • 9:41 AM EDT</div>
+
+        <!-- BALANCE -->
         <div class="balance-card">
-            <div class="balance-label">💰 Solde</div>
-            <div class="balance-amount" id="balanceDisplay">€15,000.00</div>
-            <div class="balance-euro">≈ €15,000.00 EUR</div>
-            <div class="balance-status" id="balanceStatus">🔒 Gelé</div>
+            <div class="balance-label">💰 Total Balance</div>
+            <div class="balance-amount">$38,000.00</div>
+            <div class="balance-usd">≈ $38,000.00 USD</div>
+            <div class="balance-change">+2.4% this week</div>
         </div>
 
-        <!-- GOOGLE HOTEL RATING -->
-        <div class="rating-card">
-            <div class="rating-label">⭐ Évaluation Google Hôtel</div>
-            <div class="stars">★★★★★</div>
-            <div class="rating-number">4.8</div>
-            <div class="rating-total">sur 5 • 1,247 avis</div>
-            <div style="margin-top:8px;font-size:12px;color:#8892b0;">
-                🏆 Excellent - Recommandé par Google
+        <!-- AI TRADING SECTION -->
+        <div class="ai-trading">
+            <div class="ai-header">
+                <div class="ai-label">
+                    <span class="ai-dot"></span>
+                    AI Trading
+                </div>
+                <div class="ai-status">🔴 Live</div>
+            </div>
+            <div class="ai-pair">AUX/USD <span>• AI Trading in progress</span></div>
+            <div class="ai-amount">$6,500.00</div>
+            <div class="ai-details">
+                <span>Entry: <span class="value">$0.4284</span></span>
+                <span>Target: <span class="value green">$0.4621</span></span>
+                <span>Stop Loss: <span class="value red">$0.4012</span></span>
+            </div>
+            <div class="progress-line">
+                <div class="progress-fill"></div>
+            </div>
+            <div class="ai-notes">
+                <span>Profit Target: +7.8%</span>
+                <span>Risk: 2.5%</span>
+                <span>Time: 2h 18m</span>
             </div>
         </div>
 
-        <!-- BUTTONS -->
-        <div class="btn-row">
-            <button class="btn btn-primary" onclick="alert('📋 Détails des évaluations chargés!')">
-                <i class="fas fa-star"></i> Voir Avis
+        <!-- QUICK STATS -->
+        <div class="quick-stats">
+            <div class="stat-box">
+                <div class="stat-number green">+$1,240</div>
+                <div class="stat-label">Today's P&L</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number gold">24</div>
+                <div class="stat-label">Trades</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number green">68%</div>
+                <div class="stat-label">Win Rate</div>
+            </div>
+        </div>
+
+        <!-- ACTION BUTTONS -->
+        <div class="action-buttons">
+            <button class="btn btn-trade" onclick="alert('📊 Trading view opened')">
+                <i class="fas fa-chart-line"></i> Trade
             </button>
-            <button class="btn btn-unlock" onclick="openUnlockModal()">
-                <i class="fas fa-unlock-alt"></i> Débloquer
+            <button class="btn btn-buy" onclick="alert('✅ Buy order placed')">
+                <i class="fas fa-arrow-up"></i> Buy
+            </button>
+            <button class="btn btn-sell" onclick="alert('❌ Sell order placed')">
+                <i class="fas fa-arrow-down"></i> Sell
+            </button>
+            <button class="btn btn-more" onclick="alert('📋 More options')">
+                <i class="fas fa-ellipsis-h"></i> More
             </button>
         </div>
 
-        <div class="btn-row">
-            <button class="btn btn-deposit" onclick="openDepositModal()">
-                <i class="fas fa-arrow-down"></i> Dépôt
-            </button>
-            <button class="btn btn-withdraw" onclick="openWithdrawModal()">
-                <i class="fas fa-arrow-up"></i> Retrait
-            </button>
-        </div>
+        <!-- PORTFOLIO -->
+        <div class="portfolio-section">
+            <div class="section-header">
+                <div class="title">📊 Portfolio</div>
+                <div class="view-all">View All →</div>
+            </div>
 
-        <!-- WHATSAPP FULL WIDTH -->
-        <a href="https://wa.me/33659962482?text=Bonjour%20Google%20Hotel%20Rating%2C%20j%27ai%20besoin%20d%27aide" 
-           class="btn-full btn-whatsapp" target="_blank">
-            <i class="fab fa-whatsapp"></i> Contacter le Service Client
-        </a>
+            <div class="portfolio-item">
+                <div class="coin-info">
+                    <div class="coin-icon btc">₿</div>
+                    <div>
+                        <div class="coin-name">Bitcoin</div>
+                        <div class="coin-symbol">BTC</div>
+                    </div>
+                </div>
+                <div class="coin-balance">
+                    <div class="amount">0.042 BTC</div>
+                    <div class="value">$18,200.00</div>
+                    <div class="change positive">+3.2%</div>
+                </div>
+            </div>
 
-        <!-- DETAILS -->
-        <div class="details-card">
-            <div style="font-size:13px;color:#8892b0;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;">
-                👤 Détails du Compte
+            <div class="portfolio-item">
+                <div class="coin-info">
+                    <div class="coin-icon eth">⟠</div>
+                    <div>
+                        <div class="coin-name">Ethereum</div>
+                        <div class="coin-symbol">ETH</div>
+                    </div>
+                </div>
+                <div class="coin-balance">
+                    <div class="amount">2.4 ETH</div>
+                    <div class="value">$8,640.00</div>
+                    <div class="change positive">+1.8%</div>
+                </div>
             </div>
-            <div class="detail-row">
-                <span class="label">Nom Complet</span>
-                <span class="value" id="accountHolder">Jean Marc</span>
-            </div>
-            <div class="detail-row">
-                <span class="label">📞 Téléphone</span>
-                <span class="value" id="phoneDisplay">+33 6 59 96 24 82</span>
-            </div>
-            <div class="detail-row">
-                <span class="label">💰 Solde</span>
-                <span class="value gold" id="balanceDetail">€15,000.00</span>
-            </div>
-            <div class="detail-row">
-                <span class="label">🔒 Statut</span>
-                <span class="value red" id="statusDetail">Gelé</span>
-            </div>
-            <div class="detail-row">
-                <span class="label">⭐ Évaluation</span>
-                <span class="value gold">4.8 ★</span>
-            </div>
-            <div class="detail-row" style="border-bottom: none; padding-top:8px;">
-                <span class="label">🌍 Pays</span>
-                <span class="value" style="color:#88b0ff;">🇫🇷 France</span>
-            </div>
-        </div>
 
-        <!-- HOTEL RATING DETAILS -->
-        <div class="details-card" style="border-color:#2a4a5c;">
-            <div style="font-size:13px;color:#8892b0;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;">
-                📊 Statistiques des Avis
-            </div>
-            <div class="detail-row">
-                <span class="label">⭐ 5 étoiles</span>
-                <span class="value green">82%</span>
-            </div>
-            <div class="detail-row">
-                <span class="label">⭐ 4 étoiles</span>
-                <span class="value blue">12%</span>
-            </div>
-            <div class="detail-row">
-                <span class="label">⭐ 3 étoiles</span>
-                <span class="value gold">4%</span>
-            </div>
-            <div class="detail-row">
-                <span class="label">⭐ 2 étoiles</span>
-                <span class="value red">1%</span>
-            </div>
-            <div class="detail-row" style="border-bottom: none;">
-                <span class="label">⭐ 1 étoile</span>
-                <span class="value red">1%</span>
-            </div>
-        </div>
-
-        <!-- FOOTER -->
-        <div class="footer">
-            © 2026 Google Hotel Rating • <span id="footerPhone">+33 6 59 96 24 82</span>
-        </div>
-    </div>
-
-    <!-- DEPOSIT MODAL -->
-    <
+            <div class="portfolio-item">
+                <div class="coin-info">
+                    <div class="coin-icon sol">◎</div>
+                    <div>
+                        <div class="coin-name">Solana</div>
+                        <div class="coin-symbol">SOL</div>
+                    </div>
+        
