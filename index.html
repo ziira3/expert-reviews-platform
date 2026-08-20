@@ -196,7 +196,32 @@
             background: linear-gradient(90deg, #f0b34b, #64ff9e);
             border-radius: 4px;
             transition: width 0.5s;
-            width: 20%;
+        }
+
+        .warning-box {
+            background: #5c4a1a;
+            border-radius: 12px;
+            padding: 12px 14px;
+            border: 1px solid #8a6a2a;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .warning-box .warning-icon {
+            font-size: 20px;
+            color: #f0b34b;
+        }
+
+        .warning-box .warning-text {
+            font-size: 13px;
+            color: #f0b34b;
+            font-weight: 500;
+        }
+
+        .warning-box .warning-text strong {
+            color: #64ff9e;
         }
 
         .btn-row {
@@ -298,32 +323,6 @@
 
         .details-card .detail-row .value.blue {
             color: #88b0ff;
-        }
-
-        .warning-box {
-            background: #5c4a1a;
-            border-radius: 12px;
-            padding: 12px 14px;
-            border: 1px solid #8a6a2a;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .warning-box .warning-icon {
-            font-size: 20px;
-            color: #f0b34b;
-        }
-
-        .warning-box .warning-text {
-            font-size: 13px;
-            color: #f0b34b;
-            font-weight: 500;
-        }
-
-        .warning-box .warning-text strong {
-            color: #64ff9e;
         }
 
         .wallet-box {
@@ -570,8 +569,8 @@
         <!-- BALANCE CARD -->
         <div class="balance-card">
             <div class="balance-label">💰 Balance</div>
-            <div class="balance-amount" id="balanceDisplay">$510.00</div>
-            <div class="balance-usd">≈ $510.00 USD</div>
+            <div class="balance-amount" id="balanceDisplay">$2,010.00</div>
+            <div class="balance-usd">≈ $2,010.00 USD</div>
             <div class="balance-status" id="balanceStatus">✅ Active</div>
         </div>
 
@@ -582,11 +581,11 @@
                 <div class="label">📋 Daily Tasks</div>
             </div>
             <div class="task-box">
-                <div class="number green">1</div>
+                <div class="number green">3</div>
                 <div class="label">✅ Done</div>
             </div>
             <div class="task-box">
-                <div class="number gold">4</div>
+                <div class="number gold">2</div>
                 <div class="label">⏳ Remaining</div>
             </div>
         </div>
@@ -594,17 +593,17 @@
         <!-- PROGRESS -->
         <div style="display:flex; justify-content:space-between; font-size:13px; color:#8892b0; margin-bottom:4px;">
             <span>Progress</span>
-            <span style="color:#f0b34b;">20%</span>
+            <span style="color:#f0b34b;">60%</span>
         </div>
         <div class="progress-bar">
-            <div class="progress-fill" style="width:20%;"></div>
+            <div class="progress-fill" style="width:60%;"></div>
         </div>
 
         <!-- WARNING BOX -->
         <div class="warning-box">
             <div class="warning-icon">⚠️</div>
             <div class="warning-text">
-                Complete <strong>2 tasks</strong> to make a withdrawal of <strong>$2,000 USDC</strong>
+                Deposit <strong>$420</strong> to withdraw your funds
             </div>
         </div>
 
@@ -686,4 +685,6 @@
             </div>
         </div>
 
-        <!--
+        <!-- FOOTER -->
+        <div class="footer">
+            ©
